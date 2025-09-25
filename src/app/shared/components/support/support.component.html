@@ -1,0 +1,11 @@
+  <!-- Botão flutuante de suporte -->
+  <div class="floating-support-container" *ngIf="showSupportButton" (mouseenter)="hovering = true"
+    (mouseleave)="hovering = false">
+    <button class="close-btn" *ngIf="hovering" (click)="closeSupport()" mat-icon-button>
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <button class="floating-support-button" mat-fab color="primary" (click)="openSupport()">
+      <mat-icon>support_agent</mat-icon>
+    </button>
+  </div>

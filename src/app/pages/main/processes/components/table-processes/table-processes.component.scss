@@ -1,0 +1,101 @@
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.custom-table thead {
+  background: #455988;
+  color: white;
+}
+
+.custom-table th,
+.custom-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.custom-table td {
+  font-size: 12px;
+
+  .see-more {
+    cursor: pointer;
+  }
+
+  .see-more:hover {
+    color: #455988;
+    text-decoration: underline;
+  }
+}
+
+.custom-table th {
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  .flex {
+    display: flex;
+  }
+}
+
+.pagination {
+  margin-top: 22px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+
+  button {
+    padding: 6px 12px;
+    background: #e0e0e0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &.active {
+      background-color: #5F71D2;
+      color: white;
+      font-weight: bold;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}
+
+th.sorted::after {
+  content: '▲';
+  margin-left: 5px;
+  font-size: 5px;
+}
+
+th.sorted.desc::after {
+  content: '▼';
+}
+
+.sortable-icon {
+  font-size: 12px;
+  vertical-align: top;
+  opacity: 0.3;
+  transition: opacity 0.2s ease-in-out, transform 0.2s;
+  height: 12px;
+  margin: auto 0 auto 6px;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.6;
+  }
+
+  &.active {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+.truncate {
+  display: inline-block;      /* ou block */
+  max-width: 200px;           /* Defina a largura que corresponde a 30 caracteres */
+  white-space: nowrap;        /* Impede quebra de linha */
+  overflow: hidden;           /* Oculta o excesso */
+  text-overflow: ellipsis;    /* Adiciona os "..." */
+}  

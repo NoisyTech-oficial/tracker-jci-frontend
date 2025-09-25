@@ -1,0 +1,208 @@
+@use 'src/app/shared/styles/_variables.scss' as *;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+.login-container {
+  background-color: $background-dark;
+  background-image: url('../../../assets/planet.svg');
+  background-repeat: no-repeat;
+  background-position: center bottom -70px;
+  background-size: contain;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: $spacing-md;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+
+  .shooting-star {
+    position: absolute;
+    width: 40px;
+    height: 1.5px;
+    background: linear-gradient(white, transparent);
+    opacity: 0.8;
+    transform: rotate(45deg);
+    animation: shoot 3s linear infinite;
+    z-index: 1;
+    pointer-events: none;
+
+    &.star-1 {
+      top: -20px;
+      left: -50px;
+      animation-delay: 0s;
+    }
+
+    &.star-2 {
+      top: -40px;
+      left: 380px;
+      animation-delay: 1.5s;
+      animation-duration: 2s;
+    }
+
+    &.star-3 {
+      top: -60px;
+      left: 80%;
+      animation-delay: 3s;
+      animation-duration: 2s;
+    }
+  }
+
+  .login-card {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 40px 30px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    color: $text-light;
+    animation: fadeIn 1s ease-in-out;
+    position: relative;
+    z-index: 2;
+
+    .logo-container {
+      text-align: center;
+      margin-bottom: 20px;
+
+      img {
+        width: 40px;
+        opacity: 0.9;
+        margin-bottom: 10px;
+        transition: transform 0.3s ease-in-out;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+    }
+
+    .input-group {
+      position: relative;
+      margin-top: 20px;
+
+      input {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.15);
+        color: white;
+        font-size: 16px;
+        box-shadow: 0 0 10px rgba(69, 89, 136, 0.6);
+        outline: none;
+
+        &::placeholder {
+          font-size: 14px;
+          color: white;
+        }
+
+        &:focus {
+          box-shadow: 0 0 10px rgba(69, 89, 136, 0.6);
+        }
+      }
+    }
+
+    .password-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+
+      input {
+        flex: 1;
+        padding: 12px;
+        border-radius: 8px;
+        border: none;
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+      }
+
+      button {
+        position: absolute;
+        right: 10px;
+        background: none;
+        border: none;
+        color: $grey-light;
+        cursor: pointer;
+
+        mat-icon {
+          color: $text-light;
+          font-size: 22px;
+          display: flex;
+        }
+      }
+    }
+
+    .login-button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background-color: $primary-color;
+      color: $text-light;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+
+      &:disabled {
+        background-color: $grey-disabled;
+        cursor: not-allowed;
+        opacity: 0.6;
+        transform: none;
+      }
+    }
+
+    .register-link {
+      margin-top: 20px;
+      font-size: 13px;
+
+      a {
+        color: $text-light;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+// Animações
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shoot {
+  0% {
+    transform: translate(0, 0) rotate(45deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(600px, 600px) rotate(45deg);
+    opacity: 0;
+  }
+}

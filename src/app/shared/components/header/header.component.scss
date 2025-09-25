@@ -1,0 +1,26 @@
+  /* Container do Header */
+  .header-container {
+    text-align: left;
+    /* 🔥 Alinha à esquerda para melhor leitura */
+    margin-bottom: 20px;
+    padding: 0 15px 15px 0;
+    border-bottom: 1px solid #455988;
+    /* 🔥 Linha sutil abaixo do título */
+  }
+
+  /* Título principal */
+  .header-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #455988;
+    /* 🔥 Mantém a cor do tema */
+    margin-bottom: 5px;
+  }
+
+  /* Subtítulo */
+  .header-subtitle {
+    font-size: 14px;
+    color: #666;
+    /* 🔥 Cor mais suave para o texto auxiliar */
+    margin: 0;
+  }

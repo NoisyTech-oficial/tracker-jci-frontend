@@ -1,0 +1,24 @@
+<mat-dialog-content>
+  <header class="header">
+    <h2 class="modal-title">Editar Funcionário</h2>
+    <mat-icon (click)="close()">close</mat-icon>
+  </header>
+
+  <form [formGroup]="employeeForm" class="form" (ngSubmit)="editEmployee()">
+
+    <div class="input-container">
+      <mat-form-field appearance="outline">
+        <mat-label>Permissões de Visualização</mat-label>
+        <mat-select formControlName="viewing_permission" multiple>
+          <mat-option *ngFor="let permission of permissions" [value]="permission">
+            {{ permission }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <mat-dialog-actions align="end">
+      <button mat-raised-button color="primary" [disabled]="employeeForm.invalid || isloading">{{ isloading ? 'Aguarde...' : 'Editar' }}</button>
+    </mat-dialog-actions>
+  </form>
+</mat-dialog-content>

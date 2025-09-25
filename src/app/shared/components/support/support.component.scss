@@ -1,0 +1,45 @@
+@use 'src/app/shared/styles/_variables.scss' as *;
+
+.floating-support-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .close-btn {
+      background: white;
+      color: #555;
+      border-radius: 50%;
+      font-size: 4px;
+      width: 5px;
+      height: 5px;
+      padding: 0;
+      margin-bottom: 20px;
+      margin-right: 20px;
+      z-index: 1;
+    }
+    .floating-support-button {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      background: linear-gradient(135deg, $secondary-color, $text-dark);
+      color: white;
+    
+      &:hover {
+        background-color: #303f9f;
+      }
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .floating-support-button {
+      bottom: 15px;
+      right: 15px;
+      width: 45px;
+      height: 45px;
+  
+      mat-icon {
+        font-size: 20px;
+      }
+    }
+  }

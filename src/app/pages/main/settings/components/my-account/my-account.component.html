@@ -1,0 +1,37 @@
+<div class="container">
+  <app-header [info]="header"></app-header>
+
+  <div class="profile-container">
+    <div class="profile-card">
+      <div class="avatar-section">
+        <img [src]="userPhoto || 'assets/avatar-default.png'" alt="Foto do usuário" class="avatar" />
+        <button mat-icon-button (click)="onChangePhoto()">
+          <mat-icon>photo_camera</mat-icon>
+        </button>
+        <input type="file" (change)="onFileSelected($event)" hidden #fileInput />
+      </div>
+  
+      <form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
+        <mat-form-field appearance="outline">
+          <mat-label>Nome</mat-label>
+          <input matInput formControlName="name" />
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" />
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" disabled>
+          <mat-label>Documento</mat-label>
+          <input matInput [value]="userData?.document" disabled />
+        </mat-form-field>
+  
+        <button mat-flat-button color="primary" type="submit" [disabled]="profileForm.invalid">
+          Salvar Alterações
+        </button>
+      </form>
+    </div>
+  </div>
+  
+</div>

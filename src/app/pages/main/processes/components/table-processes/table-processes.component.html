@@ -1,0 +1,98 @@
+<table class="custom-table">
+  <thead>
+    <tr>
+      <th (click)="sortBy('process_number')">
+        <div class="flex">
+          <span>Número processo</span>
+          <mat-icon class="sortable-icon" [class.active]="sortColumn === 'process_number'">
+            {{ sortColumn === 'process_number' ? (sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward') : 'unfold_more' }}
+          </mat-icon>
+        </div>
+      </th>
+
+      <th (click)="sortBy('applicant_name')">
+        <div class="flex">
+          <span>Requerente</span>
+          <mat-icon class="sortable-icon" [class.active]="sortColumn === 'applicant_name'">
+            {{ sortColumn === 'applicant_name' ? (sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward') : 'unfold_more' }}
+          </mat-icon>
+        </div>
+      </th>
+
+      <th (click)="sortBy('value')">
+        <div class="flex">
+          <span>Valor</span>
+          <mat-icon class="sortable-icon" [class.active]="sortColumn === 'value'">
+            {{ sortColumn === 'value' ? (sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward') : 'unfold_more' }}
+          </mat-icon>
+        </div>
+      </th>
+
+      <th (click)="sortBy('cpf_cnpj')">
+        <div class="flex">
+          <span>Documento</span>
+          <mat-icon class="sortable-icon" [class.active]="sortColumn === 'cpf_cnpj'">
+            {{ sortColumn === 'cpf_cnpj' ? (sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward') : 'unfold_more' }}
+          </mat-icon>
+        </div>
+      </th>
+
+      <th (click)="sortBy('company_name')">
+        <div class="flex">
+          <span>Requerido</span>
+          <mat-icon class="sortable-icon" [class.active]="sortColumn === 'company_name'">
+            {{ sortColumn === 'company_name' ? (sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward') : 'unfold_more' }}
+          </mat-icon>
+        </div>
+      </th>
+
+      <th (click)="sortBy('cep.city')">
+        <div class="flex">
+          <span>Cidade</span>
+          <mat-icon class="sortable-icon" [class.active]="sortColumn === 'cep.city'">
+            {{ sortColumn === 'cep.city' ? (sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward') : 'unfold_more' }}
+          </mat-icon>
+        </div>
+      </th>
+
+      <th (click)="sortBy('distribution_date')">
+        <div class="flex">
+          <span>Disponível há</span>
+          <mat-icon class="sortable-icon" [class.active]="sortColumn === 'distribution_date'">
+            {{ sortColumn === 'distribution_date' ? (sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward') : 'unfold_more' }}
+          </mat-icon>
+        </div>
+      </th>
+
+      <th>
+        <span>Ações</span>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let processe of paginatedProcesses; let i = index">
+      <td> {{ processe.process_number || '-' }} </td>
+      <td> {{ processe.applicant_name || '-' }} </td>
+      <td> {{ processe.value | currency:'BRL':'symbol':'1.2-2':'pt-BR' }} </td>
+      <td> {{ processe.cpf_cnpj! | cpfCnpjMask }} </td>
+      <td><span class="truncate">{{ processe.company_name?.length! > 20 ? (processe.company_name | slice:0:30) + '...' : processe.company_name || '-'}}</span></td>
+      <td> {{ processe.cep?.city || '-' }} </td>
+      <td> {{ processe.distribution_date ? getFormatDateToLabel(processe.distribution_date) : '-' }} </td>
+      <td> <a class="see-more" (click)="onSeeMore(i)">Ver mais</a> </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Paginação Customizada -->
+<div class="pagination">
+  <button (click)="changePage(1)" [disabled]="currentPage === 1">Primeiro</button>
+
+  <button *ngFor="let page of totalPagesArray"
+          [class.active]="page === currentPage"
+          (click)="changePage(page)">
+    {{ page }}
+  </button>
+
+  <button (click)="changePage(totalPages)" [disabled]="currentPage === totalPages">Último</button>
+</div>
+

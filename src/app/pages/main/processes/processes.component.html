@@ -1,0 +1,35 @@
+<div class="container">
+  <app-header [info]="header"></app-header>
+
+  <div class="body">
+    <div *ngIf="processesObtained.length === 0">
+      <div class="filter-container">
+        <app-filters-processes [resetFilter]="resetFilter" (filtersSelected)="setFormValues($event)"></app-filters-processes>
+      </div>
+
+      <div class="search">
+        <img src="assets/lupa.png" alt="Ícone de lupa" class="lupa-image" />
+        <button mat-flat-button color="primary" (click)="getTotalNumberProcesses()" [disabled]="isLoading" class="btn-search"> {{ isLoading ? 'Aguarde...' : searchButtonText }} </button>
+      </div>
+    </div>
+
+    <div class="action-buttons" *ngIf="processesObtained.length > 0">
+      <div class="info">
+        <label>*Ao fechar, você encontrará os processos adquiridos na área "Meus Processos"</label>
+      </div>
+
+      <div class="buttons">
+        <button mat-flat-button class="white" (click)="newSearch()">
+          Nova busca
+        </button>
+        <button mat-flat-button class="green" (click)="exportData()">
+          <mat-icon>summarize</mat-icon> Exportar
+        </button>
+      </div>
+    </div>
+
+    <div class="table-container" *ngIf="processesObtained.length > 0">
+      <app-table-processes [processes]="processesObtained" (seeMoreClicked)="seeMore($event)"></app-table-processes>
+    </div>
+  </div>
+</div>

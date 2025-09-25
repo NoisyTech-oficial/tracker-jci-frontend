@@ -1,0 +1,26 @@
+<div *ngIf="isLoading" class="isloading-overlay">
+  <img src="assets/gif/loading_white.gif" alt="Carregando...">
+</div>
+
+<div *ngIf="!isLoading">
+  <div *ngIf="userDisabled">
+    <app-user-disabled></app-user-disabled>
+  </div>
+
+  <div *ngIf="!userDisabled">
+    <div *ngIf="isFirstAccess">
+      <app-first-access></app-first-access>
+    </div>
+  
+    <div class="container" *ngIf="!isFirstAccess">
+      <div class="menu">
+        <app-menu></app-menu>
+      </div>
+      <div class="router">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+
+  <app-support></app-support>
+</div>

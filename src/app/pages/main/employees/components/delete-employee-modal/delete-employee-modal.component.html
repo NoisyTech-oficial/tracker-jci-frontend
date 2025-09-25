@@ -1,0 +1,15 @@
+<mat-dialog-content>
+  <header class="header">
+    <h2 class="modal-title">Excluir Funcionário</h2>
+    <mat-icon (click)="close()">close</mat-icon>
+  </header>
+
+  <p>Tem certeza que deseja excluir o funcionário
+    <strong>{{ data.name || data.document | mask: '000.000.000-00' }}</strong>?</p>
+  <p>Essa ação não pode ser desfeita.</p>
+
+  <mat-dialog-actions align="end">
+    <button mat-raised-button color="primary"
+      (click)="deleteEmployee()" [disabled]="isloading">{{ isloading ? 'Aguarde...' : 'Excluir' }}</button>
+  </mat-dialog-actions>
+</mat-dialog-content>

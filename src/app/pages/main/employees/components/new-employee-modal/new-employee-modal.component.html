@@ -1,0 +1,41 @@
+<mat-dialog-content>
+  <header class="header">
+    <h2 class="modal-title">Novo Funcionário</h2>
+    <mat-icon (click)="close()">close</mat-icon>
+  </header>
+
+  <form [formGroup]="employeeForm" class="form" (ngSubmit)="save()">
+    <div class="input-container">
+      <!-- Documento -->
+      <mat-form-field appearance="outline">
+        <mat-label>CPF</mat-label>
+        <input matInput formControlName="document" mask="000.000.000-00">
+      </mat-form-field>
+    </div>
+
+    <div class="input-container">
+      <!-- Senha Temporária -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Senha temporária</mat-label>
+        <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+        <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibility()">
+          <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <!-- Permissões -->
+      <mat-form-field appearance="outline">
+        <mat-label>Permissões de Visualização</mat-label>
+        <mat-select formControlName="viewing_permission" multiple>
+          <mat-option *ngFor="let permission of permissions" [value]="permission">
+            {{ permission }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <mat-dialog-actions align="end">
+      <button mat-raised-button color="primary" [disabled]="employeeForm.invalid || isloading">{{ isloading ? 'Aguarde...' : 'Adicionar' }}</button>
+    </mat-dialog-actions>
+  </form>
+</mat-dialog-content>

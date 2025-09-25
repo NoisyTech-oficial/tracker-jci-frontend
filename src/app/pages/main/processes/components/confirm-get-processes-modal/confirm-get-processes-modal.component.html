@@ -1,0 +1,28 @@
+<mat-dialog-content>
+  <header class="header">
+    <h2 class="modal-title">{{ haveProcesses ? 'Confirmação' : 'Não encontrado' }}</h2>
+    <mat-icon (click)="close()">close</mat-icon>
+  </header>
+
+    <div class="body" *ngIf="haveProcesses && qtdProcesses > 1">
+      <label class="modal-text">
+        Foram encontrados <strong> {{ qtdProcesses }} processos </strong> com base em sua busca.
+        Deseja obter esses novos processos para sua empresa?
+      </label> <br/>
+    </div>
+
+    <div class="body" *ngIf="haveProcesses && qtdProcesses === 1">
+      <label class="modal-text">
+        Foi encontrado <strong> {{ qtdProcesses }} processo </strong> com base em sua busca.
+        Deseja obter esse novo processo para sua empresa?
+      </label> <br/>
+    </div>
+
+    <div class="body" *ngIf="!haveProcesses">
+      <label class="modal-text">Não encontramos processos com base em sua busca. Tente novamente.</label> <br/>
+    </div>
+
+    <mat-dialog-actions class="actions" *ngIf="haveProcesses">
+      <button mat-flat-button color="primary" (click)="confirm()">{{ qtdProcesses === 1 ? 'Obter processo' : 'Obter processos' }}</button>
+    </mat-dialog-actions>
+</mat-dialog-content>

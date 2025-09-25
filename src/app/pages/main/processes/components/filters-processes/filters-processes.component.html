@@ -1,0 +1,47 @@
+<form [formGroup]="filterForm">
+  <!-- Valor Mínimo e Máximo -->
+  <div class="filters">
+    <!-- Lista de Bancos -->
+    <mat-form-field appearance="outline" class="filter-field">
+      <mat-label>Bancos</mat-label>
+      <mat-select formControlName="bank" multiple panelClass="custom-panel">
+        <input type="text" class="filter-input" placeholder="Pesquisar banco..." (keyup)="filterBanks($event)" />
+
+        <!-- Lista filtrada de opções -->
+        <mat-option *ngFor="let bank of filteredBanks" [value]="bank">
+          {{ bank.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="filter-field">
+      <mat-label>Valor Mínimo</mat-label>
+      <input matInput type="text" formControlName="minValue" mask="separator.2" thousandSeparator="." decimalMarker=","
+        prefix="R$ ">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="filter-field">
+      <mat-label>Valor Máximo</mat-label>
+      <input matInput type="text" formControlName="maxValue" mask="separator.2" thousandSeparator="." decimalMarker=","
+        prefix="R$ ">
+    </mat-form-field>
+
+    <!-- Estado -->
+    <mat-form-field appearance="outline" class="filter-field">
+      <mat-label>Estados</mat-label>
+      <mat-select formControlName="state" multiple (selectionChange)="updateCities($event.value)"
+        panelClass="custom-panel">
+        <mat-option *ngFor="let state of getState()" [value]="state">{{ state }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Cidade -->
+    <mat-form-field appearance="outline" [ngClass]="{ 'disabled': !selectedState }" class="filter-field">
+      <mat-label>Cidade</mat-label>
+      <mat-select formControlName="city" multiple [disabled]="!selectedState" panelClass="custom-panel">
+        <input type="text" class="filter-input" placeholder="Pesquisar cidade..." (keyup)="filterCities($event)" />
+        <mat-option *ngFor="let city of filteredCities" [value]="city">{{ city }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</form>

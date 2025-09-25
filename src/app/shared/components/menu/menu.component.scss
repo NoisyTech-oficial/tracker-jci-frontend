@@ -1,0 +1,242 @@
+@use 'src/app/shared/styles/_variables.scss' as *;
+
+/* Sidebar com cor de fundo moderna */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 11.5vw;
+  height: 100vh;
+  background: linear-gradient(135deg, $secondary-color, $text-dark); /* Gradiente Azul */
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  transition: width 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+
+/* Quando o sidebar estiver fechado */
+.sidebar.closed {
+  width: 3%;
+  overflow: visible;
+}
+
+/* Header do sidebar */
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+/* Logo sempre visível, mas menor quando fechado */
+.logo {
+  width: 20px;
+  display: flex;
+  margin: auto;
+  transition: width 0.3s ease-in-out;
+}
+
+.logo.small {
+  width: 20px;
+  display: flex;
+  margin: auto;
+}
+
+/* Botão de abrir/fechar com cor branca */
+.toggle-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  color: white;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.menu-toggle {
+  cursor: pointer;
+}
+
+/* Scroll apenas na parte de cima */
+.menu-scroll {
+  flex-grow: 1; 
+  overflow-y: auto; 
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+
+.menu-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.menu-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+/* Ícones fixos no rodapé */
+.menu-bottom {
+  padding: 10px 0 15px 0;
+  border-top: 1px solid #5F71DA;
+
+  .has-dropdown {
+    position: relative;
+    cursor: pointer;
+    .arrow-icon {
+      margin-left: auto;
+    }
+    .submenu {
+      list-style: none;
+      // padding: 0 0 0 5px;
+      display: flex;
+      flex-direction: column;
+      margin: 0 !important;
+  
+      li {
+        margin-bottom: 0;
+  
+        a {
+          display: flex;
+          align-items: center;
+          font-size: 13px;
+          color: white;
+          padding: 7px 5px 5px 5px;
+          text-decoration: none;
+  
+          .arrow-icon {
+            margin-left: auto !important;
+          }
+  
+          mat-icon {
+            font-size: 18px;
+            // margin-right: 6px;
+          }
+  
+          &:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+          }
+        }
+      }
+    }
+  
+    &.open > .submenu {
+      display: flex;
+    }
+  }
+}
+
+/* Estilizando os links */
+nav ul li a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza os itens */
+}
+/* Estilização dos itens de menu */
+nav ul li {
+  width: 100%;
+  text-align: center;
+  margin: 10px 0; /* Espaçamento entre os itens */
+}
+
+/* Links do menu */
+nav ul li a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+
+/* Quando o sidebar estiver fechado, muda para coluna */
+.sidebar.closed nav ul li a {
+  flex-direction: column;
+  justify-content: center;
+}
+
+.sidebar:not(.closed) span {
+  opacity: 1;
+}
+
+/* Efeito de hover */
+nav ul li a:hover {
+  background: rgba(95, 113, 210, 0.3);
+}
+
+/* Ícones maiores e centralizados */
+nav ul li a mat-icon {
+  font-size: 21px;
+  color: white;
+  margin: 0;
+}
+
+/* Ícones e texto quando fechado */
+.sidebar.closed .user-info {
+  display: none;
+}
+
+.sidebar ul li a span {
+  font-size: 12px;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: opacity 0.2s ease-in-out;
+  margin-left: 10px;
+}
+
+/* Esconde os textos quando o menu está fechado */
+.sidebar.closed ul li a span {
+  display: none;
+}
+
+/* Seções do menu */
+.section-title {
+  font-size: 12px;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 10px 0;
+}
+
+.logout a {
+  color: #ff7f7f;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.logout a:hover {
+  background: rgba(255, 127, 127, 0.3);
+}
+
+mat-tooltip {
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.active-link {
+  background-color: rgba(95, 113, 210, 0.3);
+  font-weight: bold;
+}
+
+.open {
+  background-color: rgba(95, 113, 210, 0.3);
+  border-radius: 8px;
+}

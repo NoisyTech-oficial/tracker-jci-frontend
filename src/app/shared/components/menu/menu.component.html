@@ -1,0 +1,80 @@
+<div class="sidebar" [class.closed]="isCollapsed">
+  <div class="sidebar-header"></div>
+
+  <div class="sidebar-header">
+    <img src="assets/img/logo_noisy.svg" alt="Logo" class="logo" [class.small]="isCollapsed" />
+  </div>
+
+  <div class="menu-scroll">
+    <nav>
+      <ul>
+        <li>
+          <a (click)="toggleSidebar()" *ngIf="isCollapsed" matTooltip="Expandir menu" matTooltipPosition="right" class="menu-toggle">
+            <mat-icon>menu</mat-icon>
+          </a>
+          <a (click)="toggleSidebar()" *ngIf="!isCollapsed" class="menu-toggle">
+            <mat-icon>menu_open</mat-icon>
+            <span>Recolher menu</span>
+          </a>
+        </li>
+        <li>
+          <a *ngIf="isCollapsed" routerLink="/inicio" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }" matTooltip="Inicio" matTooltipPosition="right" class="menu-toggle">
+            <mat-icon>home</mat-icon>
+          </a>
+          <a *ngIf="!isCollapsed" routerLink="/inicio" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }" class="menu-toggle" (click)="toggleSidebar()">
+            <mat-icon>home</mat-icon>
+            <span>Inicio</span>
+          </a>
+        </li>
+        <li *ngFor="let item of menuItems">
+          <a routerLink="{{ item.link }}" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }" *ngIf="isCollapsed" matTooltip="{{ item.label }}" matTooltipPosition="right">
+            <mat-icon>{{ item.icon }}</mat-icon>
+            <span>{{ item.label }}</span>
+          </a>
+          <a routerLink="{{ item.link }}" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }" *ngIf="!isCollapsed" (click)="toggleSidebar()">
+            <mat-icon>{{ item.icon }}</mat-icon>
+            <span>{{ item.label }}</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="menu-bottom">
+    <nav>
+      <ul>
+        <!-- ############ MINHA CONTA ############ -->
+        <!-- <li class="has-dropdown" [class.open]="isSubmenuOpen" [ngClass]="{ 'open': isSubmenuOpen }">
+          <a (click)="toggleSubmenu();" *ngIf="isCollapsed" routerLinkActive="active-link" matTooltip="Conta" matTooltipPosition="right">
+            <mat-icon>account_circle</mat-icon>
+          </a>
+        
+          <a (click)="toggleSubmenu();" routerLinkActive="active-link" *ngIf="!isCollapsed">
+            <mat-icon>account_circle</mat-icon>
+            <span>Conta</span>
+            <mat-icon class="arrow-icon">{{ isSubmenuOpen ? 'expand_less' : 'expand_more' }}</mat-icon>
+          </a>
+        
+          <ul class="submenu" *ngIf="isSubmenuOpen">
+            <li><a routerLink="/conta/perfil" (click)="toggleSubMenuAndSidebar();" matTooltip="Meu Perfil" matTooltipPosition="right"><mat-icon>person</mat-icon> <span>Meu Perfil</span></a></li>
+            <li><a routerLink="/conta/plano" (click)="toggleSubMenuAndSidebar();"matTooltip="Meu Plano" matTooltipPosition="right"><mat-icon>paid</mat-icon> <span>Meu Plano</span></a></li>
+          </ul>
+        </li>        -->
+        
+        <!-- ############ SAIR ############ -->
+        <li class="logout">
+          <a (click)="logout()"
+             matTooltip="Sair"
+             matTooltipPosition="right"
+             *ngIf="isCollapsed">
+            <mat-icon>logout</mat-icon>
+          </a>
+          <a (click)="logout()" *ngIf="!isCollapsed">
+            <mat-icon>logout</mat-icon>
+            <span>Sair</span>
+          </a>
+        </li>
+      </ul>   
+    </nav>
+  </div>
+</div>

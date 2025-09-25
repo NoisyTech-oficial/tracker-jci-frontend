@@ -1,0 +1,69 @@
+<div class="container">
+  <app-header [info]="header"></app-header>
+
+  <div class="loading-container" *ngIf="isLoading === true">
+    <div class="loading-card">
+      <p class="subtitle">Aguarde! <br> Estamos obtendo informações...</p>
+    </div>
+  </div>
+
+  <div class="table-container" *ngIf="isLoading === false">
+    <div class="table-header">
+      <input type="text" placeholder="Filtrar por Nome" (keyup)="applyFilter($event)" class="filter-input" />
+
+      <button class="add-button" (click)="openNewEmployeeModal()">
+        <mat-icon>person_add</mat-icon>
+        <span>Adicionar Funcionário</span>
+      </button>
+    </div>
+
+    <table class="custom-table">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>CPF</th>
+          <th>Permissões de Visualização</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="employeesData.length > 0">
+        <tr *ngFor="let employee of filteredEmployees; let i = index">
+          <td>{{ getFirstAndLastName(employee.name!) || "-" }}</td>
+          <td>{{ employee.document | mask: '000.000.000-00' }}</td>
+          <td>
+            <div class="custom-select">
+              <span *ngFor="let permission of employee.viewing_permission" class="selected-option">
+                {{ formatMenuTitle(permission) }}
+              </span>
+            </div>
+          </td>
+          <td class="actions">
+            <div *ngIf="userData.document !== employee.document">
+              <button class="edit-btn" (click)="editEmployee(employee)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button class="delete-btn" (click)="deleteEmployee(employee.name!, employee.document)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+            <div *ngIf="userData.document === employee.document">
+              <button class="edit-btn disabled-btn">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button class="delete-btn disabled-btn">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="employeesData.length == 0" class="tbodyEmpty">
+        <tr>
+          <td colspan="4">Não há funcionários cadastrados</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+

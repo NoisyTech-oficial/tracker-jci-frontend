@@ -1,0 +1,29 @@
+.welcome-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+  
+    .welcome-card {
+      max-width: 600px;
+      padding: 40px;
+      text-align: center;
+      h1 {
+        font-size: 32px;
+        margin-bottom: 20px;
+        span {
+          color: #3f51b5;
+        }
+      }
+      .subtitle {
+        margin-bottom: 30px;
+        font-size: 18px;
+        color: #555;
+      }
+      .btn-logout {
+        width: 25%;
+      }
+    }
+  }
+  

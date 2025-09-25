@@ -1,0 +1,31 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="logo-container">
+      <h2>Primeiro Acesso</h2>
+    </div>
+
+    <form [formGroup]="firstAccessForm" (ngSubmit)="confirmFirstAccess()">
+      <div class="input-group">
+        <input type="text" formControlName="name" [placeholder]="userData.profile === 'ADMINISTRADOR' ? 'Insira o nome da empresa' : 'Insira seu nome completo'"  required (keypress)="allowOnlyLetters($event)"/>
+      </div>
+
+      <div class="input-group space-input">
+        <div class="password-wrapper">
+          <input [type]="hidePassword ? 'password' : 'text'" formControlName="password" id="password" placeholder="Crie uma nova senha" required />
+          <button mat-icon-button type="button" (click)="togglePasswordVisibility()">
+            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="terms-container">
+        <label for="terms">Ao clicar em Finalizar Cadastro, você aceita nossos <a href="assets/pdf/termos.pdf" download="Termos_de_Uso.pdf">Termos de Uso</a></label>
+      </div>
+
+      <button type="submit" class="login-button" [disabled]="firstAccessForm.invalid">
+        {{ isloading ? 'Aguarde...' : 'Finalizar Cadastro' }}
+      </button>
+
+    </form>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<mat-dialog-content>
+  <header class="header">
+    <h2 class="modal-title">Filtro de exportação</h2>
+    <mat-icon (click)="close()">close</mat-icon>
+  </header>
+
+  <div class="custom-filter-box">
+    <div class="content">
+      <label>De:</label>
+      <input type="date" [(ngModel)]="filtro.dataInicio" [ngModelOptions]="{standalone: true}" />
+      <input type="time" [(ngModel)]="filtro.horaInicio" [ngModelOptions]="{standalone: true}" />
+    </div>
+
+    <div class="content">
+      <label>Até:</label>
+      <input type="date" [(ngModel)]="filtro.dataFim" [ngModelOptions]="{standalone: true}" />
+      <input type="time" [(ngModel)]="filtro.horaFim" [ngModelOptions]="{standalone: true}" />
+    </div>
+
+    <button class="export-btn green" mat-flat-button color="primary" (click)="onExportClick()">Exportar</button>
+  </div>
+</mat-dialog-content>

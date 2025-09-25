@@ -1,0 +1,190 @@
+@use 'src/app/shared/styles/_variables.scss' as *;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body, html {
+  height: 100%;
+}
+
+.login-container::before {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 80%);
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  filter: blur(80px);
+}
+
+.login-container { 
+  background: linear-gradient(160deg, $background-dark 15%, $secondary-color 45%, $background-dark 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+  flex-direction: column;
+}
+
+.logo-container {
+  text-align: center;
+  margin-bottom: 20px;
+  h2 {
+    margin-bottom: 25px;
+    font-size: 24px;
+  }
+}
+
+.login-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.08));
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 40px 30px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  color: white;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.input-group {
+  position: relative; /* Garante que a posição do erro seja relativa ao input */
+}
+
+.input-group input:focus {
+  box-shadow: 0 0 10px rgba(69, 89, 136, 0.6);
+  outline: none; /* Garante que não tenha borda padrão */
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  font-size: 16px;
+  box-shadow: 0 0 10px rgba(69, 89, 136, 0.6);
+  outline: none;
+}
+
+.input-group input::placeholder {
+  font-size: 14px;
+  color: white;
+}
+
+.space-input {
+  margin-top: 25px;
+}
+
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-wrapper input {
+  flex: 1;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.password-wrapper button {
+  display: flex;
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+}
+
+.password-wrapper button mat-icon {
+  color: #ffffffb3; /* Branco suave */
+  font-size: 22px;
+  margin-top: 15%;
+  display: flex;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.login-button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: #5F71D2;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+  transition: all 0.3s ease-in-out;
+}
+
+.login-button:disabled {
+  background-color: #A0A0A0; /* Cinza para indicar desativado */
+  cursor: not-allowed; /* Altera o cursor para indicar que está desabilitado */
+  opacity: 0.6; /* Deixa o botão visualmente apagado */
+  transform: none; /* Remove a animação de hover */
+}
+
+.login-button:hover {
+  background-color: #3a4d76; /* Um tom mais escuro ao passar o mouse */
+  transform: scale(1.05);
+}
+
+.terms-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 15px 0;
+}
+
+.terms-container input {
+  margin-right: 8px;
+}
+
+.terms-container label {
+  font-size: 12px;
+}
+
+.terms-container a {
+  color: white;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
