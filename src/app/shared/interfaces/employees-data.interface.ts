@@ -1,5 +1,5 @@
 export interface EmployeesData {
-  name: string | null;
-  document: string;
-  viewing_permission: string[];
+  nome: string | null;
+  documento: string;
+  permissao_visualizacao: string[];
 }

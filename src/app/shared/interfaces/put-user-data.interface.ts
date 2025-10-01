@@ -1,6 +1,12 @@
 export interface PutUserData {
-  name: string | null;
-  agree_terms: boolean;
-  first_access: boolean;
-  new_password: string;
+  nome?: string;
+  advogado?: AdvogadoDados | null;
+  primeiro_acesso?: boolean;
+  aceitou_termos?: boolean;
+}
+
+export interface AdvogadoDados {
+  email: string;
+  senha: string;
+  totip: string;
 }

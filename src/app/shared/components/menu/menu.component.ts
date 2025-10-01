@@ -1,7 +1,7 @@
 import { UserService } from './../../../services/user/user.service';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { ProfileUserEnum } from 'src/app/shared/enums/profile-user.enum';
+import { PerfilUsuarioEnum } from 'src/app/shared/enums/profile-user.enum';
 import { UserData } from 'src/app/shared/interfaces/user-data.interface';
 
 @Component({
@@ -29,8 +29,8 @@ export class MenuComponent implements OnInit {
   }
 
   filterMenu() {
-    if (this.userData.viewing_permission && this.userData.profile !== ProfileUserEnum.ADMINISTRADOR) {
-      this.menuItems = this.menuItems.filter(item => this.userData.viewing_permission.includes(item.permission));
+    if (this.userData.permissao_visualizacao && this.userData.perfil !== PerfilUsuarioEnum.ADMINISTRADOR) {
+      this.menuItems = this.menuItems.filter(item => this.userData.permissao_visualizacao.includes(item.permission));
     }
   }
 

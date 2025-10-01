@@ -7,10 +7,10 @@ export class MasksService {
 
   constructor() { }
 
-  formatCPF(document: string): string {
-    if (!document) return '';
+  formatCPF(documento: string): string {
+    if (!documento) return '';
 
-    return document
+    return documento
       .replace(/\D/g, '') // 🔥 Remove tudo que não for número
       .replace(/(\d{3})(\d)/, '$1.$2') // 🔥 Adiciona o primeiro ponto
       .replace(/(\d{3})(\d)/, '$1.$2') // 🔥 Adiciona o segundo ponto

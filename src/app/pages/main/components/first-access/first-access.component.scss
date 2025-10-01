@@ -34,10 +34,13 @@ body, html {
 
 .logo-container {
   text-align: center;
-  margin-bottom: 20px;
   h2 {
-    margin-bottom: 25px;
     font-size: 24px;
+    margin-bottom: 0;
+  }
+  h3 {
+    margin-bottom: 25px;
+    font-size: 18px;
   }
 }
 
@@ -52,6 +55,15 @@ body, html {
   text-align: center;
   color: white;
   animation: fadeIn 0.8s ease-in-out;
+
+  .advogado {
+    .titulo {
+      font-size: 22px;
+    }
+    .email, .senha, .totip {
+      margin-top: 15px;
+    }
+  }
 }
 
 .input-group {
@@ -90,13 +102,13 @@ body, html {
   margin-top: 25px;
 }
 
-.password-wrapper {
+.senha-wrapper {
   position: relative;
   display: flex;
   align-items: center;
 }
 
-.password-wrapper input {
+.senha-wrapper input {
   flex: 1;
   padding: 12px;
   border-radius: 8px;
@@ -105,7 +117,7 @@ body, html {
   color: white;
 }
 
-.password-wrapper button {
+.senha-wrapper button {
   display: flex;
   position: absolute;
   right: 10px;
@@ -115,14 +127,14 @@ body, html {
   cursor: pointer;
 }
 
-.password-wrapper button mat-icon {
+.senha-wrapper button mat-icon {
   color: #ffffffb3; /* Branco suave */
   font-size: 22px;
-  margin-top: 15%;
+  margin-top: 10%;
   display: flex;
 }
 
-.toggle-password {
+.toggle-senha {
   position: absolute;
   right: 10px;
   top: 50%;

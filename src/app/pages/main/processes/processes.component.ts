@@ -6,7 +6,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmGetProcessesModalComponent } from './components/confirm-get-processes-modal/confirm-get-processes-modal.component';
 import { Process } from 'src/app/shared/interfaces/processes-data.interface';
-import { SeeMoreInformationsProcessesModalComponent } from './components/see-more-informations-processes-modal/see-more-informations-processes-modal.component';
 import { MasksService } from 'src/app/shared/masks/masks.service';
 import { Header } from 'src/app/shared/interfaces/header.interface';
 
@@ -167,10 +166,10 @@ export class ProcessesComponent {
   }
 
   seeMore(index: number) {
-    this.dialog.open(SeeMoreInformationsProcessesModalComponent, {
-      width: '800px',
-      data: this.processesObtained[index]
-    });
+    // this.dialog.open(SeeMoreInformationsProcessesModalComponent, {
+    //   width: '800px',
+    //   data: this.processesObtained[index]
+    // });
   }
 
   onSpace(event: any): void {

@@ -11,7 +11,7 @@
     </div>
     
     <div class="table-container" *ngIf="processesObtained.length > 0">
-      <app-table-processes-obtained [processes]="filteredProcesses" (postNewStatusEmit)="postNewStatus($event)" (seeMoreClicked)="seeMore($event)"></app-table-processes-obtained>
+      <app-table-processes-obtained [processes]="filteredProcesses" (postNewStatusEmit)="postNewStatus($event)"></app-table-processes-obtained>
     </div>
 
     <div *ngIf="processesObtained.length === 0" class="empty">

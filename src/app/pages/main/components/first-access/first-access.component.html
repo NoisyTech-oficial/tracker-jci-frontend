@@ -1,25 +1,40 @@
 <div class="login-container">
   <div class="login-card">
     <div class="logo-container">
-      <h2>Primeiro Acesso</h2>
+      <h2>Advogado</h2>
+      <h3>Insira as credenciais</h3>
     </div>
 
     <form [formGroup]="firstAccessForm" (ngSubmit)="confirmFirstAccess()">
-      <div class="input-group">
-        <input type="text" formControlName="name" [placeholder]="userData.profile === 'ADMINISTRADOR' ? 'Insira o nome da empresa' : 'Insira seu nome completo'"  required (keypress)="allowOnlyLetters($event)"/>
+      <div class="input-group" *ngIf="userData.perfil != 'ADMINISTRADOR'">
+        <input type="text" formControlName="nome" [placeholder]="'Insira seu nome completo'"  required (keypress)="allowOnlyLetters($event)"/>
       </div>
 
-      <div class="input-group space-input">
-        <div class="password-wrapper">
-          <input [type]="hidePassword ? 'password' : 'text'" formControlName="password" id="password" placeholder="Crie uma nova senha" required />
-          <button mat-icon-button type="button" (click)="togglePasswordVisibility()">
-            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
-          </button>
+      <div class="advogado" *ngIf="userData.perfil === 'ADMINISTRADOR' && userData.id_advogado === null">
+        <div class="titulo">
+        </div>
+        <div class="input-group email">
+          <input type="text" formControlName="email_advogado" [placeholder]="'E-mail'"  required/>
+        </div>
+        <div class="input-group">
+          <div class="senha-wrapper senha">
+            <input [type]="hidePassword ? 'password' : 'text'" formControlName="senha_advogado" id="senha" placeholder="Senha" required />
+            <button mat-icon-button type="button" (click)="togglePasswordVisibility()">
+              <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+          </div>
+        </div>
+        <div class="input-group totip">
+          <input type="text" formControlName="totip_advogado" [placeholder]="'Tot-ip'"  required/>
         </div>
       </div>
 
-      <div class="terms-container">
+      <!-- <div class="terms-container">
         <label for="terms">Ao clicar em Finalizar Cadastro, você aceita nossos <a href="assets/pdf/termos.pdf" download="Termos_de_Uso.pdf">Termos de Uso</a></label>
+      </div> -->
+
+      <div class="terms-container">
+        <label for="terms">Por segurança, sugerimos que você redefina sua senha ao acessar.</label>
       </div>
 
       <button type="submit" class="login-button" [disabled]="firstAccessForm.invalid">

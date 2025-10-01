@@ -14,7 +14,7 @@ export class MyAccountComponent {
   userData = {
     name: 'Fulano da Silva',
     email: 'fulano@email.com',
-    document: '123.456.789-00'
+    documento: '123.456.789-00'
   };
 
   userPhoto: string | null = 'https://www.gravatar.com/avatar/?d=mp&s=200';
@@ -27,7 +27,7 @@ export class MyAccountComponent {
   constructor(private fb: FormBuilder) {}
 
   onChangePhoto() {
-    // document.querySelector < HTMLInputElement > ('#fileInput') ? .click();
+    // documento.querySelector < HTMLInputElement > ('#fileInput') ? .click();
   }
 
   onFileSelected(event: any) {

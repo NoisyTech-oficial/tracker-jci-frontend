@@ -12,46 +12,51 @@ import { Router } from '@angular/router';
 export class MainComponent implements OnInit {
 
   constructor(
-    private userService: UserService,
-    private spinner: NgxSpinnerService,
-    private router: Router
+    private servicoUsuario: UserService,
+    private carregador: NgxSpinnerService,
+    private roteador: Router
   ) { }
 
-  isLoading: boolean = false;
-  isFirstAccess: boolean = false;
-  userDisabled: boolean = false;
+  estaCarregando: boolean = false;
+  primeiroAcesso: boolean = false;
+  perfilAdmin: boolean = false;
+  temAdvogado: boolean = false;
+  usuarioDesativado: boolean = false;
 
   ngOnInit(): void {
-    this.showSpinner();
-    this.userService.getUser().subscribe((userData: UserData) => {
-      this.userService.setUser(userData);
-      this.verifyRules(userData.first_access, userData.user_activated);
-      this.hideSpinner();
+    this.mostrarCarregador();
+    this.servicoUsuario.getUser().subscribe((dadosUsuario: UserData) => {
+      this.servicoUsuario.setUser(dadosUsuario);
+
+      const temAdvogado = dadosUsuario.id_advogado ? true : false;
+      this.verificarRegras(dadosUsuario.primeiro_acesso, dadosUsuario.usuario_ativo, dadosUsuario.perfil, temAdvogado);
+      
+      this.ocultarCarregador();
     });
   }
 
-  verifyRules(firstAccess: boolean, userActivated: boolean) {
-    if (!userActivated) {
-      this.userDisabled = true;
+  verificarRegras(primeiroAcesso: boolean, usuarioAtivado: boolean, perfil: string, temAdvogado: boolean) {
+    if (!usuarioAtivado) {
+      this.usuarioDesativado = true;
       return;
     }
 
-    this.isFirstAccess = firstAccess;
-    if(!firstAccess) {
-      const currentRoute = this.router.url;
-      if (currentRoute === '/') {
-        this.router.navigate(['/inicio']); 
+    this.primeiroAcesso = primeiroAcesso;
+    if(!primeiroAcesso) {
+      const rotaAtual = this.roteador.url;
+      if (rotaAtual === '/') {
+        this.roteador.navigate(['/inicio']); 
       }
     }
   }
 
-  showSpinner(): void {
-    this.isLoading = true;
-    this.spinner.show();
+  mostrarCarregador(): void {
+    this.estaCarregando = true;
+    this.carregador.show();
   }
 
-  hideSpinner() {
-    this.isLoading = false;
-    this.spinner.hide();
+  ocultarCarregador() {
+    this.estaCarregando = false;
+    this.carregador.hide();
   }
 }

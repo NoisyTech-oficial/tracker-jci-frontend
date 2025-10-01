@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { debounceTime } from 'rxjs';
-import { GeneralDataService } from 'src/app/services/general-data/general-data.service';
 import { Banks } from 'src/app/shared/interfaces/banks.interface';
 import { Cep } from 'src/app/shared/interfaces/cep.interface';
 
@@ -31,25 +30,17 @@ export class FiltersProcessesComponent {
 
   constructor(
     private fb: FormBuilder,
-    private generalDataService: GeneralDataService,
     private cdRef: ChangeDetectorRef
   ) {
     this.startForm();
   }
 
   ngOnInit(): void {
-    this.getDataFilter();
-
     this.filterForm.valueChanges
     .pipe(debounceTime(300)) // espera 300ms sem digitar
     .subscribe(() => {
       this.filtersSelected.emit(this.filterForm);
     });
-  }
-
-  getDataFilter() {
-    this.getStateAndCities();
-    this.getBanksContainLawsuits();
   }
 
   startForm() {
@@ -59,22 +50,6 @@ export class FiltersProcessesComponent {
       maxValue: [null],
       city: [[]],
       state: [[]]
-    });
-  }
-
-  getBanksContainLawsuits(): void {
-    this.generalDataService.getBanksContainLawsuits().subscribe((data: Banks[]) => {
-      data.push({name: "- Demais bancos -", code: "000"});
-      this.banks = data;
-      this.filteredBanks = [...this.banks];
-      this.cdRef.detectChanges();
-    });
-  }
-
-  getStateAndCities(): void {
-    this.generalDataService.getStateAndCities().subscribe((data: Cep) => {
-      this.stateAndCities = data;
-      this.cdRef.detectChanges();
     });
   }
 

@@ -1,5 +1,5 @@
 export const environment = {
-  production: true,
-  apiUrl: 'https://juristracker.com.br/api',
+  production: false,
+  apiUrl: 'http://localhost:3000/api',
   suportContact: '5511987913176'
 };

@@ -25,10 +25,10 @@ export class DeleteEmployeeModalComponent {
 
   deleteEmployee() {
     this.isloading = true;
-    this.employeesService.deleteEmployee(this.data.document).subscribe({
+    this.employeesService.deleteEmployee(this.data.documento).subscribe({
       next: () => {
         this.notificationService.showMessage('Funcionário excluído com sucesso', 'success');
-        this.dialogRef.close(this.data.document);
+        this.dialogRef.close(this.data.documento);
       },
       error: () => {
         this.isloading = false;

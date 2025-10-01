@@ -1,4 +1,4 @@
 export interface CredentialsLogin {
-  document: string;
-  password: string;
+  documento: string;
+  senha: string;
 }

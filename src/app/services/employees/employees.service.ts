@@ -16,24 +16,24 @@ export class EmployeesService {
   constructor(private http: HttpClient) { }
 
   getEmployees(): Observable<EmployeesData[]> {
-    return this.http.get<EmployeesData[]>(`${this.baseUrl}/employee/employees-by-company-document`);
+    return this.http.get<EmployeesData[]>(`${this.baseUrl}/funcionarios/por-documento-empresa`);
   }
 
   postEmployee(data: AddEmployee): Observable<any> {
-    data.viewing_permission = this.rulesPermission(data.viewing_permission);
-    return this.http.post<any>(`${this.baseUrl}/employee/register`, data);
+    data.permissao_visualizacao = this.rulesPermission(data.permissao_visualizacao);
+    return this.http.post<any>(`${this.baseUrl}/funcionarios/cadastrar`, data);
   }
 
   putEmployeeView(data: PutEmployeeViewData): Observable<any> {
-    data.viewing_permission = this.rulesPermission(data.viewing_permission);
-    return this.http.put<any>(`${this.baseUrl}/employee/viewing-permission`, data);
+    data.permissao_visualizacao = this.rulesPermission(data.permissao_visualizacao);
+    return this.http.put<any>(`${this.baseUrl}/funcionarios/permissoes-visualizacao`, data);
   }
 
-  deleteEmployee(document: string): Observable<any> {
+  deleteEmployee(documento: string): Observable<any> {
     const options = {
-      body: { document: document }
+      body: { documento: documento }
     };
-    return this.http.delete<any>(`${this.baseUrl}/employee/delete`, options);
+    return this.http.delete<any>(`${this.baseUrl}/funcionarios/deletar`, options);
   }
 
   rulesPermission(arr: string[]): string[] {

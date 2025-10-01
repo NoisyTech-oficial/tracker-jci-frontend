@@ -40,7 +40,7 @@ export class EmployeesComponent implements OnInit {
   }
 
   sortViewingPermission() {
-    this.employeesData.map(item => item.viewing_permission.sort());
+    this.employeesData.map(item => item.permissao_visualizacao.sort());
   }
 
   getEmployees() {
@@ -66,7 +66,7 @@ export class EmployeesComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
     this.filteredEmployees = this.employeesData.filter(emp =>
-      (emp.name!.toLowerCase()).includes(filterValue)
+      (emp.nome!.toLowerCase()).includes(filterValue)
     );
   }
 
@@ -79,9 +79,9 @@ export class EmployeesComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.employeesData.push({
-          name: null,
-          document: result.document,
-          viewing_permission: result.viewing_permission
+          nome: null,
+          documento: result.documento,
+          permissao_visualizacao: result.permissao_visualizacao
         });
 
         this.filteredEmployees = [...this.employeesData];
@@ -107,8 +107,8 @@ export class EmployeesComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.employeesData.map(item => {
-          if (item.document === result.document) {
-            item.viewing_permission = result.viewing_permission;
+          if (item.documento === result.documento) {
+            item.permissao_visualizacao = result.permissao_visualizacao;
           }
         });
         this.filteredEmployees = [...this.employeesData];
@@ -116,15 +116,15 @@ export class EmployeesComponent implements OnInit {
     });
   }
 
-  deleteEmployee(name: string, document: string) {
+  deleteEmployee(name: string, documento: string) {
     const dialogRef = this.dialog.open(DeleteEmployeeModalComponent, {
       width: '600px',
-      data: { name: name, document: document }
+      data: { name: name, documento: documento }
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.employeesData = this.employeesData.filter(employee => employee.document !== result);
+        this.employeesData = this.employeesData.filter(employee => employee.documento !== result);
         this.filteredEmployees = [...this.employeesData];
       }
     });

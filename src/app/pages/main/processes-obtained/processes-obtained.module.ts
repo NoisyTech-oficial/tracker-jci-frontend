@@ -13,13 +13,12 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ProcessesObtainedComponent } from './processes-obtained.component';
-import { SeeMoreInformationsProcessesObtainedModalComponent } from './components/see-more-informations-processes-obtained-modal/see-more-informations-processes-obtained-modal.component';
 import { FiltersProcessesObtainedComponent } from './components/filters-processes-obtained/filters-processes-obtained.component';
 import { TableProcessesObtainedComponent } from './components/table-processes-obtained/table-processes-obtained.component';
 import { OverlayModule } from '@angular/cdk/overlay';
 
 @NgModule({
-  declarations: [ProcessesObtainedComponent, SeeMoreInformationsProcessesObtainedModalComponent, FiltersProcessesObtainedComponent, TableProcessesObtainedComponent],
+  declarations: [ProcessesObtainedComponent, FiltersProcessesObtainedComponent, TableProcessesObtainedComponent],
   imports: [
     ProcessesObtainedRoutingModule,
     CommonModule,

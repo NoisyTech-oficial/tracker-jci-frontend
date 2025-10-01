@@ -16,11 +16,11 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getUser(): Observable<UserData> {
-    return this.http.get<UserData>(`${this.baseUrl}/user/data`);
+    return this.http.get<UserData>(`${this.baseUrl}/usuario/dados`);
   }
 
   putUser(user: PutUserData): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}/user/data`, user);
+    return this.http.put<any>(`${this.baseUrl}/usuario/dados`, user);
   }
 
   setUser(user: UserData): void {

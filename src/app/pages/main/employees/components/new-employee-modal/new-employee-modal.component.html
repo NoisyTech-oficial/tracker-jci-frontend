@@ -9,7 +9,7 @@
       <!-- Documento -->
       <mat-form-field appearance="outline">
         <mat-label>CPF</mat-label>
-        <input matInput formControlName="document" mask="000.000.000-00">
+        <input matInput formControlName="documento" mask="000.000.000-00">
       </mat-form-field>
     </div>
 
@@ -17,7 +17,7 @@
       <!-- Senha Temporária -->
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Senha temporária</mat-label>
-        <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+        <input matInput [type]="hidePassword ? 'senha' : 'text'" formControlName="senha">
         <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibility()">
           <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
         </button>
@@ -26,7 +26,7 @@
       <!-- Permissões -->
       <mat-form-field appearance="outline">
         <mat-label>Permissões de Visualização</mat-label>
-        <mat-select formControlName="viewing_permission" multiple>
+        <mat-select formControlName="permissao_visualizacao" multiple>
           <mat-option *ngFor="let permission of permissions" [value]="permission">
             {{ permission }}
           </mat-option>

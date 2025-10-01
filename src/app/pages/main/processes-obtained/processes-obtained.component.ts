@@ -5,7 +5,6 @@ import { ExportExcelService } from 'src/app/services/export-excel/export-excel.s
 import { ProcessesService } from 'src/app/services/processes/processes.service';
 import { MasksService } from 'src/app/shared/masks/masks.service';
 import { ProcessObtained, putStatusOrNotesProcess } from 'src/app/shared/interfaces/processes-obtained-data.interface';
-import { SeeMoreInformationsProcessesObtainedModalComponent } from './components/see-more-informations-processes-obtained-modal/see-more-informations-processes-obtained-modal.component';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 import { Header } from 'src/app/shared/interfaces/header.interface';
 import { ExportExcelComponent } from 'src/app/shared/components/export-excel/export-excel.component';
@@ -146,14 +145,6 @@ export class ProcessesObtainedComponent {
   hideSpinner() {
     this.isLoading = false;
     this.spinner.hide();
-  }
-
-  seeMore(index: any) {
-    this.dialog.open(SeeMoreInformationsProcessesObtainedModalComponent, {
-      width: '800px',
-      data: this.filteredProcesses[index],
-      autoFocus: false
-    });
   }
 
   exportExcel() {

@@ -1,18 +1,18 @@
-<div *ngIf="isLoading" class="isloading-overlay">
+<div *ngIf="estaCarregando" class="isloading-overlay">
   <img src="assets/gif/loading_white.gif" alt="Carregando...">
 </div>
 
-<div *ngIf="!isLoading">
-  <div *ngIf="userDisabled">
+<div *ngIf="!estaCarregando">
+  <div *ngIf="usuarioDesativado">
     <app-user-disabled></app-user-disabled>
   </div>
 
-  <div *ngIf="!userDisabled">
-    <div *ngIf="isFirstAccess">
+  <div *ngIf="!usuarioDesativado">
+    <div *ngIf="primeiroAcesso && (perfilAdmin && !temAdvogado) || primeiroAcesso && !perfilAdmin">
       <app-first-access></app-first-access>
     </div>
   
-    <div class="container" *ngIf="!isFirstAccess">
+    <div class="container" *ngIf="!primeiroAcesso || primeiroAcesso && (perfilAdmin && temAdvogado)">
       <div class="menu">
         <app-menu></app-menu>
       </div>

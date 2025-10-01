@@ -10,12 +10,12 @@
 
     <form [formGroup]="loginForm" (ngSubmit)="login()">
       <div class="input-group">
-        <input type="text" #documentInput formControlName="document" placeholder="Digite seu CPF ou CNPJ" required />
+        <input type="text" #documentInput formControlName="documento" placeholder="Digite seu CPF ou CNPJ" required />
       </div>
 
       <div class="input-group space-input">
-        <div class="password-wrapper">
-          <input [type]="hidePassword ? 'password' : 'text'" formControlName="password" id="password" placeholder="Insira sua senha" required />
+        <div class="senha-wrapper">
+          <input [type]="hidePassword ? 'senha' : 'text'" formControlName="senha" id="senha" placeholder="Insira sua senha" required />
           <button mat-icon-button type="button" (click)="togglePasswordVisibility()">
             <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
           </button>
@@ -24,7 +24,7 @@
 
       <div class="options">
         <label></label>
-        <!-- <a href="#" class="forgot-password">Esqueceu sua senha?</a> -->
+        <!-- <a href="#" class="forgot-senha">Esqueceu sua senha?</a> -->
       </div>
 
       <button type="submit" class="login-button" [disabled]="loginForm.invalid || isloading">

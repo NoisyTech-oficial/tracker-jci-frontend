@@ -1,13 +1,12 @@
-import { ProfileUserEnum } from "../enums/profile-user.enum";
+import { PerfilUsuarioEnum } from "../enums/profile-user.enum";
 
 export interface UserData {
-  name: string | null;
-  document: string;
-  plan: string;
-  plan_plus: boolean;
-  profile: ProfileUserEnum;
-  first_access: boolean;
-  viewing_permission: string[];
-  company_document: string | null;
-  user_activated: boolean;
+  nome: string | null;
+  documento: string;
+  documento_empresa: string | null;
+  id_advogado: null | string;
+  perfil: PerfilUsuarioEnum;
+  primeiro_acesso: boolean;
+  permissao_visualizacao: string[];
+  usuario_ativo: boolean;
 }

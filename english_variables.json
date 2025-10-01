@@ -1,0 +1,2919 @@
+{
+  "src/xlsx-style.d.ts": [
+    {
+      "line": 3,
+      "name": "export",
+      "snippet": "export = XLSX;"
+    }
+  ],
+  "src/app/app-routing.module.ts": [
+    {
+      "line": 4,
+      "name": "routes",
+      "snippet": "const routes: Routes = ["
+    },
+    {
+      "line": 11,
+      "name": "imports",
+      "snippet": "imports: [RouterModule.forRoot(routes)],"
+    },
+    {
+      "line": 12,
+      "name": "exports",
+      "snippet": "exports: [RouterModule]"
+    }
+  ],
+  "src/app/app.module.ts": [
+    {
+      "line": 20,
+      "name": "imports",
+      "snippet": "imports: ["
+    },
+    {
+      "line": 30,
+      "name": "providers",
+      "snippet": "providers: ["
+    },
+    {
+      "line": 36,
+      "name": "exports",
+      "snippet": "exports: [],"
+    },
+    {
+      "line": 37,
+      "name": "bootstrap",
+      "snippet": "bootstrap: [AppComponent]"
+    }
+  ],
+  "src/app/app.component.ts": [
+    {
+      "line": 4,
+      "name": "selector",
+      "snippet": "selector: 'app-root',"
+    },
+    {
+      "line": 5,
+      "name": "templateUrl",
+      "snippet": "templateUrl: './app.component.html',"
+    },
+    {
+      "line": 6,
+      "name": "styleUrls",
+      "snippet": "styleUrls: ['./app.component.scss']"
+    },
+    {
+      "line": 9,
+      "name": "title",
+      "snippet": "title = 'noisy-tracker-frontend';"
+    }
+  ],
+  "src/app/interceptors/auth-interceptor.service.ts": [
+    {
+      "line": 8,
+      "name": "providedIn",
+      "snippet": "providedIn: 'root'"
+    },
+    {
+      "line": 11,
+      "name": "authService",
+      "snippet": "constructor(private authService: AuthService, private router: Router) { }"
+    },
+    {
+      "line": 11,
+      "name": "router",
+      "snippet": "constructor(private authService: AuthService, private router: Router) { }"
+    },
+    {
+      "line": 14,
+      "name": "token",
+      "snippet": "const token = this.authService.getToken();"
+    },
+    {
+      "line": 17,
+      "name": "clonedRequest",
+      "snippet": "const clonedRequest = token"
+    }
+  ],
+  "src/app/core/guards/auth.guard.ts": [
+    {
+      "line": 5,
+      "name": "authGuard",
+      "snippet": "export const authGuard: CanActivateFn = (route, state) => {"
+    },
+    {
+      "line": 6,
+      "name": "authService",
+      "snippet": "const authService = inject(AuthService);"
+    },
+    {
+      "line": 7,
+      "name": "router",
+      "snippet": "const router = inject(Router);"
+    }
+  ],
+  "src/app/shared/shared.module.ts": [
+    {
+      "line": 20,
+      "name": "exports",
+      "snippet": "exports: [CurrencyFormatPipe, CpfCnpjPipe, SupportComponent, MenuComponent, HeaderComponent, ExportExcelComponent],"
+    },
+    {
+      "line": 21,
+      "name": "imports",
+      "snippet": "imports: ["
+    },
+    {
+      "line": 34,
+      "name": "providers",
+      "snippet": "providers: ["
+    }
+  ],
+  "src/app/shared/enums/profile-user.enum.ts": [
+    {
+      "line": 2,
+      "name": "ADMINISTRADOR",
+      "snippet": "ADMINISTRADOR = \"ADMINISTRADOR\","
+    }
+  ],
+  "src/app/shared/pipes/cpf-cnpj/cpf-cnpj.pipe.ts": [
+    {
+      "line": 5,
+      "name": "name",
+      "snippet": "name: 'cpfCnpjMask'"
+    },
+    {
+      "line": 9,
+      "name": "maskPipe",
+      "snippet": "constructor(private maskPipe: NgxMaskPipe) {}"
+    },
+    {
+      "line": 15,
+      "name": "mask",
+      "snippet": "const mask = value.length <= 11 ? '000.000.000-00' : '00.000.000/0000-00';"
+    }
+  ],
+  "src/app/shared/pipes/currency-format/currency-format.pipe.ts": [
+    {
+      "line": 4,
+      "name": "name",
+      "snippet": "name: 'currencyFormat'"
+    },
+    {
+      "line": 13,
+      "name": "minimumFractionDigits",
+      "snippet": "minimumFractionDigits: 2,"
+    },
+    {
+      "line": 14,
+      "name": "maximumFractionDigits",
+      "snippet": "maximumFractionDigits: 2"
+    }
+  ],
+  "src/app/shared/components/export-excel/export-excel.component.ts": [
+    {
+      "line": 5,
+      "name": "selector",
+      "snippet": "selector: 'app-export-excel',"
+    },
+    {
+      "line": 6,
+      "name": "templateUrl",
+      "snippet": "templateUrl: './export-excel.component.html',"
+    },
+    {
+      "line": 7,
+      "name": "styleUrls",
+      "snippet": "styleUrls: ['./export-excel.component.scss']"
+    },
+    {
+      "line": 12,
+      "name": "dataInicio",
+      "snippet": "dataInicio: '',"
+    },
+    {
+      "line": 14,
+      "name": "dataFim",
+      "snippet": "dataFim: '',"
+    },
+    {
+      "line": 19,
+      "name": "dialogRef",
+      "snippet": "public dialogRef: MatDialogRef<ExportExcelComponent>,"
+    },
+    {
+      "line": 27,
+      "name": "today",
+      "snippet": "const today = new Date();"
+    },
+    {
+      "line": 42,
+      "name": "data",
+      "snippet": "const data = {"
+    },
+    {
+      "line": 43,
+      "name": "dataInicio",
+      "snippet": "dataInicio: new Date(`${this.filtro.dataInicio}T${this.filtro.horaInicio}`),"
+    },
+    {
+      "line": 44,
+      "name": "dataFim",
+      "snippet": "dataFim: new Date(`${this.filtro.dataFim}T${this.filtro.horaFim}`)"
+    }
+  ],
+  "src/app/shared/components/support/support.component.ts": [
+    {
+      "line": 5,
+      "name": "selector",
+      "snippet": "selector: 'app-support',"
+    },
+    {
+      "line": 6,
+      "name": "templateUrl",
+      "snippet": "templateUrl: './support.component.html',"
+    },
+    {
+      "line": 7,
+      "name": "styleUrls",
+      "snippet": "styleUrls: ['./support.component.scss']"
+    },
+    {
+      "line": 11,
+      "name": "hovering",
+      "snippet": "hovering = false;"
+    },
+    {
+      "line": 12,
+      "name": "showSupportButton",
+      "snippet": "showSupportButton = true;"
+    },
+    {
+      "line": 15,
+      "name": "message",
+      "snippet": "const message = 'Olá! Preciso de suporte com o JurisTracker.';"
+    },
+    {
+      "line": 16,
+      "name": "phone",
+      "snippet": "const phone = environment.suportContact;"
+    },
+    {
+      "line": 17,
+      "name": "url",
+      "snippet": "const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;"
+    }
+  ],
+  "src/app/shared/components/menu/menu.component.ts": [
+    {
+      "line": 8,
+      "name": "selector",
+      "snippet": "selector: 'app-menu',"
+    },
+    {
+      "line": 9,
+      "name": "templateUrl",
+      "snippet": "templateUrl: './menu.component.html',"
+    },
+    {
+      "line": 10,
+      "name": "styleUrls",
+      "snippet": "styleUrls: ['./menu.component.scss']"
+    },
+    {
+      "line": 13,
+      "name": "authService",
+      "snippet": "constructor(private authService: AuthService, private userService: UserService) { }"
+    },
+    {
+      "line": 13,
+      "name": "userService",
+      "snippet": "constructor(private authService: AuthService, private userService: UserService) { }"
+    },
+    {
+      "line": 15,
+      "name": "isCollapsed",
+      "snippet": "isCollapsed = true;"
+    },
+    {
+      "line": 16,
+      "name": "isSubmenuOpen",
+      "snippet": "isSubmenuOpen = false;"
+    },
+    {
+      "line": 19,
+      "name": "menuItems",
+      "snippet": "menuItems = ["
+    }
+  ],
+  "src/app/shared/components/header/header.component.ts": [
+    {
+      "line": 5,
+      "name": "selector",
+      "snippet": "selector: 'app-header',"
+    },
+    {
+      "line": 6,
+      "name": "templateUrl",
+      "snippet": "templateUrl: './header.component.html',"
+    },
+    {
+      "line": 7,
+      "name": "styleUrls",
+      "snippet": "styleUrls: ['./header.component.scss']"
+    },
+    {
+      "line": 11,
+      "name": "info",
+      "snippet": "@Input() info!: Header;"
+    }
+  ],
+  "src/app/shared/validators/document-length.ts": [
+    {
+      "line": 6,
+      "name": "value",
+      "snippet": "const value = (control.value).replace(/[^\\d]/g, '');"
+    }
+  ],
+  "src/app/shared/masks/masks.service.ts": [
+    {
+      "line": 4,
+      "name": "providedIn",
+      "snippet": "providedIn: 'root'"
+    },
+    {
+      "line": 34,
+      "name": "cleanValue",
+      "snippet": "let cleanValue = value.replace(/\\D/g, '');"
+    },
+    {
+      "line": 38,
+      "name": "cleanValue",
+      "snippet": "cleanValue = '0' + cleanValue;"
+    },
+    {
+      "line": 55,
+      "name": "cleanValue",
+      "snippet": "let cleanValue = value.replace(/\\D/g, '');"
+    },
+    {
+      "line": 59,
+      "name": "cleanValue",
+      "snippet": "cleanValue = cleanValue.substring(2); // Remove o \"55\""
+    },
+    {
+      "line": 79,
+      "name": "cleanValue",
+      "snippet": "let cleanValue = value.toUpperCase().replace(/[^A-Z0-9]/g, '');"
+    },
+    {
+      "line": 90,
+      "name": "dataProcesso",
+      "snippet": "let dataProcesso: Date;"
+    },
+    {
+      "line": 95,
+      "name": "dataProcesso",
+      "snippet": "dataProcesso = new Date(year, month - 1, day); // <-- Sem UTC shift"
+    },
+    {
+      "line": 97,
+      "name": "dataProcesso",
+      "snippet": "dataProcesso = new Date(data);"
+    },
+    {
+      "line": 102,
+      "name": "processoDate",
+      "snippet": "const processoDate = new Date(dataProcesso.getFullYear(), dataProcesso.getMonth(), dataProcesso.getDate());"
+    },
+    {
+      "line": 103,
+      "name": "today",
+      "snippet": "const today = new Date(agora.getFullYear(), agora.getMonth(), agora.getDate());"
+    },
+    {
+      "line": 104,
+      "name": "yesterday",
+      "snippet": "const yesterday = new Date(today);"
+    },
+    {
+      "line": 115,
+      "name": "diffMs",
+      "snippet": "const diffMs = agora.getTime() - processoDate.getTime();"
+    },
+    {
+      "line": 116,
+      "name": "diffDias",
+      "snippet": "const diffDias = Math.floor(diffMs / (1000 * 60 * 60 * 24));"
+    },
+    {
+      "line": 122,
+      "name": "time",
+      "snippet": "const time = dataProcesso.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });"
+    },
+    {
+      "line": 123,
+      "name": "formattedDate",
+      "snippet": "const formattedDate = dataProcesso.toLocaleDateString('pt-BR');"
+    },
+    {
+      "line": 130,
+      "name": "data",
+      "snippet": "const data = new Date(dateString);"
+    },
+    {
+      "line": 133,
+      "name": "processoDate",
+      "snippet": "const processoDate = new Date(data.getFullYear(), data.getMonth(), data.getDate());"
+    },
+    {
+      "line": 134,
+      "name": "today",
+      "snippet": "const today = new Date(agora.getFullYear(), agora.getMonth(), agora.getDate());"
+    },
+    {
+      "line": 135,
+      "name": "yesterday",
+      "snippet": "const yesterday = new Date(today);"
+    },
+    {
+      "line": 138,
+      "name": "time",
+      "snippet": "const time = data.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });"
+    },
+    {
+      "line": 148,
+      "name": "formattedDate",
+      "snippet": "const formattedDate = data.toLocaleDateString('pt-BR');"
+    }
+  ],
+  "src/app/shared/interfaces/header.interface.ts": [
+    {
+      "line": 2,
+      "name": "title",
+      "snippet": "title: string;"
+    },
+    {
+      "line": 3,
+      "name": "subtitle",
+      "snippet": "subtitle: string;"
+    }
+  ],
+  "src/app/shared/interfaces/employees-data.interface.ts": [
+    {
+      "line": 2,
+      "name": "name",
+      "snippet": "name: string | null;"
+    },
+    {
+      "line": 4,
+      "name": "permissao_visualizacao",
+      "snippet": "permissao_visualizacao: string[];"
+    }
+  ],
+  "src/app/shared/interfaces/login-response.interface.ts": [
+    {
+      "line": 2,
+      "name": "token",
+      "snippet": "token: string;"
+    }
+  ],
+  "src/app/shared/interfaces/put-user-data.interface.ts": [
+    {
+      "line": 2,
+      "name": "name",
+      "snippet": "name: string | null;"
+    },
+    {
+      "line": 3,
+      "name": "agree_terms",
+      "snippet": "agree_terms: boolean;"
+    },
+    {
+      "line": 4,
+      "name": "primeiro_acesso",
+      "snippet": "primeiro_acesso: boolean;"
+    },
+    {
+      "line": 5,
+      "name": "new_senha",
+      "snippet": "new_senha: string;"
+    }
+  ],
+  "src/app/shared/interfaces/user-data.interface.ts": [
+    {
+      "line": 4,
+      "name": "name",
+      "snippet": "name: string | null;"
+    },
+    {
+      "line": 6,
+      "name": "plan",
+      "snippet": "plan: string;"
+    },
+    {
+      "line": 7,
+      "name": "plan_plus",
+      "snippet": "plan_plus: boolean;"
+    },
+    {
+      "line": 8,
+      "name": "profile",
+      "snippet": "profile: ProfileUserEnum;"
+    },
+    {
+      "line": 9,
+      "name": "primeiro_acesso",
+      "snippet": "primeiro_acesso: boolean;"
+    },
+    {
+      "line": 10,
+      "name": "permissao_visualizacao",
+      "snippet": "permissao_visualizacao: string[];"
+    },
+    {
+      "line": 11,
+      "name": "company_documento",
+      "snippet": "company_documento: string | null;"
+    },
+    {
+      "line": 12,
+      "name": "usuario_ativo",
+      "snippet": "usuario_ativo: boolean;"
+    }
+  ],
+  "src/app/shared/interfaces/banks.interface.ts": [
+    {
+      "line": 2,
+      "name": "name",
+      "snippet": "name: string;"
+    },
+    {
+      "line": 3,
+      "name": "code",
+      "snippet": "code: string | null;"
+    }
+  ],
+  "src/app/shared/interfaces/processes-obtained-data.interface.ts": [
+    {
+      "line": 4,
+      "name": "export_documento",
+      "snippet": "export_documento: string;"
+    },
+    {
+      "line": 5,
+      "name": "data_exporting",
+      "snippet": "data_exporting: string;"
+    },
+    {
+      "line": 6,
+      "name": "crm_update_documento",
+      "snippet": "crm_update_documento: string;"
+    },
+    {
+      "line": 7,
+      "name": "status",
+      "snippet": "status: string | null;"
+    },
+    {
+      "line": 8,
+      "name": "notes",
+      "snippet": "notes: string | null;"
+    },
+    {
+      "line": 12,
+      "name": "limitProcesses",
+      "snippet": "limitProcesses: number;"
+    },
+    {
+      "line": 13,
+      "name": "usedProcesses",
+      "snippet": "usedProcesses: number;"
+    },
+    {
+      "line": 17,
+      "name": "processNumber",
+      "snippet": "processNumber: string;"
+    }
+  ],
+  "src/app/shared/interfaces/put-employee-view-data.ts": [
+    {
+      "line": 2,
+      "name": "permissao_visualizacao",
+      "snippet": "permissao_visualizacao: string[];"
+    }
+  ],
+  "src/app/shared/interfaces/processes-data.interface.ts": [
+    {
+      "line": 10,
+      "name": "total",
+      "snippet": "total: number"
+    },
+    {
+      "line": 14,
+      "name": "data",
+      "snippet": "data: Process[]"
+    },
+    {
+      "line": 18,
+      "name": "process_number",
+      "snippet": "process_number: string;"
+    },
+    {
+      "line": 19,
+      "name": "applicant_name",
+      "snippet": "applicant_name: string | null;"
+    },
+    {
+      "line": 20,
+      "name": "value",
+      "snippet": "value: string | null;"
+    },
+    {
+      "line": 22,
+      "name": "company_name",
+      "snippet": "company_name: string | null;"
+    },
+    {
+      "line": 23,
+      "name": "phone1",
+      "snippet": "phone1: string | null;"
+    },
+    {
+      "line": 24,
+      "name": "phone2",
+      "snippet": "phone2: string | null;"
+    },
+    {
+      "line": 42,
+      "name": "distribution_date",
+      "snippet": "distribution_date: string | null;"
+    },
+    {
+      "line": 43,
+      "name": "created_at",
+      "snippet": "created_at: string | null;"
+    },
+    {
+      "line": 47,
+      "name": "city",
+      "snippet": "city: string | null;"
+    },
+    {
+      "line": 48,
+      "name": "state",
+      "snippet": "state: string | null;"
+    }
+  ],
+  "src/app/shared/interfaces/add-employee.interface.ts": [
+    {
+      "line": 2,
+      "name": "name",
+      "snippet": "name: string"
+    },
+    {
+      "line": 5,
+      "name": "permissao_visualizacao",
+      "snippet": "permissao_visualizacao: string[]"
+    }
+  ],
+  "src/app/pages/main/main.module.ts": [
+    {
+      "line": 17,
+      "name": "imports",
+      "snippet": "imports: ["
+    }
+  ],
+  "src/app/pages/main/main.component.ts": [
+    {
+      "line": 8,
+      "name": "selector",
+      "snippet": "selector: 'app-main',"
+    },
+    {
+      "line": 9,
+      "name": "templateUrl",
+      "snippet": "templateUrl: './main.component.html',"
+    },
+    {
+      "line": 10,
+      "name": "styleUrls",
+      "snippet": "styleUrls: ['./main.component.scss']"
+    },
+    {
+      "line": 15,
+      "name": "userService",
+      "snippet": "private userService: UserService,"
+    },
+    {
+      "line": 17,
+      "name": "router",
+      "snippet": "private router: Router"
+    },
+    {
+      "line": 20,
+      "name": "isLoading",
+      "snippet": "isLoading: boolean = false;"
+    },
+    {
+      "line": 21,
+      "name": "isFirstAccess",
+      "snippet": "isFirstAccess: boolean = false;"
+    },
+    {
+      "line": 22,
+      "name": "userDisabled",
+      "snippet": "userDisabled: boolean = false;"
+    },
+    {
+      "line": 41,
+      "name": "currentRoute",
+      "snippet": "const currentRoute = this.router.url;"
+    }
+  ],
+  "src/app/pages/main/main-routing.module.ts": [
+    {
+      "line": 6,
+      "name": "routes",
+      "snippet": "const routes: Routes = ["
+    },
+    {
+      "line": 8,
+      "name": "path",
+      "snippet": "path: '',"
+    },
+    {
+      "line": 9,
+      "name": "component",
+      "snippet": "component: MainComponent,"
+    },
+    {
+      "line": 10,
+      "name": "canActivate",
+      "snippet": "canActivate: [authGuard],"
+    },
+    {
+      "line": 11,
+      "name": "children",
+      "snippet": "children: ["
+    },
+    {
+      "line": 22,
+      "name": "imports",
+      "snippet": "imports: [RouterModule.forChild(routes)],"
+    },
+    {
+      "line": 23,
+      "name": "exports",
+      "snippet": "exports: [RouterModule]"
+    }
+  ],
+  "src/app/pages/main/settings/settings-routing.module.ts": [
+    {
+      "line": 8,
+      "name": "routes",
+      "snippet": "const routes: Routes = ["
+    },
+    {
+      "line": 10,
+      "name": "path",
+      "snippet": "path: '',"
+    },
+    {
+      "line": 11,
+      "name": "component",
+      "snippet": "component: SettingsComponent,"
+    },
+    {
+      "line": 12,
+      "name": "canActivate",
+      "snippet": "canActivate: [authGuard]"
+    },
+    {
+      "line": 19,
+      "name": "imports",
+      "snippet": "imports: [RouterModule.forChild(routes)],"
+    },
+    {
+      "line": 20,
+      "name": "exports",
+      "snippet": "exports: [RouterModule]"
+    }
+  ],
+  "src/app/pages/main/settings/settings.component.ts": [
+    {
+      "line": 5,
+      "name": "selector",
+      "snippet": "selector: 'app-settings',"
+    },
+    {
+      "line": 6,
+      "name": "templateUrl",
+      "snippet": "templateUrl: './settings.component.html',"
+    },
+    {
+      "line": 7,
+      "name": "styleUrls",
+      "snippet": "styleUrls: ['./settings.component.scss']"
+    }
+  ],
+  "src/app/pages/main/settings/settings.module.ts": [
+    {
+      "line": 19,
+      "name": "imports",
+      "snippet": "imports: ["
+    }
+  ],
+  "src/app/pages/main/settings/components/my-account/my-account.component.ts": [
+    {
+      "line": 6,
+      "name": "selector",
+      "snippet": "selector: 'app-my-account',"
+    },
+    {
+      "line": 7,
+      "name": "templateUrl",
+      "snippet": "templateUrl: './my-account.component.html',"
+    },
+    {
+      "line": 8,
+      "name": "styleUrls",
+      "snippet": "styleUrls: ['./my-account.component.scss']"
+    },
+    {
+      "line": 12,
+      "name": "header",
+      "snippet": "header: Header = { title: 'Meu Perfil', subtitle: 'Acesse suas informações e altere se necessário' };"
+    },
+    {
+      "line": 14,
+      "name": "userData",
+      "snippet": "userData = {"
+    },
+    {
+      "line": 15,
+      "name": "name",
+      "snippet": "name: 'Fulano da Silva',"
+    },
+    {
+      "line": 16,
+      "name": "email",
+      "snippet": "email: 'fulano@email.com',"
+    },
+    {
+      "line": 20,
+      "name": "userPhoto",
+      "snippet": "userPhoto: string | null = 'https://www.gravatar.com/avatar/?d=mp&s=200';"
+    },
+    {
+      "line": 22,
+      "name": "profileForm",
+      "snippet": "profileForm = this.fb.group({"
+    },
+    {
+      "line": 23,
+      "name": "name",
+      "snippet": "name: [this.userData.name, Validators.required],"
+    },
+    {
+      "line": 24,
+      "name": "email",
+      "snippet": "email: [this.userData.email, [Validators.required, Validators.email]]"
+    },
+    {
+      "line": 36,
+      "name": "reader",
+      "snippet": "const reader = new FileReader();"
+    },
+    {
+      "line": 44,
+      "name": "updatedData",
+      "snippet": "const updatedData = this.profileForm.value;"
+    }
+  ],
+  "src/app/pages/main/settings/components/my-plan/my-plan.component.ts": [
+    {
+      "line": 8,
+      "name": "selector",
+      "snippet": "selector: 'app-my-plan',"
+    },
+    {
+      "line": 9,
+      "name": "templateUrl",
+      "snippet": "templateUrl: './my-plan.component.html',"
+    },
+    {
+      "line": 10,
+      "name": "styleUrls",
+      "snippet": "styleUrls: ['./my-plan.component.scss']"
+    },
+    {
+      "line": 13,
+      "name": "header",
+      "snippet": "header: Header = { title: 'Meu Plano', subtitle: 'Informações sobre seu plano e empresa' };"
+    },
+    {
+      "line": 14,
+      "name": "userData",
+      "snippet": "userData = this.userService.getUserData();"
+    },
+    {
+      "line": 16,
+      "name": "totalAvailable",
+      "snippet": "totalAvailable: number = 0;"
+    },
+    {
+      "line": 17,
+      "name": "totalObtained",
+      "snippet": "totalObtained: number = 0;"
+    },
+    {
+      "line": 19,
+      "name": "processesService",
+      "snippet": "constructor(private processesService: ProcessesService, private userService: UserService) {}"
+    },
+    {
+      "line": 19,
+      "name": "userService",
+      "snippet": "constructor(private processesService: ProcessesService, private userService: UserService) {}"
+    }
+  ],
+  "src/app/pages/main/processes/processes.component.ts": [
+    {
+      "line": 14,
+      "name": "selector",
+      "snippet": "selector: 'app-processes',"
+    },
+    {
+      "line": 15,
+      "name": "templateUrl",
+      "snippet": "templateUrl: './processes.component.html',"
+    },
+    {
+      "line": 16,
+      "name": "styleUrls",
+      "snippet": "styleUrls: ['./processes.component.scss']"
+    },
+    {
+      "line": 19,
+      "name": "isLoading",
+      "snippet": "isLoading: boolean = false;"
+    },
+    {
+      "line": 20,
+      "name": "resetFilter",
+      "snippet": "resetFilter: boolean = false;"
+    },
+    {
+      "line": 24,
+      "name": "processesObtained",
+      "snippet": "processesObtained: Process[] = [];"
+    },
+    {
+      "line": 26,
+      "name": "header",
+      "snippet": "header: Header = { title: 'Obter Processos', subtitle: 'Novos processos para sua empresa' };"
+    },
+    {
+      "line": 29,
+      "name": "exportExcelService",
+      "snippet": "private exportExcelService: ExportExcelService,"
+    },
+    {
+      "line": 30,
+      "name": "processesService",
+      "snippet": "private processesService: ProcessesService,"
+    },
+    {
+      "line": 31,
+      "name": "masksService",
+      "snippet": "private masksService: MasksService,"
+    },
+    {
+      "line": 33,
+      "name": "dialog",
+      "snippet": "private dialog: MatDialog,"
+    },
+    {
+      "line": 38,
+      "name": "formattedData",
+      "snippet": "const formattedData = this.processesObtained.map(item => ({"
+    },
+    {
+      "line": 82,
+      "name": "hasFilters",
+      "snippet": "const hasFilters = this.hasFilterApplied();"
+    },
+    {
+      "line": 84,
+      "name": "body",
+      "snippet": "const body = this.getBodyProcesses(hasFilters);"
+    },
+    {
+      "line": 93,
+      "name": "formValues",
+      "snippet": "const formValues = this.filterForm?.value;"
+    },
+    {
+      "line": 96,
+      "name": "hasFilters",
+      "snippet": "const hasFilters = Object.values(formValues).some(value => {"
+    },
+    {
+      "line": 115,
+      "name": "formValues",
+      "snippet": "const formValues = this.filterForm.value;"
+    },
+    {
+      "line": 119,
+      "name": "banks",
+      "snippet": "banks: formValues.bank.map((b: any) => b.name),"
+    },
+    {
+      "line": 120,
+      "name": "minimum_value",
+      "snippet": "minimum_value: formValues.minValue ?? null,"
+    },
+    {
+      "line": 121,
+      "name": "maximum_value",
+      "snippet": "maximum_value: formValues.maxValue ?? null,"
+    },
+    {
+      "line": 122,
+      "name": "city",
+      "snippet": "city: formValues.city.length > 0 ? formValues.city : [],"
+    },
+    {
+      "line": 123,
+      "name": "state",
+      "snippet": "state: formValues.state.length > 0 ? formValues.state : []"
+    },
+    {
+      "line": 129,
+      "name": "dialogRef",
+      "snippet": "const dialogRef = this.dialog.open(ConfirmGetProcessesModalComponent, {"
+    },
+    {
+      "line": 130,
+      "name": "width",
+      "snippet": "width: '500px',"
+    },
+    {
+      "line": 131,
+      "name": "data",
+      "snippet": "data: qtdProcesses"
+    },
+    {
+      "line": 153,
+      "name": "dateA",
+      "snippet": "const dateA = a.distribution_date ? new Date(a.distribution_date).getTime() : Infinity;"
+    },
+    {
+      "line": 154,
+      "name": "dateB",
+      "snippet": "const dateB = b.distribution_date ? new Date(b.distribution_date).getTime() : Infinity;"
+    },
+    {
+      "line": 171,
+      "name": "width",
+      "snippet": "width: '800px',"
+    },
+    {
+      "line": 172,
+      "name": "data",
+      "snippet": "data: this.processesObtained[index]"
+    },
+    {
+      "line": 181,
+      "name": "format",
+      "snippet": "const format = this.masksService.formatCurrency(value);"
+    },
+    {
+      "line": 186,
+      "name": "format",
+      "snippet": "const format = this.masksService.formatPercentage(value);"
+    },
+    {
+      "line": 191,
+      "name": "format",
+      "snippet": "const format = this.masksService.formatDocument(value);"
+    },
+    {
+      "line": 196,
+      "name": "format",
+      "snippet": "const format = this.masksService.formatPhone(value);"
+    },
+    {
+      "line": 201,
+      "name": "format",
+      "snippet": "const format = this.masksService.formatPlateVehicle(value);"
+    },
+    {
+      "line": 210,
+      "name": "hasFilters",
+      "snippet": "const hasFilters = this.hasFilterApplied();"
+    }
+  ],
+  "src/app/pages/main/processes/processes.module.ts": [
+    {
+      "line": 22,
+      "name": "imports",
+      "snippet": "imports: ["
+    },
+    {
+      "line": 38,
+      "name": "providers",
+      "snippet": "providers: [provideNgxMask()],"
+    },
+    {
+      "line": 39,
+      "name": "exports",
+      "snippet": "exports: []"
+    }
+  ],
+  "src/app/pages/main/processes/processes-routing.module.ts": [
+    {
+      "line": 6,
+      "name": "routes",
+      "snippet": "const routes: Routes = ["
+    },
+    {
+      "line": 11,
+      "name": "imports",
+      "snippet": "imports: [RouterModule.forChild(routes)],"
+    },
+    {
+      "line": 12,
+      "name": "exports",
+      "snippet": "exports: [RouterModule]"
+    }
+  ],
+  "src/app/pages/main/processes/components/table-processes/table-processes.component.ts": [
+    {
+      "line": 6,
+      "name": "selector",
+      "snippet": "selector: 'app-table-processes',"
+    },
+    {
+      "line": 7,
+      "name": "templateUrl",
+      "snippet": "templateUrl: './table-processes.component.html',"
+    },
+    {
+      "line": 8,
+      "name": "styleUrls",
+      "snippet": "styleUrls: ['./table-processes.component.scss']"
+    },
+    {
+      "line": 11,
+      "name": "masksService",
+      "snippet": "constructor(private masksService: MasksService) {}"
+    },
+    {
+      "line": 13,
+      "name": "pageSize",
+      "snippet": "pageSize = 15;"
+    },
+    {
+      "line": 14,
+      "name": "currentPage",
+      "snippet": "currentPage = 1;"
+    },
+    {
+      "line": 16,
+      "name": "blockSize",
+      "snippet": "blockSize = 10;"
+    },
+    {
+      "line": 17,
+      "name": "currentBlock",
+      "snippet": "currentBlock = 1;"
+    },
+    {
+      "line": 19,
+      "name": "paginatedProcesses",
+      "snippet": "paginatedProcesses: Process[] = [];"
+    },
+    {
+      "line": 29,
+      "name": "seeMoreClicked",
+      "snippet": "@Output() seeMoreClicked = new EventEmitter<number>();"
+    },
+    {
+      "line": 32,
+      "name": "processesAll",
+      "snippet": "processesAll: Process[] = [];"
+    },
+    {
+      "line": 65,
+      "name": "newBlock",
+      "snippet": "const newBlock = Math.floor((page - 1) / this.blockSize) + 1;"
+    },
+    {
+      "line": 98,
+      "name": "format",
+      "snippet": "const format = this.masksService.formatDocument(value);"
+    },
+    {
+      "line": 123,
+      "name": "blockSize",
+      "snippet": "const blockSize = 10; // tamanho do bloco total (10 páginas)"
+    },
+    {
+      "line": 124,
+      "name": "halfBlock",
+      "snippet": "const halfBlock = Math.floor(blockSize / 2); // metade do bloco (5)"
+    }
+  ],
+  "src/app/pages/main/processes/components/confirm-get-processes-modal/confirm-get-processes-modal.component.ts": [
+    {
+      "line": 5,
+      "name": "selector",
+      "snippet": "selector: 'app-confirm-get-processes-modal',"
+    },
+    {
+      "line": 6,
+      "name": "templateUrl",
+      "snippet": "templateUrl: './confirm-get-processes-modal.component.html',"
+    },
+    {
+      "line": 7,
+      "name": "styleUrls",
+      "snippet": "styleUrls: ['./confirm-get-processes-modal.component.scss']"
+    },
+    {
+      "line": 11,
+      "name": "haveProcesses",
+      "snippet": "haveProcesses: boolean = false;"
+    },
+    {
+      "line": 14,
+      "name": "dialogRef",
+      "snippet": "public dialogRef: MatDialogRef<ConfirmGetProcessesModalComponent>,"
+    },
+    {
+      "line": 15,
+      "name": "qtdProcesses",
+      "snippet": "@Inject(MAT_DIALOG_DATA) public qtdProcesses: number"
+    }
+  ],
+  "src/app/pages/main/processes/components/see-more-informations-processes-modal/see-more-informations-processes-modal.component.ts": [
+    {
+      "line": 8,
+      "name": "selector",
+      "snippet": "selector: 'app-see-more-informations-processes-modal',"
+    },
+    {
+      "line": 9,
+      "name": "templateUrl",
+      "snippet": "templateUrl: './see-more-informations-processes-modal.component.html',"
+    },
+    {
+      "line": 10,
+      "name": "styleUrls",
+      "snippet": "styleUrls: ['./see-more-informations-processes-modal.component.scss']"
+    },
+    {
+      "line": 13,
+      "name": "fieldsProcess",
+      "snippet": "fieldsProcess: { label: string; value: string | number | null | undefined }[] = [];"
+    },
+    {
+      "line": 14,
+      "name": "fieldsClient",
+      "snippet": "fieldsClient: { label: string; value: string | number | null | undefined }[] = [];"
+    },
+    {
+      "line": 15,
+      "name": "fieldsVehicle",
+      "snippet": "fieldsVehicle: { label: string; value: string | number | null | undefined }[] = [];"
+    },
+    {
+      "line": 18,
+      "name": "dialogRef",
+      "snippet": "public dialogRef: MatDialogRef<SeeMoreInformationsProcessesModalComponent>,"
+    },
+    {
+      "line": 19,
+      "name": "data",
+      "snippet": "@Inject(MAT_DIALOG_DATA) public data: Process,"
+    },
+    {
+      "line": 20,
+      "name": "masksService",
+      "snippet": "private masksService: MasksService,"
+    },
+    {
+      "line": 21,
+      "name": "userService",
+      "snippet": "private userService: UserService"
+    },
+    {
+      "line": 25,
+      "name": "user",
+      "snippet": "const user = this.userService.getUserData();"
+    },
+    {
+      "line": 105,
+      "name": "format",
+      "snippet": "const format = this.masksService.formatCurrency(value);"
+    },
+    {
+      "line": 110,
+      "name": "format",
+      "snippet": "const format = this.masksService.formatPercentage(value);"
+    },
+    {
+      "line": 115,
+      "name": "format",
+      "snippet": "const format = this.masksService.formatDocument(value);"
+    },
+    {
+      "line": 120,
+      "name": "format",
+      "snippet": "const format = this.masksService.formatPhone(value);"
+    },
+    {
+      "line": 125,
+      "name": "format",
+      "snippet": "const format = this.masksService.formatPlateVehicle(value);"
+    }
+  ],
+  "src/app/pages/main/processes/components/filters-processes/filters-processes.component.ts": [
+    {
+      "line": 9,
+      "name": "selector",
+      "snippet": "selector: 'app-filters-processes',"
+    },
+    {
+      "line": 10,
+      "name": "templateUrl",
+      "snippet": "templateUrl: './filters-processes.component.html',"
+    },
+    {
+      "line": 11,
+      "name": "styleUrls",
+      "snippet": "styleUrls: ['./filters-processes.component.scss']"
+    },
+    {
+      "line": 19,
+      "name": "filtersSelected",
+      "snippet": "@Output() filtersSelected = new EventEmitter<FormGroup>();"
+    },
+    {
+      "line": 23,
+      "name": "banks",
+      "snippet": "banks: Banks[] = [];"
+    },
+    {
+      "line": 24,
+      "name": "filteredBanks",
+      "snippet": "filteredBanks: Banks[] = [...this.banks];"
+    },
+    {
+      "line": 25,
+      "name": "searchBank",
+      "snippet": "searchBank: string = '';"
+    },
+    {
+      "line": 27,
+      "name": "stateAndCities",
+      "snippet": "stateAndCities: Cep = {};"
+    },
+    {
+      "line": 28,
+      "name": "selectedState",
+      "snippet": "selectedState: string = '';"
+    },
+    {
+      "line": 29,
+      "name": "stateCity",
+      "snippet": "stateCity: string[] = [];"
+    },
+    {
+      "line": 30,
+      "name": "filteredCities",
+      "snippet": "filteredCities: string[] = [];"
+    },
+    {
+      "line": 34,
+      "name": "generalDataService",
+      "snippet": "private generalDataService: GeneralDataService,"
+    },
+    {
+      "line": 35,
+      "name": "cdRef",
+      "snippet": "private cdRef: ChangeDetectorRef"
+    },
+    {
+      "line": 57,
+      "name": "bank",
+      "snippet": "bank: [[]],"
+    },
+    {
+      "line": 58,
+      "name": "minValue",
+      "snippet": "minValue: [null],"
+    },
+    {
+      "line": 59,
+      "name": "maxValue",
+      "snippet": "maxValue: [null],"
+    },
+    {
+      "line": 60,
+      "name": "city",
+      "snippet": "city: [[]],"
+    },
+    {
+      "line": 61,
+      "name": "state",
+      "snippet": "state: [[]]"
+    },
+    {
+      "line": 100,
+      "name": "input",
+      "snippet": "const input = event.target as HTMLInputElement;"
+    },
+    {
+      "line": 101,
+      "name": "searchTerm",
+      "snippet": "const searchTerm = input.value.toLowerCase().trim();"
+    },
+    {
+      "line": 109,
+      "name": "input",
+      "snippet": "const input = event.target as HTMLInputElement;"
+    },
+    {
+      "line": 110,
+      "name": "searchTerm",
+      "snippet": "const searchTerm = input.value.toLowerCase().trim();"
+    }
+  ],
+  "src/app/pages/main/processes-obtained/processes-obtained.component.ts": [
+    {
+      "line": 14,
+      "name": "selector",
+      "snippet": "selector: 'app-processes-obtained',"
+    },
+    {
+      "line": 15,
+      "name": "templateUrl",
+      "snippet": "templateUrl: './processes-obtained.component.html',"
+    },
+    {
+      "line": 16,
+      "name": "styleUrls",
+      "snippet": "styleUrls: ['./processes-obtained.component.scss']"
+    },
+    {
+      "line": 19,
+      "name": "isLoading",
+      "snippet": "isLoading: boolean = true;"
+    },
+    {
+      "line": 21,
+      "name": "processesObtained",
+      "snippet": "processesObtained: ProcessObtained[] = [];"
+    },
+    {
+      "line": 22,
+      "name": "filteredProcesses",
+      "snippet": "filteredProcesses: ProcessObtained[] = [];"
+    },
+    {
+      "line": 24,
+      "name": "header",
+      "snippet": "header: Header = { title: 'Meus Processos', subtitle: 'Acompanhe seus processos' };"
+    },
+    {
+      "line": 27,
+      "name": "dataInicio",
+      "snippet": "dataInicio: '',"
+    },
+    {
+      "line": 29,
+      "name": "dataFim",
+      "snippet": "dataFim: '',"
+    },
+    {
+      "line": 34,
+      "name": "exportExcelService",
+      "snippet": "private exportExcelService: ExportExcelService,"
+    },
+    {
+      "line": 35,
+      "name": "processesService",
+      "snippet": "private processesService: ProcessesService,"
+    },
+    {
+      "line": 36,
+      "name": "masksService",
+      "snippet": "private masksService: MasksService,"
+    },
+    {
+      "line": 38,
+      "name": "dialog",
+      "snippet": "private dialog: MatDialog,"
+    },
+    {
+      "line": 39,
+      "name": "notificationService",
+      "snippet": "private notificationService: NotificationService"
+    },
+    {
+      "line": 48,
+      "name": "formattedData",
+      "snippet": "const formattedData = this.processesObtained"
+    },
+    {
+      "line": 52,
+      "name": "dataExporting",
+      "snippet": "const dataExporting = new Date(item.data_exporting);"
+    },
+    {
+      "line": 95,
+      "name": "next",
+      "snippet": "next: (response: ProcessObtained[]) => {"
+    },
+    {
+      "line": 105,
+      "name": "banks",
+      "snippet": "const banks = this.getBanksFromProcesses(response).map(name => ({ name, code: null }));"
+    },
+    {
+      "line": 109,
+      "name": "error",
+      "snippet": "error: (error) => {"
+    },
+    {
+      "line": 122,
+      "name": "dateA",
+      "snippet": "const dateA = a.distribution_date ? new Date(a.distribution_date).getTime() : Infinity;"
+    },
+    {
+      "line": 123,
+      "name": "dateB",
+      "snippet": "const dateB = b.distribution_date ? new Date(b.distribution_date).getTime() : Infinity;"
+    },
+    {
+      "line": 129,
+      "name": "body",
+      "snippet": "const body: putStatusOrNotesProcess = {"
+    },
+    {
+      "line": 130,
+      "name": "processNumber",
+      "snippet": "processNumber: data.process_number,"
+    },
+    {
+      "line": 131,
+      "name": "status",
+      "snippet": "status: data.permission,"
+    },
+    {
+      "line": 135,
+      "name": "error",
+      "snippet": "error: () => {"
+    },
+    {
+      "line": 153,
+      "name": "width",
+      "snippet": "width: '800px',"
+    },
+    {
+      "line": 154,
+      "name": "data",
+      "snippet": "data: this.filteredProcesses[index],"
+    },
+    {
+      "line": 155,
+      "name": "autoFocus",
+      "snippet": "autoFocus: false"
+    },
+    {
+      "line": 160,
+      "name": "dialogRef",
+      "snippet": "const dialogRef = this.dialog.open(ExportExcelComponent, {"
+    },
+    {
+      "line": 161,
+      "name": "width",
+      "snippet": "width: '450px',"
+    },
+    {
+      "line": 162,
+      "name": "autoFocus",
+      "snippet": "autoFocus: false"
+    },
+    {
+      "line": 190,
+      "name": "bankSet",
+      "snippet": "const bankSet = new Set<string>();"
+    },
+    {
+      "line": 202,
+      "name": "format",
+      "snippet": "const format = this.masksService.formatCurrency(value);"
+    },
+    {
+      "line": 207,
+      "name": "format",
+      "snippet": "const format = this.masksService.formatPercentage(value);"
+    },
+    {
+      "line": 212,
+      "name": "format",
+      "snippet": "const format = this.masksService.formatDocument(value);"
+    },
+    {
+      "line": 217,
+      "name": "format",
+      "snippet": "const format = this.masksService.formatPhone(value);"
+    },
+    {
+      "line": 222,
+      "name": "format",
+      "snippet": "const format = this.masksService.formatPlateVehicle(value);"
+    }
+  ],
+  "src/app/pages/main/processes-obtained/processes-obtained.module.ts": [
+    {
+      "line": 23,
+      "name": "imports",
+      "snippet": "imports: ["
+    },
+    {
+      "line": 41,
+      "name": "providers",
+      "snippet": "providers: [provideNgxMask()],"
+    }
+  ],
+  "src/app/pages/main/processes-obtained/processes-obtained-routing.module.ts": [
+    {
+      "line": 6,
+      "name": "routes",
+      "snippet": "const routes: Routes = ["
+    },
+    {
+      "line": 11,
+      "name": "imports",
+      "snippet": "imports: [RouterModule.forChild(routes)],"
+    },
+    {
+      "line": 12,
+      "name": "exports",
+      "snippet": "exports: [RouterModule]"
+    }
+  ],
+  "src/app/pages/main/processes-obtained/components/see-more-informations-processes-obtained-modal/see-more-informations-processes-obtained-modal.component.ts": [
+    {
+      "line": 10,
+      "name": "selector",
+      "snippet": "selector: 'app-see-more-informations-processes-obtained-modal',"
+    },
+    {
+      "line": 11,
+      "name": "templateUrl",
+      "snippet": "templateUrl: './see-more-informations-processes-obtained-modal.component.html',"
+    },
+    {
+      "line": 12,
+      "name": "styleUrls",
+      "snippet": "styleUrls: ['./see-more-informations-processes-obtained-modal.component.scss']"
+    },
+    {
+      "line": 15,
+      "name": "fieldsProcess",
+      "snippet": "fieldsProcess: { label: string; value: string | number | null | undefined }[] = [];"
+    },
+    {
+      "line": 16,
+      "name": "fieldsClient",
+      "snippet": "fieldsClient: { label: string; value: string | number | null | undefined }[] = [];"
+    },
+    {
+      "line": 17,
+      "name": "fieldsVehicle",
+      "snippet": "fieldsVehicle: { label: string; value: string | number | null | undefined }[] = [];"
+    },
+    {
+      "line": 19,
+      "name": "notes",
+      "snippet": "notes: string = '';"
+    },
+    {
+      "line": 20,
+      "name": "isLoading",
+      "snippet": "isLoading: boolean = false;"
+    },
+    {
+      "line": 23,
+      "name": "dialogRef",
+      "snippet": "public dialogRef: MatDialogRef<SeeMoreInformationsProcessesObtainedModalComponent>,"
+    },
+    {
+      "line": 24,
+      "name": "data",
+      "snippet": "@Inject(MAT_DIALOG_DATA) public data: ProcessObtained,"
+    },
+    {
+      "line": 25,
+      "name": "masksService",
+      "snippet": "private masksService: MasksService,"
+    },
+    {
+      "line": 26,
+      "name": "processesService",
+      "snippet": "private processesService: ProcessesService,"
+    },
+    {
+      "line": 27,
+      "name": "notificationService",
+      "snippet": "private notificationService: NotificationService,"
+    },
+    {
+      "line": 28,
+      "name": "userService",
+      "snippet": "private userService: UserService"
+    },
+    {
+      "line": 32,
+      "name": "user",
+      "snippet": "const user = this.userService.getUserData();"
+    },
+    {
+      "line": 116,
+      "name": "format",
+      "snippet": "const format = this.masksService.formatCurrency(value);"
+    },
+    {
+      "line": 121,
+      "name": "format",
+      "snippet": "const format = this.masksService.formatPercentage(value);"
+    },
+    {
+      "line": 126,
+      "name": "format",
+      "snippet": "const format = this.masksService.formatDocument(value);"
+    },
+    {
+      "line": 131,
+      "name": "format",
+      "snippet": "const format = this.masksService.formatPhone(value);"
+    },
+    {
+      "line": 136,
+      "name": "format",
+      "snippet": "const format = this.masksService.formatPlateVehicle(value);"
+    },
+    {
+      "line": 143,
+      "name": "body",
+      "snippet": "const body: putStatusOrNotesProcess = {"
+    },
+    {
+      "line": 144,
+      "name": "processNumber",
+      "snippet": "processNumber: this.data.process_number,"
+    },
+    {
+      "line": 145,
+      "name": "notes",
+      "snippet": "notes: this.notes"
+    },
+    {
+      "line": 149,
+      "name": "next",
+      "snippet": "next: () => {"
+    },
+    {
+      "line": 154,
+      "name": "error",
+      "snippet": "error: () => {"
+    }
+  ],
+  "src/app/pages/main/processes-obtained/components/table-processes-obtained/table-processes-obtained.component.ts": [
+    {
+      "line": 6,
+      "name": "selector",
+      "snippet": "selector: 'app-table-processes-obtained',"
+    },
+    {
+      "line": 7,
+      "name": "templateUrl",
+      "snippet": "templateUrl: './table-processes-obtained.component.html',"
+    },
+    {
+      "line": 8,
+      "name": "styleUrls",
+      "snippet": "styleUrls: ['./table-processes-obtained.component.scss']"
+    },
+    {
+      "line": 11,
+      "name": "masksService",
+      "snippet": "constructor(private masksService: MasksService) {}"
+    },
+    {
+      "line": 13,
+      "name": "pageSize",
+      "snippet": "pageSize = 15;"
+    },
+    {
+      "line": 14,
+      "name": "currentPage",
+      "snippet": "currentPage = 1;"
+    },
+    {
+      "line": 16,
+      "name": "paginatedProcesses",
+      "snippet": "paginatedProcesses: ProcessObtained[] = [];"
+    },
+    {
+      "line": 26,
+      "name": "postNewStatusEmit",
+      "snippet": "@Output() postNewStatusEmit = new EventEmitter<{"
+    },
+    {
+      "line": 27,
+      "name": "permission",
+      "snippet": "permission: string,"
+    },
+    {
+      "line": 28,
+      "name": "process_number",
+      "snippet": "process_number: string"
+    },
+    {
+      "line": 32,
+      "name": "statusUpdated",
+      "snippet": "@Output() statusUpdated = new EventEmitter<{ status: string, processNumber: string }>();"
+    },
+    {
+      "line": 33,
+      "name": "seeMoreClicked",
+      "snippet": "@Output() seeMoreClicked = new EventEmitter<number>();"
+    },
+    {
+      "line": 35,
+      "name": "permissions",
+      "snippet": "permissions = [\"Cliente Encontrado\", \"Cliente Desconhecido\", \"Processo Desativado\"];"
+    },
+    {
+      "line": 36,
+      "name": "filteredProcesses",
+      "snippet": "filteredProcesses: ProcessObtained[] = [];"
+    },
+    {
+      "line": 88,
+      "name": "format",
+      "snippet": "const format = this.masksService.formatDocument(value);"
+    },
+    {
+      "line": 93,
+      "name": "data",
+      "snippet": "const data = {"
+    },
+    {
+      "line": 94,
+      "name": "permission",
+      "snippet": "permission: permission,"
+    },
+    {
+      "line": 95,
+      "name": "process_number",
+      "snippet": "process_number: process_number"
+    },
+    {
+      "line": 121,
+      "name": "blockSize",
+      "snippet": "const blockSize = 10; // tamanho do bloco total (10 páginas)"
+    },
+    {
+      "line": 122,
+      "name": "halfBlock",
+      "snippet": "const halfBlock = Math.floor(blockSize / 2); // metade do bloco (5)"
+    }
+  ],
+  "src/app/pages/main/processes-obtained/components/filters-processes-obtained/filters-processes-obtained.component.ts": [
+    {
+      "line": 8,
+      "name": "selector",
+      "snippet": "selector: 'app-filters-processes-obtained',"
+    },
+    {
+      "line": 9,
+      "name": "templateUrl",
+      "snippet": "templateUrl: './filters-processes-obtained.component.html',"
+    },
+    {
+      "line": 10,
+      "name": "styleUrls",
+      "snippet": "styleUrls: ['./filters-processes-obtained.component.scss']"
+    },
+    {
+      "line": 13,
+      "name": "filtersSelected",
+      "snippet": "@Output() filtersSelected = new EventEmitter<string>();"
+    },
+    {
+      "line": 14,
+      "name": "exportClicked",
+      "snippet": "@Output() exportClicked = new EventEmitter<any>();"
+    },
+    {
+      "line": 16,
+      "name": "filterForm",
+      "snippet": "@Input() filterForm!: FormGroup;"
+    },
+    {
+      "line": 17,
+      "name": "processesObtained",
+      "snippet": "@Input() processesObtained: boolean = false;"
+    },
+    {
+      "line": 19,
+      "name": "banks",
+      "snippet": "banks: Banks[] = [];"
+    },
+    {
+      "line": 20,
+      "name": "filteredBanks",
+      "snippet": "filteredBanks: Banks[] = [...this.banks];"
+    },
+    {
+      "line": 21,
+      "name": "searchBank",
+      "snippet": "searchBank: string = '';"
+    },
+    {
+      "line": 23,
+      "name": "stateAndCities",
+      "snippet": "stateAndCities: Cep = {};"
+    },
+    {
+      "line": 24,
+      "name": "selectedState",
+      "snippet": "selectedState: string = '';"
+    },
+    {
+      "line": 25,
+      "name": "stateCity",
+      "snippet": "stateCity: string[] = [];"
+    },
+    {
+      "line": 26,
+      "name": "filteredCities",
+      "snippet": "filteredCities: string[] = [];"
+    },
+    {
+      "line": 34,
+      "name": "bank",
+      "snippet": "bank: [[]],"
+    },
+    {
+      "line": 35,
+      "name": "minValue",
+      "snippet": "minValue: [null],"
+    },
+    {
+      "line": 36,
+      "name": "maxValue",
+      "snippet": "maxValue: [null],"
+    },
+    {
+      "line": 37,
+      "name": "city",
+      "snippet": "city: [[]],"
+    },
+    {
+      "line": 38,
+      "name": "state",
+      "snippet": "state: [[]],"
+    },
+    {
+      "line": 39,
+      "name": "processNumber",
+      "snippet": "processNumber: [''],"
+    },
+    {
+      "line": 44,
+      "name": "value",
+      "snippet": "const value = this.filterForm.get('processNumber')?.value?.toLowerCase().trim();"
+    },
+    {
+      "line": 58,
+      "name": "formValues",
+      "snippet": "const formValues = this.filterForm.value;"
+    },
+    {
+      "line": 60,
+      "name": "hasFilters",
+      "snippet": "const hasFilters = Object.values(formValues).some(value => {"
+    }
+  ],
+  "src/app/pages/main/dashboard/dashboard-routing.module.ts": [
+    {
+      "line": 6,
+      "name": "routes",
+      "snippet": "const routes: Routes = ["
+    },
+    {
+      "line": 8,
+      "name": "path",
+      "snippet": "path: '',"
+    },
+    {
+      "line": 9,
+      "name": "component",
+      "snippet": "component: DashboardComponent,"
+    },
+    {
+      "line": 10,
+      "name": "canActivate",
+      "snippet": "canActivate: [authGuard],"
+    },
+    {
+      "line": 15,
+      "name": "imports",
+      "snippet": "imports: [RouterModule.forChild(routes)],"
+    },
+    {
+      "line": 16,
+      "name": "exports",
+      "snippet": "exports: [RouterModule]"
+    }
+  ],
+  "src/app/pages/main/dashboard/dashboard.module.ts": [
+    {
+      "line": 12,
+      "name": "imports",
+      "snippet": "imports: ["
+    }
+  ],
+  "src/app/pages/main/dashboard/dashboard.component.ts": [
+    {
+      "line": 4,
+      "name": "selector",
+      "snippet": "selector: 'app-dashboard',"
+    },
+    {
+      "line": 5,
+      "name": "templateUrl",
+      "snippet": "templateUrl: './dashboard.component.html',"
+    },
+    {
+      "line": 6,
+      "name": "styleUrls",
+      "snippet": "styleUrls: ['./dashboard.component.scss']"
+    }
+  ],
+  "src/app/pages/main/dashboard/components/welcome/welcome.component.ts": [
+    {
+      "line": 3,
+      "name": "selector",
+      "snippet": "selector: 'app-welcome',"
+    },
+    {
+      "line": 4,
+      "name": "templateUrl",
+      "snippet": "templateUrl: './welcome.component.html',"
+    },
+    {
+      "line": 5,
+      "name": "styleUrls",
+      "snippet": "styleUrls: ['./welcome.component.scss']"
+    }
+  ],
+  "src/app/pages/main/components/user-disabled/user-disabled.component.ts": [
+    {
+      "line": 5,
+      "name": "selector",
+      "snippet": "selector: 'app-user-disabled',"
+    },
+    {
+      "line": 6,
+      "name": "templateUrl",
+      "snippet": "templateUrl: './user-disabled.component.html',"
+    },
+    {
+      "line": 7,
+      "name": "styleUrls",
+      "snippet": "styleUrls: ['./user-disabled.component.scss']"
+    },
+    {
+      "line": 10,
+      "name": "authService",
+      "snippet": "constructor(private authService: AuthService) {}"
+    }
+  ],
+  "src/app/pages/main/components/first-access/first-access.component.ts": [
+    {
+      "line": 10,
+      "name": "selector",
+      "snippet": "selector: 'app-first-access',"
+    },
+    {
+      "line": 11,
+      "name": "templateUrl",
+      "snippet": "templateUrl: './first-access.component.html',"
+    },
+    {
+      "line": 12,
+      "name": "styleUrls",
+      "snippet": "styleUrls: ['./first-access.component.scss']"
+    },
+    {
+      "line": 17,
+      "name": "hidePassword",
+      "snippet": "hidePassword: boolean = true;"
+    },
+    {
+      "line": 18,
+      "name": "isloading",
+      "snippet": "isloading: boolean = false;"
+    },
+    {
+      "line": 19,
+      "name": "termsAccepted",
+      "snippet": "termsAccepted: boolean = false;"
+    },
+    {
+      "line": 23,
+      "name": "userService",
+      "snippet": "private userService: UserService,"
+    },
+    {
+      "line": 24,
+      "name": "notificationService",
+      "snippet": "private notificationService: NotificationService"
+    },
+    {
+      "line": 34,
+      "name": "name",
+      "snippet": "name: ['', ["
+    },
+    {
+      "line": 56,
+      "name": "next",
+      "snippet": "next: () => {"
+    },
+    {
+      "line": 63,
+      "name": "error",
+      "snippet": "error: () => {"
+    },
+    {
+      "line": 72,
+      "name": "name",
+      "snippet": "name: this.firstAccessForm.get('name')!.value,"
+    },
+    {
+      "line": 73,
+      "name": "agree_terms",
+      "snippet": "agree_terms: true,"
+    },
+    {
+      "line": 74,
+      "name": "primeiro_acesso",
+      "snippet": "primeiro_acesso: false,"
+    },
+    {
+      "line": 75,
+      "name": "new_senha",
+      "snippet": "new_senha: this.firstAccessForm.get('senha')!.value"
+    },
+    {
+      "line": 80,
+      "name": "inputChar",
+      "snippet": "const inputChar = event.key;"
+    },
+    {
+      "line": 83,
+      "name": "validChars",
+      "snippet": "const validChars = /^[A-Za-zÀ-ÿ\\s]+$/;"
+    }
+  ],
+  "src/app/pages/main/employees/employees.module.ts": [
+    {
+      "line": 21,
+      "name": "imports",
+      "snippet": "imports: ["
+    },
+    {
+      "line": 36,
+      "name": "providers",
+      "snippet": "providers: [provideNgxMask()]"
+    }
+  ],
+  "src/app/pages/main/employees/employees-routing.module.ts": [
+    {
+      "line": 6,
+      "name": "routes",
+      "snippet": "const routes: Routes = ["
+    },
+    {
+      "line": 11,
+      "name": "imports",
+      "snippet": "imports: [RouterModule.forChild(routes)],"
+    },
+    {
+      "line": 12,
+      "name": "exports",
+      "snippet": "exports: [RouterModule]"
+    }
+  ],
+  "src/app/pages/main/employees/employees.component.ts": [
+    {
+      "line": 15,
+      "name": "selector",
+      "snippet": "selector: 'app-employees',"
+    },
+    {
+      "line": 16,
+      "name": "templateUrl",
+      "snippet": "templateUrl: './employees.component.html',"
+    },
+    {
+      "line": 17,
+      "name": "styleUrls",
+      "snippet": "styleUrls: ['./employees.component.scss']"
+    },
+    {
+      "line": 22,
+      "name": "dialog",
+      "snippet": "public dialog: MatDialog,"
+    },
+    {
+      "line": 23,
+      "name": "employeesService",
+      "snippet": "private employeesService: EmployeesService,"
+    },
+    {
+      "line": 24,
+      "name": "userService",
+      "snippet": "private userService: UserService,"
+    },
+    {
+      "line": 25,
+      "name": "notificationService",
+      "snippet": "private notificationService: NotificationService"
+    },
+    {
+      "line": 29,
+      "name": "employeesData",
+      "snippet": "employeesData: EmployeesData[] = [];"
+    },
+    {
+      "line": 30,
+      "name": "filteredEmployees",
+      "snippet": "filteredEmployees = [...this.employeesData];"
+    },
+    {
+      "line": 33,
+      "name": "isLoading",
+      "snippet": "isLoading: boolean = false;"
+    },
+    {
+      "line": 35,
+      "name": "header",
+      "snippet": "header: Header = { title: 'Funcionários', subtitle: 'Gerencie os funcionários da sua empresa' };"
+    },
+    {
+      "line": 49,
+      "name": "next",
+      "snippet": "next: (response: EmployeesData[]) => {"
+    },
+    {
+      "line": 55,
+      "name": "error",
+      "snippet": "error: () => {"
+    },
+    {
+      "line": 67,
+      "name": "filterValue",
+      "snippet": "const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();"
+    },
+    {
+      "line": 74,
+      "name": "dialogRef",
+      "snippet": "const dialogRef = this.dialog.open(NewEmployeeModalComponent, {"
+    },
+    {
+      "line": 75,
+      "name": "width",
+      "snippet": "width: '600px',"
+    },
+    {
+      "line": 76,
+      "name": "data",
+      "snippet": "data: employee"
+    },
+    {
+      "line": 82,
+      "name": "name",
+      "snippet": "name: null,"
+    },
+    {
+      "line": 84,
+      "name": "permissao_visualizacao",
+      "snippet": "permissao_visualizacao: result.permissao_visualizacao"
+    },
+    {
+      "line": 95,
+      "name": "names",
+      "snippet": "const names = fullName.trim().split(/\\s+/);"
+    },
+    {
+      "line": 102,
+      "name": "dialogRef",
+      "snippet": "const dialogRef = this.dialog.open(EditEmployeeModalComponent, {"
+    },
+    {
+      "line": 103,
+      "name": "width",
+      "snippet": "width: '600px',"
+    },
+    {
+      "line": 104,
+      "name": "data",
+      "snippet": "data: employee"
+    },
+    {
+      "line": 120,
+      "name": "dialogRef",
+      "snippet": "const dialogRef = this.dialog.open(DeleteEmployeeModalComponent, {"
+    },
+    {
+      "line": 121,
+      "name": "width",
+      "snippet": "width: '600px',"
+    },
+    {
+      "line": 122,
+      "name": "data",
+      "snippet": "data: { name: name, documento: documento }"
+    }
+  ],
+  "src/app/pages/main/employees/components/delete-employee-modal/delete-employee-modal.component.ts": [
+    {
+      "line": 8,
+      "name": "selector",
+      "snippet": "selector: 'app-delete-employee-modal',"
+    },
+    {
+      "line": 9,
+      "name": "templateUrl",
+      "snippet": "templateUrl: './delete-employee-modal.component.html',"
+    },
+    {
+      "line": 10,
+      "name": "styleUrls",
+      "snippet": "styleUrls: ['./delete-employee-modal.component.scss']"
+    },
+    {
+      "line": 14,
+      "name": "dialogRef",
+      "snippet": "public dialogRef: MatDialogRef<DeleteEmployeeModalComponent>,"
+    },
+    {
+      "line": 15,
+      "name": "data",
+      "snippet": "@Inject(MAT_DIALOG_DATA) public data: EmployeesData,"
+    },
+    {
+      "line": 16,
+      "name": "employeesService",
+      "snippet": "private employeesService: EmployeesService,"
+    },
+    {
+      "line": 17,
+      "name": "notificationService",
+      "snippet": "private notificationService: NotificationService"
+    },
+    {
+      "line": 20,
+      "name": "isloading",
+      "snippet": "isloading: boolean = false;"
+    },
+    {
+      "line": 29,
+      "name": "next",
+      "snippet": "next: () => {"
+    },
+    {
+      "line": 33,
+      "name": "error",
+      "snippet": "error: () => {"
+    }
+  ],
+  "src/app/pages/main/employees/components/edit-employee-modal/edit-employee-modal.component.ts": [
+    {
+      "line": 10,
+      "name": "selector",
+      "snippet": "selector: 'app-edit-employee-modal',"
+    },
+    {
+      "line": 11,
+      "name": "templateUrl",
+      "snippet": "templateUrl: './edit-employee-modal.component.html',"
+    },
+    {
+      "line": 12,
+      "name": "styleUrls",
+      "snippet": "styleUrls: ['./edit-employee-modal.component.scss']"
+    },
+    {
+      "line": 17,
+      "name": "documentoEmployee",
+      "snippet": "documentoEmployee: string = '';"
+    },
+    {
+      "line": 18,
+      "name": "viewingPermission",
+      "snippet": "viewingPermission: string[] = [];"
+    },
+    {
+      "line": 20,
+      "name": "permissions",
+      "snippet": "permissions = ['Meus Processos', 'Obter Processos', 'Funcionários'];"
+    },
+    {
+      "line": 22,
+      "name": "isloading",
+      "snippet": "isloading: boolean = false;"
+    },
+    {
+      "line": 25,
+      "name": "dialogRef",
+      "snippet": "public dialogRef: MatDialogRef<EditEmployeeModalComponent>,"
+    },
+    {
+      "line": 26,
+      "name": "data",
+      "snippet": "@Inject(MAT_DIALOG_DATA) public data: EmployeesData,"
+    },
+    {
+      "line": 28,
+      "name": "employeesService",
+      "snippet": "private employeesService: EmployeesService,"
+    },
+    {
+      "line": 29,
+      "name": "notificationService",
+      "snippet": "private notificationService: NotificationService"
+    },
+    {
+      "line": 41,
+      "name": "permissao_visualizacao",
+      "snippet": "permissao_visualizacao: [this.getSelectedPermissions(), Validators.required]"
+    },
+    {
+      "line": 51,
+      "name": "data",
+      "snippet": "const data = this.getChangeViewingData(this.documentoEmployee, (this.employeeForm.value).permissao_visualizacao);"
+    },
+    {
+      "line": 55,
+      "name": "next",
+      "snippet": "next: () => {"
+    },
+    {
+      "line": 60,
+      "name": "permissao_visualizacao",
+      "snippet": "permissao_visualizacao: this.employeesService.rulesPermission((this.employeeForm.value).permissao_visualizacao),"
+    },
+    {
+      "line": 64,
+      "name": "error",
+      "snippet": "error: () => {"
+    },
+    {
+      "line": 73,
+      "name": "permissao_visualizacao",
+      "snippet": "permissao_visualizacao: viewing,"
+    }
+  ],
+  "src/app/pages/main/employees/components/new-employee-modal/new-employee-modal.component.ts": [
+    {
+      "line": 10,
+      "name": "selector",
+      "snippet": "selector: 'app-new-employee-modal',"
+    },
+    {
+      "line": 11,
+      "name": "templateUrl",
+      "snippet": "templateUrl: './new-employee-modal.component.html',"
+    },
+    {
+      "line": 12,
+      "name": "styleUrls",
+      "snippet": "styleUrls: ['./new-employee-modal.component.scss']"
+    },
+    {
+      "line": 16,
+      "name": "permissions",
+      "snippet": "permissions = ['Meus Processos', 'Obter Processos', 'Funcionários'];"
+    },
+    {
+      "line": 17,
+      "name": "isloading",
+      "snippet": "isloading: boolean = false;"
+    },
+    {
+      "line": 19,
+      "name": "hidePassword",
+      "snippet": "hidePassword: boolean = true;"
+    },
+    {
+      "line": 22,
+      "name": "dialogRef",
+      "snippet": "public dialogRef: MatDialogRef<NewEmployeeModalComponent>,"
+    },
+    {
+      "line": 23,
+      "name": "data",
+      "snippet": "@Inject(MAT_DIALOG_DATA) public data: EmployeesData,"
+    },
+    {
+      "line": 25,
+      "name": "employeesService",
+      "snippet": "private employeesService: EmployeesService,"
+    },
+    {
+      "line": 26,
+      "name": "notificationService",
+      "snippet": "private notificationService: NotificationService"
+    },
+    {
+      "line": 35,
+      "name": "name",
+      "snippet": "name: ['', Validators.minLength(6)],"
+    },
+    {
+      "line": 38,
+      "name": "permissao_visualizacao",
+      "snippet": "permissao_visualizacao: [[], Validators.required]"
+    },
+    {
+      "line": 50,
+      "name": "next",
+      "snippet": "next: () => {"
+    },
+    {
+      "line": 54,
+      "name": "error",
+      "snippet": "error: () => {"
+    }
+  ],
+  "src/app/pages/login/login.module.ts": [
+    {
+      "line": 10,
+      "name": "imports",
+      "snippet": "imports: ["
+    },
+    {
+      "line": 16,
+      "name": "providers",
+      "snippet": "providers: [],"
+    }
+  ],
+  "src/app/pages/login/login.component.ts": [
+    {
+      "line": 10,
+      "name": "selector",
+      "snippet": "selector: 'app-login',"
+    },
+    {
+      "line": 11,
+      "name": "templateUrl",
+      "snippet": "templateUrl: './login.component.html',"
+    },
+    {
+      "line": 12,
+      "name": "styleUrls",
+      "snippet": "styleUrls: ['./login.component.scss']"
+    },
+    {
+      "line": 17,
+      "name": "hidePassword",
+      "snippet": "hidePassword: boolean = true;"
+    },
+    {
+      "line": 19,
+      "name": "isloading",
+      "snippet": "isloading: boolean = false;"
+    },
+    {
+      "line": 23,
+      "name": "authService",
+      "snippet": "private authService: AuthService,"
+    },
+    {
+      "line": 24,
+      "name": "router",
+      "snippet": "private router: Router,"
+    },
+    {
+      "line": 25,
+      "name": "notificationService",
+      "snippet": "private notificationService: NotificationService"
+    },
+    {
+      "line": 31,
+      "name": "documentoField",
+      "snippet": "const documentoField = this.documentoInput.nativeElement;"
+    },
+    {
+      "line": 34,
+      "name": "mask",
+      "snippet": "mask: ["
+    },
+    {
+      "line": 57,
+      "name": "next",
+      "snippet": "next: () => {"
+    },
+    {
+      "line": 60,
+      "name": "error",
+      "snippet": "error: () => {"
+    }
+  ],
+  "src/app/pages/login/login-routing.module.ts": [
+    {
+      "line": 5,
+      "name": "routes",
+      "snippet": "const routes: Routes = ["
+    },
+    {
+      "line": 10,
+      "name": "imports",
+      "snippet": "imports: [RouterModule.forChild(routes)],"
+    },
+    {
+      "line": 11,
+      "name": "exports",
+      "snippet": "exports: [RouterModule]"
+    }
+  ],
+  "src/app/services/auth/auth.service.ts": [
+    {
+      "line": 10,
+      "name": "providedIn",
+      "snippet": "providedIn: 'root'"
+    },
+    {
+      "line": 13,
+      "name": "TOKEN_KEY",
+      "snippet": "private TOKEN_KEY = 'authToken';"
+    },
+    {
+      "line": 15,
+      "name": "baseUrl",
+      "snippet": "private baseUrl = environment.apiUrl;"
+    },
+    {
+      "line": 17,
+      "name": "http",
+      "snippet": "constructor(private http: HttpClient, private router: Router) { }"
+    },
+    {
+      "line": 17,
+      "name": "router",
+      "snippet": "constructor(private http: HttpClient, private router: Router) { }"
+    }
+  ],
+  "src/app/services/notification/notification.service.ts": [
+    {
+      "line": 5,
+      "name": "providedIn",
+      "snippet": "providedIn: 'root'"
+    },
+    {
+      "line": 13,
+      "name": "horizontalPosition",
+      "snippet": "horizontalPosition: 'center',"
+    },
+    {
+      "line": 14,
+      "name": "verticalPosition",
+      "snippet": "verticalPosition: 'bottom',"
+    },
+    {
+      "line": 15,
+      "name": "panelClass",
+      "snippet": "panelClass: [`snackbar-${type}`]"
+    }
+  ],
+  "src/app/services/processes/processes.service.ts": [
+    {
+      "line": 9,
+      "name": "providedIn",
+      "snippet": "providedIn: 'root'"
+    },
+    {
+      "line": 13,
+      "name": "baseUrl",
+      "snippet": "private baseUrl = environment.apiUrl;"
+    },
+    {
+      "line": 15,
+      "name": "http",
+      "snippet": "constructor(private http: HttpClient) { }"
+    },
+    {
+      "line": 18,
+      "name": "body",
+      "snippet": "const body = data || {};"
+    },
+    {
+      "line": 23,
+      "name": "body",
+      "snippet": "const body = data || {};"
+    },
+    {
+      "line": 32,
+      "name": "now",
+      "snippet": "const now = new Date();"
+    },
+    {
+      "line": 33,
+      "name": "year",
+      "snippet": "const year = now.getFullYear();"
+    },
+    {
+      "line": 34,
+      "name": "month",
+      "snippet": "const month = now.getMonth() + 1;"
+    }
+  ],
+  "src/app/services/general-data/general-data.service.ts": [
+    {
+      "line": 9,
+      "name": "providedIn",
+      "snippet": "providedIn: 'root'"
+    },
+    {
+      "line": 14,
+      "name": "baseUrl",
+      "snippet": "private baseUrl = environment.apiUrl;"
+    },
+    {
+      "line": 16,
+      "name": "http",
+      "snippet": "constructor(private http: HttpClient) { }"
+    }
+  ],
+  "src/app/services/user/user.service.ts": [
+    {
+      "line": 9,
+      "name": "providedIn",
+      "snippet": "providedIn: 'root'"
+    },
+    {
+      "line": 13,
+      "name": "baseUrl",
+      "snippet": "private baseUrl = environment.apiUrl;"
+    },
+    {
+      "line": 16,
+      "name": "http",
+      "snippet": "constructor(private http: HttpClient) { }"
+    }
+  ],
+  "src/app/services/export-excel/export-excel.service.ts": [
+    {
+      "line": 6,
+      "name": "providedIn",
+      "snippet": "providedIn: 'root'"
+    },
+    {
+      "line": 11,
+      "name": "worksheet",
+      "snippet": "const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data);"
+    },
+    {
+      "line": 42,
+      "name": "header",
+      "snippet": "const header = Object.keys(data[0]);"
+    },
+    {
+      "line": 45,
+      "name": "cellRef",
+      "snippet": "const cellRef = XLSX.utils.encode_cell({ r: 0, c: i }); // Cabeçalho na linha 1 (r: 0)"
+    },
+    {
+      "line": 51,
+      "name": "alignment",
+      "snippet": "alignment: { horizontal: 'center', vertical: 'center' }, // Centralizado"
+    },
+    {
+      "line": 52,
+      "name": "border",
+      "snippet": "border: { // Borda fina para destacar cabeçalho"
+    },
+    {
+      "line": 53,
+      "name": "top",
+      "snippet": "top: { style: 'thin' },"
+    },
+    {
+      "line": 54,
+      "name": "bottom",
+      "snippet": "bottom: { style: 'thin' },"
+    },
+    {
+      "line": 55,
+      "name": "left",
+      "snippet": "left: { style: 'thin' },"
+    },
+    {
+      "line": 56,
+      "name": "right",
+      "snippet": "right: { style: 'thin' }"
+    },
+    {
+      "line": 61,
+      "name": "workbook",
+      "snippet": "const workbook: XLSX.WorkBook = { Sheets: { 'Funcionários': worksheet }, SheetNames: ['Funcionários'] };"
+    },
+    {
+      "line": 64,
+      "name": "excelBuffer",
+      "snippet": "const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });"
+    },
+    {
+      "line": 70,
+      "name": "saveAsExcelFile",
+      "snippet": "private saveAsExcelFile(buffer: any, fileName: string): void {"
+    },
+    {
+      "line": 71,
+      "name": "data",
+      "snippet": "const data: Blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocumento.spreadsheetml.sheet;charset=UTF-8' });"
+    }
+  ],
+  "src/app/services/employees/employees.service.ts": [
+    {
+      "line": 10,
+      "name": "providedIn",
+      "snippet": "providedIn: 'root'"
+    },
+    {
+      "line": 14,
+      "name": "baseUrl",
+      "snippet": "private baseUrl = environment.apiUrl;"
+    },
+    {
+      "line": 16,
+      "name": "http",
+      "snippet": "constructor(private http: HttpClient) { }"
+    },
+    {
+      "line": 33,
+      "name": "options",
+      "snippet": "const options = {"
+    },
+    {
+      "line": 34,
+      "name": "body",
+      "snippet": "body: { documento: documento }"
+    }
+  ],
+  "src/environments/environment.prod.ts": [
+    {
+      "line": 1,
+      "name": "environment",
+      "snippet": "export const environment = {"
+    },
+    {
+      "line": 2,
+      "name": "production",
+      "snippet": "production: false,"
+    },
+    {
+      "line": 3,
+      "name": "apiUrl",
+      "snippet": "apiUrl: 'http://localhost:3000/api',"
+    }
+  ],
+  "src/environments/environment.dev.ts": [
+    {
+      "line": 1,
+      "name": "environment",
+      "snippet": "export const environment = {"
+    },
+    {
+      "line": 2,
+      "name": "production",
+      "snippet": "production: false,"
+    },
+    {
+      "line": 3,
+      "name": "apiUrl",
+      "snippet": "apiUrl: 'http://localhost:3000/api'"
+    }
+  ]
+}

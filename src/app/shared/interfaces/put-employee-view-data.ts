@@ -1,4 +1,4 @@
 export interface PutEmployeeViewData {
-  viewing_permission: string[];
-  document: string;
+  permissao_visualizacao: string[];
+  documento: string;
 }

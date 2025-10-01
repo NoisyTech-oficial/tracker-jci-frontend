@@ -14,7 +14,7 @@ import { PutEmployeeViewData } from 'src/app/shared/interfaces/put-employee-view
 export class EditEmployeeModalComponent implements OnInit {
 
   employeeForm!: FormGroup;
-  documentEmployee: string = '';
+  documentoEmployee: string = '';
   viewingPermission: string[] = [];
 
   permissions = ['Meus Processos', 'Obter Processos', 'Funcionários'];
@@ -28,8 +28,8 @@ export class EditEmployeeModalComponent implements OnInit {
     private employeesService: EmployeesService,
     private notificationService: NotificationService
   ) {
-    this.documentEmployee = data.document;
-    this.viewingPermission = data.viewing_permission;
+    this.documentoEmployee = data.documento;
+    this.viewingPermission = data.permissao_visualizacao;
   }
 
   ngOnInit(): void {
@@ -38,7 +38,7 @@ export class EditEmployeeModalComponent implements OnInit {
 
   startForm(): void {
     this.employeeForm = this.fb.group({
-      viewing_permission: [this.getSelectedPermissions(), Validators.required]
+      permissao_visualizacao: [this.getSelectedPermissions(), Validators.required]
     });
   }
 
@@ -48,7 +48,7 @@ export class EditEmployeeModalComponent implements OnInit {
 
   editEmployee() {
     this.isloading = true;
-    const data = this.getChangeViewingData(this.documentEmployee, (this.employeeForm.value).viewing_permission);
+    const data = this.getChangeViewingData(this.documentoEmployee, (this.employeeForm.value).permissao_visualizacao);
 
     this.employeesService.putEmployeeView(data)
     .subscribe({
@@ -56,8 +56,8 @@ export class EditEmployeeModalComponent implements OnInit {
         this.notificationService.showMessage('Funcionário alterado com sucesso', 'success');
         this.dialogRef.close(
           {
-            document: this.documentEmployee,
-            viewing_permission: this.employeesService.rulesPermission((this.employeeForm.value).viewing_permission),
+            documento: this.documentoEmployee,
+            permissao_visualizacao: this.employeesService.rulesPermission((this.employeeForm.value).permissao_visualizacao),
           }
         );
       },
@@ -68,10 +68,10 @@ export class EditEmployeeModalComponent implements OnInit {
     });
   }
 
-  getChangeViewingData(document: string, viewing: string[]): PutEmployeeViewData {
+  getChangeViewingData(documento: string, viewing: string[]): PutEmployeeViewData {
     return {
-      viewing_permission: viewing,
-      document: document
+      permissao_visualizacao: viewing,
+      documento: documento
     };
   }
 

@@ -1,7 +1,6 @@
 import { UserService } from 'src/app/services/user/user.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
 import { UserData } from 'src/app/shared/interfaces/user-data.interface';
 import { PutUserData } from 'src/app/shared/interfaces/put-user-data.interface';
 import { NotificationService } from 'src/app/services/notification/notification.service';
@@ -31,13 +30,10 @@ export class FirstAccessComponent implements OnInit {
 
   buildForm() {
     this.firstAccessForm = this.fb.group({
-      name: ['', [
-        Validators.required, 
-        Validators.minLength(5),
-        Validators.pattern(/^[A-Za-zÀ-ú\s]+$/)
-      ]
-    ],
-      password: ['', [Validators.required, Validators.minLength(8)]]
+      nome: [null, []],
+      email_advogado: [null, []],
+      senha_advogado: [null, []],    
+      totip_advogado: [null, []]
     });
   }
 
@@ -68,11 +64,18 @@ export class FirstAccessComponent implements OnInit {
   }
 
   getUser(): PutUserData {
-    return {
-      name: this.firstAccessForm.get('name')!.value,
-      agree_terms: true,
-      first_access: false,
-      new_password: this.firstAccessForm.get('password')!.value
+    const { nome, email_advogado, senha_advogado, totip_advogado } = this.firstAccessForm.value;
+    const novoNovo = nome === null ? this.userData.nome : nome;
+
+    const advogado = email_advogado && senha_advogado && totip_advogado 
+      ? { email: email_advogado, senha: senha_advogado, totip: totip_advogado }
+      : null;
+
+    return { 
+      nome: novoNovo, 
+      advogado,
+      primeiro_acesso: false,
+      aceitou_termos: true
     };
   }
 

@@ -1,9 +1,9 @@
 import { Process } from "./processes-data.interface"
 
 export interface ProcessObtained extends Process {
-  export_document: string;
+  export_documento: string;
   data_exporting: string;
-  crm_update_document: string;
+  crm_update_documento: string;
   status: string | null;
   notes: string | null;
 }

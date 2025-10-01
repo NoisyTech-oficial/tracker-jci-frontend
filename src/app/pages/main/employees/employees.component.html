@@ -28,25 +28,25 @@
       </thead>
       <tbody *ngIf="employeesData.length > 0">
         <tr *ngFor="let employee of filteredEmployees; let i = index">
-          <td>{{ getFirstAndLastName(employee.name!) || "-" }}</td>
-          <td>{{ employee.document | mask: '000.000.000-00' }}</td>
+          <td>{{ getFirstAndLastName(employee.nome!) || "-" }}</td>
+          <td>{{ employee.documento | mask: '000.000.000-00' }}</td>
           <td>
             <div class="custom-select">
-              <span *ngFor="let permission of employee.viewing_permission" class="selected-option">
+              <span *ngFor="let permission of employee.permissao_visualizacao" class="selected-option">
                 {{ formatMenuTitle(permission) }}
               </span>
             </div>
           </td>
           <td class="actions">
-            <div *ngIf="userData.document !== employee.document">
+            <div *ngIf="userData.documento !== employee.documento">
               <button class="edit-btn" (click)="editEmployee(employee)">
                 <mat-icon>edit</mat-icon>
               </button>
-              <button class="delete-btn" (click)="deleteEmployee(employee.name!, employee.document)">
+              <button class="delete-btn" (click)="deleteEmployee(employee.nome!, employee.documento)">
                 <mat-icon>delete</mat-icon>
               </button>
             </div>
-            <div *ngIf="userData.document === employee.document">
+            <div *ngIf="userData.documento === employee.documento">
               <button class="edit-btn disabled-btn">
                 <mat-icon>edit</mat-icon>
               </button>

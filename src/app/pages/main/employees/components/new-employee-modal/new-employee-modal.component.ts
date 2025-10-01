@@ -33,9 +33,9 @@ export class NewEmployeeModalComponent implements OnInit {
   startForm(): void {
     this.employeeForm = this.fb.group({
       name: ['', Validators.minLength(6)],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      document: ['', [Validators.required, DocumentValidator.validateDocumentLength]],
-      viewing_permission: [[], Validators.required]
+      senha: ['', [Validators.required, Validators.minLength(8)]],
+      documento: ['', [Validators.required, DocumentValidator.validateDocumentLength]],
+      permissao_visualizacao: [[], Validators.required]
     });
   }
 

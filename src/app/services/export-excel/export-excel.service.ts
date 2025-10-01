@@ -68,7 +68,7 @@ export class ExportExcelService {
   }
 
   private saveAsExcelFile(buffer: any, fileName: string): void {
-    const data: Blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8' });
+    const data: Blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocumento.spreadsheetml.sheet;charset=UTF-8' });
     FileSaver.saveAs(data, `${fileName}.xlsx`);
   }
 }

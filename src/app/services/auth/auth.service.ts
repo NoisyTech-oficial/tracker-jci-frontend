@@ -17,7 +17,7 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) { }
 
   login(credentials: CredentialsLogin): Observable<LoginResponse> {
-    credentials.document = credentials.document.replace(/[^\d]/g, '');
+    credentials.documento = credentials.documento.replace(/[^\d]/g, '');
     return this.http.post<LoginResponse>(`${this.baseUrl}/auth/login`, credentials).pipe(
       tap((response: LoginResponse) => {
         this.saveToken(response.token);

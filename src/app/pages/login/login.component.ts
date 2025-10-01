@@ -12,7 +12,7 @@ import { DocumentValidator } from 'src/app/shared/validators/document-length';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements AfterViewInit {
-  @ViewChild('documentInput') documentInput!: ElementRef;
+  @ViewChild('documentInput') documentoInput!: ElementRef;
 
   hidePassword: boolean = true;
   loginForm!: FormGroup;
@@ -28,9 +28,9 @@ export class LoginComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    const documentField = this.documentInput.nativeElement;
+    const documentoField = this.documentoInput.nativeElement;
 
-    IMask(documentField, {
+    IMask(documentoField, {
       mask: [
         { mask: '000.000.000-00', maxLength: 11 },
         { mask: '00.000.000/0000-00', maxLength: 14 }
@@ -40,8 +40,8 @@ export class LoginComponent implements AfterViewInit {
 
   startForm() {
     this.loginForm = this.fb.group({
-      document: ['', [Validators.required, DocumentValidator.validateDocumentLength]],
-      password: ['', [Validators.required, Validators.minLength(8)]]
+      documento: ['', [Validators.required, DocumentValidator.validateDocumentLength]],
+      senha: ['', [Validators.required, Validators.minLength(8)]]
     });
   }
 
@@ -59,7 +59,7 @@ export class LoginComponent implements AfterViewInit {
       },
       error: () => {
         this.notificationService.showMessage('Algo deu errado, tente novamente.', 'error');
-        this.loginForm.controls['password'].setValue('');
+        this.loginForm.controls['senha'].setValue('');
         this.isloading = false;
       }
     });
