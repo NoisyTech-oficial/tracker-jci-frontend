@@ -1,3 +1,5 @@
+@use "./styles/colors";
+
 /* You can add global styles to this file, and also import other style files */
 * {
   margin: 0;
@@ -12,7 +14,12 @@
 }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: var(--cor-fundo-pagina);
+  color: var(--cor-texto-titulo);
+}
 
 /* 🔥 Remove o fundo padrão do Material */
 .mat-mdc-snack-bar-container .mdc-snackbar__surface {
@@ -26,25 +33,25 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 /* 🔥 Personalizando a aparência do MatSnackBar */
 .snackbar-success {
-  background-color: #4CAF50 !important; /* Verde */
+  background-color: var(--cor-estado-sucesso) !important;
   color: white !important;
   font-weight: bold;
 }
 
 .snackbar-error {
-  background-color: #D32F2F !important; /* Vermelho */
+  background-color: var(--cor-estado-erro) !important;
   color: white !important;
   font-weight: bold;
 }
 
 .snackbar-warning {
-  background-color: #FFA000 !important; /* Amarelo */
+  background-color: var(--cor-estado-atencao) !important;
   color: white !important;
   font-weight: bold;
 }
 
 .snackbar-info {
-  background-color: #1976D2 !important; /* Azul */
+  background-color: var(--cor-estado-informacao) !important;
   color: white !important;
   font-weight: bold;
 }

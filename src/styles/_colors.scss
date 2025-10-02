@@ -1,0 +1,35 @@
+:root {
+  /* Base surfaces */
+  --cor-login: #2ECC71;
+  --cor-fundo-pagina: #F5F7FA;
+  --cor-superficie-card: rgba(255, 255, 255, 0.8);
+  --cor-superficie-card-borda: rgba(255, 255, 255, 0.6);
+  --cor-superficie-sombra: rgba(0, 0, 0, 0.08);
+  --cor-fundo-destaque: #0E3A22;
+
+  /* Typography */
+  --cor-texto-titulo: #1C1C1E;
+  --cor-texto-subtitulo: #6B7280;
+  --cor-texto-kpi: #111827;
+
+  /* Charts */
+  --cor-grafico-barra: #2ECC71;
+  --cor-grafico-barra-hover: #58D68D;
+  --cor-grafico-eixo: #6B7280;
+  --cor-grafico-grade: #F1F5F9;
+  --cor-grafico-tooltip-texto: #1C1C1E;
+
+  /* Buttons */
+  --cor-botao-ativo-fundo: #2ECC71;
+  --cor-botao-ativo-texto: #FFFFFF;
+  --cor-botao-inativo-fundo: #E5E8EC;
+  --cor-botao-inativo-texto: #2D2D2D;
+  --cor-botao-hover-fundo: #58D68D;
+  --cor-botao-sombra: rgba(46, 204, 113, 0.25);
+
+  /* Status */
+  --cor-estado-sucesso: #2ECC71;
+  --cor-estado-atencao: #F1C40F;
+  --cor-estado-erro: #E74C3C;
+  --cor-estado-informacao: #3498DB;
+}
