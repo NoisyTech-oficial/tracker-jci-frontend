@@ -48,7 +48,7 @@ export class FirstAccessComponent implements OnInit {
       return;
     }
 
-    this.userService.putUser(this.getUser()).subscribe({
+    this.userService.PutUsuarioPrimeiroLogin(this.getUser()).subscribe({
       next: () => {
         this.notificationService.showMessage('Primeiro acesso realizado com sucesso', 'success');
         setTimeout(() => {

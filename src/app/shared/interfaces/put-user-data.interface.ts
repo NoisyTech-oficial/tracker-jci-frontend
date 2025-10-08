@@ -10,3 +10,9 @@ export interface AdvogadoDados {
   senha: string;
   totip: string;
 }
+
+export interface putUsuario {
+  nome: string | null;
+  email: string | null;
+  foto: string | null;
+}

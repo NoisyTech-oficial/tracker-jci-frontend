@@ -9,4 +9,13 @@ export interface UserData {
   primeiro_acesso: boolean;
   permissao_visualizacao: string[];
   usuario_ativo: boolean;
+  email: string;
+  foto: string | null;
+}
+
+export interface DadosPerfilUsuario {
+  nome: string | null;
+  documento: string;
+  email: string;
+  foto: string | null;
 }

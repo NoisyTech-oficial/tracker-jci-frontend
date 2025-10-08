@@ -1,4 +1,5 @@
 @use 'src/app/shared/styles/_variables.scss' as *;
+@use '../../../styles/colors';
 
 * {
   box-sizing: border-box;
@@ -11,11 +12,7 @@ html, body {
 }
 
 .login-container {
-  background-color: $background-dark;
-  background-image: url('../../../assets/planet.svg');
-  background-repeat: no-repeat;
-  background-position: center bottom -70px;
-  background-size: contain;
+  background: linear-gradient(135deg, var(--cor-botao-ativo-fundo), var(--cor-fundo-destaque));
 
   display: flex;
   justify-content: center;
@@ -59,15 +56,16 @@ html, body {
   }
 
   .login-card {
-    background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(12px);
+    background: var(--cor-superficie-card);
+    border: 1px solid var(--cor-superficie-card-borda);
+    backdrop-filter: blur(18px);
     border-radius: 20px;
     padding: 40px 30px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 20px 40px var(--cor-superficie-sombra);
     width: 100%;
     max-width: 400px;
     text-align: center;
-    color: $text-light;
+    color: var(--cor-texto-titulo);
     animation: fadeIn 1s ease-in-out;
     position: relative;
     z-index: 2;
@@ -97,19 +95,19 @@ html, body {
         padding: 12px;
         border: none;
         border-radius: 8px;
-        background: rgba(255, 255, 255, 0.15);
-        color: white;
+        background: rgba(255, 255, 255, 0.9);
+        color: var(--cor-texto-titulo);
         font-size: 16px;
-        box-shadow: 0 0 10px rgba(69, 89, 136, 0.6);
+        box-shadow: 0 0 0 1px rgba(17, 24, 39, 0.06);
         outline: none;
 
         &::placeholder {
           font-size: 14px;
-          color: white;
+          color: rgba(28, 28, 30, 0.6);
         }
 
         &:focus {
-          box-shadow: 0 0 10px rgba(69, 89, 136, 0.6);
+          box-shadow: 0 0 0 2px rgba(88, 214, 141, 0.4);
         }
       }
     }
@@ -124,8 +122,8 @@ html, body {
         padding: 12px;
         border-radius: 8px;
         border: none;
-        background: rgba(255, 255, 255, 0.2);
-        color: white;
+        background: rgba(255, 255, 255, 0.9);
+        color: var(--cor-texto-titulo);
       }
 
       button {
@@ -133,11 +131,11 @@ html, body {
         right: 10px;
         background: none;
         border: none;
-        color: $grey-light;
+        color: rgba(28, 28, 30, 0.5);
         cursor: pointer;
 
         mat-icon {
-          color: $text-light;
+          color: var(--cor-texto-subtitulo);
           font-size: 22px;
           display: flex;
         }
@@ -149,19 +147,22 @@ html, body {
       padding: 12px;
       border: none;
       border-radius: 8px;
-      background-color: $primary-color;
-      color: $text-light;
+      background-color: var(--cor-botao-ativo-fundo);
+      color: var(--cor-botao-ativo-texto);
       font-size: 16px;
       cursor: pointer;
       margin-top: 20px;
-      transition: all 0.3s ease-in-out;
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+      box-shadow: 0 12px 24px rgba(46, 204, 113, 0.35);
 
       &:hover {
-        transform: scale(1.05);
+        transform: scale(1.03);
+        box-shadow: 0 16px 32px rgba(46, 204, 113, 0.45);
       }
 
       &:disabled {
-        background-color: $grey-disabled;
+        background-color: var(--cor-botao-inativo-fundo);
+        color: var(--cor-botao-inativo-texto);
         cursor: not-allowed;
         opacity: 0.6;
         transform: none;
@@ -173,7 +174,7 @@ html, body {
       font-size: 13px;
 
       a {
-        color: $text-light;
+        color: var(--cor-texto-subtitulo);
         text-decoration: none;
 
         &:hover {

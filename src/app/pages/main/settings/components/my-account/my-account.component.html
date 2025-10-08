@@ -4,14 +4,28 @@
   <div class="profile-container">
     <div class="profile-card">
       <div class="avatar-section">
-        <img [src]="userPhoto || 'assets/avatar-default.png'" alt="Foto do usuário" class="avatar" />
-        <button mat-icon-button (click)="onChangePhoto()">
+        <img 
+          [src]="userPhoto || 'assets/avatar-default.png'" 
+          alt="Foto do usuário" 
+          class="avatar" 
+        />
+      
+        <!-- Ícone de câmera sobre a foto -->
+        <button mat-icon-button class="camera-btn" (click)="selecionarImagem()">
           <mat-icon>photo_camera</mat-icon>
         </button>
-        <input type="file" (change)="onFileSelected($event)" hidden #fileInput />
+      
+        <!-- Input escondido -->
+        <input 
+          type="file" 
+          accept="image/*" 
+          #inputImagem 
+          (change)="converterParaBase64($event)" 
+          hidden
+        />
       </div>
   
-      <form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
+      <form [formGroup]="profileForm" (ngSubmit)="salvar()">
         <mat-form-field appearance="outline">
           <mat-label>Nome</mat-label>
           <input matInput formControlName="name" />

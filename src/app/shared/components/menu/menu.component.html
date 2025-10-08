@@ -44,7 +44,7 @@
     <nav>
       <ul>
         <!-- ############ MINHA CONTA ############ -->
-        <!-- <li class="has-dropdown" [class.open]="isSubmenuOpen" [ngClass]="{ 'open': isSubmenuOpen }">
+        <li class="has-dropdown" [class.open]="isSubmenuOpen" [ngClass]="{ 'open': isSubmenuOpen }">
           <a (click)="toggleSubmenu();" *ngIf="isCollapsed" routerLinkActive="active-link" matTooltip="Conta" matTooltipPosition="right">
             <mat-icon>account_circle</mat-icon>
           </a>
@@ -57,9 +57,9 @@
         
           <ul class="submenu" *ngIf="isSubmenuOpen">
             <li><a routerLink="/conta/perfil" (click)="toggleSubMenuAndSidebar();" matTooltip="Meu Perfil" matTooltipPosition="right"><mat-icon>person</mat-icon> <span>Meu Perfil</span></a></li>
-            <li><a routerLink="/conta/plano" (click)="toggleSubMenuAndSidebar();"matTooltip="Meu Plano" matTooltipPosition="right"><mat-icon>paid</mat-icon> <span>Meu Plano</span></a></li>
+            <li><a routerLink="/conta/advogado" (click)="toggleSubMenuAndSidebar();"matTooltip="Meu Advogado" matTooltipPosition="right"><mat-icon>paid</mat-icon> <span>Meu Advogado</span></a></li>
           </ul>
-        </li>        -->
+        </li>       
         
         <!-- ############ SAIR ############ -->
         <li class="logout">

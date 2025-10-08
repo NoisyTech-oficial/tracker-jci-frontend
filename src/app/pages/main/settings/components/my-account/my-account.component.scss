@@ -22,22 +22,29 @@
   
       .avatar-section {
         position: relative;
-        margin-bottom: 20px;
-  
-        .avatar {
-          width: 120px;
-          height: 120px;
-          border-radius: 50%;
-          object-fit: cover;
-        }
-  
-        button {
-          position: absolute;
-          bottom: 0;
-          right: 0;
-          background: white;
-          border-radius: 50%;
-        }
+        display: inline-block;
+        margin-bottom: 25px;
+      }
+      
+      .avatar {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #ccc;
+      }
+      
+      .camera-btn {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      }
+      
+      .camera-btn mat-icon {
+        color: #555;
       }
   
       mat-form-field {
