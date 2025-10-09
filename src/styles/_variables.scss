@@ -1,0 +1,43 @@
+// ====================
+// CORES BASE
+// ====================
+$color-bg-page:        #F5F7FA;                 // fundo da página
+$color-card-glass:     rgba(255, 255, 255, 0.8);
+$color-card-border:    rgba(255, 255, 255, 0.6);
+$color-shadow:         rgba(0, 0, 0, 0.08);
+
+// ====================
+// TIPOGRAFIA
+// ====================
+$color-title:          #1C1C1E; // cinza escuro quase preto
+$color-subtitle:       #6B7280; // cinza frio
+$color-kpi:            #111827; // preto suave
+
+// ====================
+// GRÁFICOS
+// ====================
+$color-bar:            #2ECC71; // verde institucional
+$color-bar-hover:      #58D68D; // verde claro
+$color-axis:           #6B7280; // cinza frio
+$color-grid:           #F1F5F9; // cinza muito suave
+$color-tooltip-text:   #1C1C1E; // cinza escuro
+
+// ====================
+// BOTÕES
+// ====================
+$btn-active-bg:        #2ECC71;
+$btn-active-text:      #ffffff;
+
+$btn-inactive-bg:      #E5E8EC;
+$btn-inactive-text:    #2D2D2D;
+
+$btn-hover-bg:         lighten($btn-active-bg, 8%); // versão mais clara
+$btn-hover-text:       #ffffff;
+
+// ====================
+// ESTADOS
+// ====================
+$state-success:        #2ECC71;
+$state-warning:        #F1C40F;
+$state-error:          #E74C3C;
+$state-info:           #3498DB;

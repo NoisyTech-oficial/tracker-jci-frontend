@@ -928,13 +928,13 @@
     },
     {
       "line": 19,
-      "name": "processesService",
-      "snippet": "constructor(private processesService: ProcessesService, private userService: UserService) {}"
+      "name": "processosService",
+      "snippet": "constructor(private processosService: ProcessesService, private userService: UserService) {}"
     },
     {
       "line": 19,
       "name": "userService",
-      "snippet": "constructor(private processesService: ProcessesService, private userService: UserService) {}"
+      "snippet": "constructor(private processosService: ProcessesService, private userService: UserService) {}"
     }
   ],
   "src/app/pages/main/processes/processes.component.ts": [
@@ -980,8 +980,8 @@
     },
     {
       "line": 30,
-      "name": "processesService",
-      "snippet": "private processesService: ProcessesService,"
+      "name": "processosService",
+      "snippet": "private processosService: ProcessesService,"
     },
     {
       "line": 31,
@@ -1148,21 +1148,21 @@
       "snippet": "exports: [RouterModule]"
     }
   ],
-  "src/app/pages/main/processes/components/table-processes/table-processes.component.ts": [
+  "src/app/pages/main/processes/components/tabela-leads/tabela-leads.component.ts": [
     {
       "line": 6,
       "name": "selector",
-      "snippet": "selector: 'app-table-processes',"
+      "snippet": "selector: 'app-tabela-leads',"
     },
     {
       "line": 7,
       "name": "templateUrl",
-      "snippet": "templateUrl: './table-processes.component.html',"
+      "snippet": "templateUrl: './tabela-leads.component.html',"
     },
     {
       "line": 8,
       "name": "styleUrls",
-      "snippet": "styleUrls: ['./table-processes.component.scss']"
+      "snippet": "styleUrls: ['./tabela-leads.component.scss']"
     },
     {
       "line": 11,
@@ -1504,8 +1504,8 @@
     },
     {
       "line": 35,
-      "name": "processesService",
-      "snippet": "private processesService: ProcessesService,"
+      "name": "processosService",
+      "snippet": "private processosService: ProcessesService,"
     },
     {
       "line": 36,
@@ -1725,8 +1725,8 @@
     },
     {
       "line": 26,
-      "name": "processesService",
-      "snippet": "private processesService: ProcessesService,"
+      "name": "processosService",
+      "snippet": "private processosService: ProcessesService,"
     },
     {
       "line": 27,
@@ -1794,21 +1794,21 @@
       "snippet": "error: () => {"
     }
   ],
-  "src/app/pages/main/processes-obtained/components/table-processes-obtained/table-processes-obtained.component.ts": [
+  "src/app/pages/main/processes-obtained/components/tabela-leads-obtained/tabela-leads-obtained.component.ts": [
     {
       "line": 6,
       "name": "selector",
-      "snippet": "selector: 'app-table-processes-obtained',"
+      "snippet": "selector: 'app-tabela-leads-obtained',"
     },
     {
       "line": 7,
       "name": "templateUrl",
-      "snippet": "templateUrl: './table-processes-obtained.component.html',"
+      "snippet": "templateUrl: './tabela-leads-obtained.component.html',"
     },
     {
       "line": 8,
       "name": "styleUrls",
-      "snippet": "styleUrls: ['./table-processes-obtained.component.scss']"
+      "snippet": "styleUrls: ['./tabela-leads-obtained.component.scss']"
     },
     {
       "line": 11,

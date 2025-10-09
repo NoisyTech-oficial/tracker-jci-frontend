@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { FiltersProcesses, ProcessesData, TotalNumberProcesses } from 'src/app/shared/interfaces/processes-data.interface';
+import { DetalhesLead, ObterLeads } from 'src/app/shared/interfaces/processes-data.interface';
 import { environment } from '../../../environments/environment.prod';
 import { NumberProcessObtained, ProcessObtained, putStatusOrNotesProcess } from 'src/app/shared/interfaces/processes-obtained-data.interface';
 
@@ -14,14 +14,16 @@ export class ProcessesService {
 
   constructor(private http: HttpClient) { }
 
-  getTotalNumberProcesses(data: FiltersProcesses | null): Observable<TotalNumberProcesses> {
-    const body = data || {};
-    return this.http.post<TotalNumberProcesses>(`${this.baseUrl}/processes/total-number`, body);
+  getLeads(): Observable<ObterLeads[]> {
+    return this.http.get<ObterLeads[]>(`${this.baseUrl}/leads`);
   }
 
-  getProcesses(data?: FiltersProcesses): Observable<ProcessesData> {
-    const body = data || {};
-    return this.http.post<ProcessesData>(`${this.baseUrl}/processes/export`, body);
+  getDetalhesLeads(id: string): Observable<DetalhesLead> {
+    return this.http.get<DetalhesLead>(`${this.baseUrl}/leads/${id}`);
+  }
+
+  getDocumentos(id: string) {
+    return this.http.get<DetalhesLead>(`${this.baseUrl}/documentos-processo/solicitar/${id}`);
   }
 
   getProcessesObtained(): Observable<ProcessObtained[]> {

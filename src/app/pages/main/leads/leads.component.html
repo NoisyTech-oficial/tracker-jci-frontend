@@ -1,0 +1,13 @@
+<div class="container">
+  <app-header [info]="header"></app-header>
+
+  <div class="body">
+    <div class="table-container">
+      <app-tabela-leads
+        [leadsDados]="leads"
+        [isLoading]="isLoading"
+        (verDetalhesClicked)="verDetalhes($event)">
+      </app-tabela-leads>
+    </div>
+  </div>
+</div>

@@ -11,8 +11,7 @@ const routes: Routes = [
     children: [
       { path: 'inicio', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
       { path: 'funcionarios', loadChildren: () => import('./employees/employees.module').then(m => m.EmployeesModule) },
-      { path: 'obter-processos', loadChildren: () => import('./processes/processes.module').then(m => m.ProcessesModule) },
-      { path: 'meus-processos', loadChildren: () => import('./processes-obtained/processes-obtained.module').then(m => m.ProcessesObtainedModule) },
+      { path: 'obter-leads', loadChildren: () => import('./leads/leads.module').then(m => m.LeadsModule) },
       { path: 'conta', loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule) },
     ]
   }

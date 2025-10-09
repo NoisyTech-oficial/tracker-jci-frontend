@@ -1,17 +1,42 @@
-export interface FiltersProcesses {
-  banks?: string[]
-  minimum_value?: number
-  maximum_value?: number
-  city?: string[]
-  state?: string[]
+export interface ObterLeads {
+  id: number;
+  nome: string;
+  cpf: string;
+  numero_processo: string;
+  telefone_1: string | null;
+  telefone_2: string | null;
+  email: string | null;
+  banco: string;
+  status_id: number;
+  pertence_a: number;
+  createdAt: string;
 }
 
-export interface TotalNumberProcesses {
-  total: number
+export interface DetalhesLead {
+  nome: string
+  banco: string
+  processo_assunto: string
+  processo_classe: string
+  processo_foro: string
+  processo_vara: string
+  processo_juiz: string
+  processo_distribuicao: string
+  processo_valor_acao: string
+  processo_requerente: string
+  processo_advogado_requerente: string
+  processo_movimentacoes?: ProcessoMovimentac[]
+  processo_documentos?: ProcessoDocumento[]
 }
 
-export interface ProcessesData {
-  data: Process[]
+export interface ProcessoMovimentac {
+  data: string
+  titulo: string
+  descricao: string
+}
+
+export interface ProcessoDocumento {
+  nome: string
+  descricao: string
 }
 
 export interface Process {

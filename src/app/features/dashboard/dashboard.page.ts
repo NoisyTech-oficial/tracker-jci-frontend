@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { DashboardService, Preset } from 'src/app/services/dashboard/dashboard.service';
+import { DashboardService, Preset } from '../../services/dashboard/dashboard.service';
 
 type Mode = 'preset' | 'custom';
 
@@ -15,11 +15,11 @@ interface ChartPoint {
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  templateUrl: './dashboard.page.html',
+  styleUrls: ['./dashboard.page.scss']
 })
-export class DashboardComponent {
- // ======= STATE (alinhado ao seu HTML) =======
+export class DashboardPage {
+  // ======= STATE (alinhado ao seu HTML) =======
   headerSubtitle = '7 dias';
   rangePreset = 7 as 7 | 15 | 30;
   startDate?: string;

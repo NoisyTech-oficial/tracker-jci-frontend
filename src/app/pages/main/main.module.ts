@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { UserDisabledComponent } from './components/user-disabled/user-disabled.component';
 import { MainRoutingModule } from './main-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [MainComponent, FirstAccessComponent, UserDisabledComponent],
@@ -23,7 +24,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     ReactiveFormsModule,
     MatDialogModule,
     NgxSpinnerModule,
-    SharedModule
+    SharedModule,
+    NgChartsModule,
   ]
 })
 export class MainModule { }

@@ -1,0 +1,102 @@
+<div class="container">
+  <app-header [info]="header"></app-header>
+
+  <button class="back-button" type="button" (click)="voltar()">
+    ← Voltar
+  </button>
+
+  <div class="loading-container" *ngIf="isLoading">
+    <div class="loading-card">
+      <p class="subtitle">Aguarde! <br> Estamos obtendo informações...</p>
+    </div>
+  </div>
+
+  <ng-container *ngIf="!isLoading">
+    <ng-container *ngIf="detalhes || fieldsLead.length; else emptyState">
+      <div class="row">
+        <div class="tabs">
+          <button
+            class="tab"
+            [class.active]="activeTab === 'detalhes'"
+            (click)="selectTab('detalhes')"
+          >
+            Detalhes
+          </button>
+          <button
+            class="tab"
+            [class.active]="activeTab === 'movimentacoes'"
+            (click)="selectTab('movimentacoes')"
+          >
+            Movimentações
+          </button>
+          <button
+            class="tab"
+            [class.active]="activeTab === 'documentos'"
+            (click)="selectTab('documentos')"
+          >
+            Documentos
+          </button>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="activeTab === 'detalhes' && fieldsLead.length">
+        <label class="title-section">Informações do Lead</label>
+        <div class="grid-container">
+          <div class="grid-item" *ngFor="let field of fieldsLead">
+            <label class="title">{{ field.label }}</label>
+            <label class="value">{{ field.value || '-' }}</label>
+          </div>
+          <div *ngIf="fieldsLead.length % 3 === 1" class="grid-item placeholder"></div>
+          <div *ngIf="fieldsLead.length % 3 === 2" class="grid-item placeholder"></div>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="activeTab === 'detalhes' && fieldsProcess.length">
+        <label class="title-section">Informações do Processo</label>
+        <div class="grid-container">
+          <div class="grid-item" *ngFor="let field of fieldsProcess">
+            <label class="title">{{ field.label }}</label>
+            <label class="value">{{ field.value || '-' }}</label>
+          </div>
+          <div *ngIf="fieldsProcess.length % 3 === 1" class="grid-item placeholder"></div>
+          <div *ngIf="fieldsProcess.length % 3 === 2" class="grid-item placeholder"></div>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="activeTab === 'movimentacoes'">
+        <div class="tab-content">
+          <div class="movements-list" *ngIf="movimentacoes.length; else emptyMovements">
+            <div class="movement-item" *ngFor="let movimento of movimentacoes">
+              <div class="movement-date">{{ formatMovementDate(movimento.data) }}</div>
+              <div class="movement-content">
+                <div class="movement-title">{{ movimento.titulo || '-' }}</div>
+                <div class="movement-description">{{ movimento.descricao || '-' }}</div>
+              </div>
+            </div>
+          </div>
+          <ng-template #emptyMovements>
+            <div class="empty-tab">Nenhuma movimentação disponível.</div>
+          </ng-template>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="activeTab === 'documentos'">
+        <div class="tab-content">
+          <div class="documents-list" *ngIf="documentos.length; else emptyDocuments">
+            <div class="document-item" *ngFor="let documento of documentos">
+              <div class="document-title">{{ documento.nome || '-' }}</div>
+              <div class="document-description">{{ documento.descricao || '-' }}</div>
+            </div>
+          </div>
+          <ng-template #emptyDocuments>
+            <div class="empty-tab">Nenhum documento disponível.</div>
+          </ng-template>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+
+  <ng-template #emptyState>
+    <div class="empty-state">Nenhum detalhe disponível.</div>
+  </ng-template>
+</div>

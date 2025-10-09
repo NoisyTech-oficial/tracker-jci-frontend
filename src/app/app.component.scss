@@ -1,0 +1,33 @@
+@use '../styles/variables' as *;
+
+:host {
+  display: block;
+  background: $color-bg-page;
+  min-height: 100vh;
+  color: #1f2937;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;    // largura boa pro desk
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: #1f2937;  // topo escuro discreto
+  color: #fff;
+  padding: 10px 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+
+  .brand { font-weight: 700; letter-spacing: .2px; }
+}
+
+.app-main {
+  padding: 24px 0 48px; // respiro global
+}

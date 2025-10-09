@@ -1,4 +1,4 @@
-@use '../../../../styles/_variables' as *;
+@use '../../../styles/_variables' as *;
 
 // ======= Tokens de fallback =======
 $brand-500: if(global-variable-exists(brand-500), $brand-500, #22c55e);

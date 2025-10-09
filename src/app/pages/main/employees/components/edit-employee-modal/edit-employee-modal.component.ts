@@ -17,7 +17,7 @@ export class EditEmployeeModalComponent implements OnInit {
   documentoEmployee: string = '';
   viewingPermission: string[] = [];
 
-  permissions = ['Meus Processos', 'Obter Processos', 'Funcionários'];
+  permissions = ['Obter Processos', 'Funcionários'];
 
   isloading: boolean = false;
 

@@ -13,7 +13,7 @@ import { DocumentValidator } from 'src/app/shared/validators/document-length';
 })
 export class NewEmployeeModalComponent implements OnInit {
   employeeForm!: FormGroup;
-  permissions = ['Meus Processos', 'Obter Processos', 'Funcionários'];
+  permissions = ['Obter Processos', 'Funcionários'];
   isloading: boolean = false;
 
   hidePassword: boolean = true;

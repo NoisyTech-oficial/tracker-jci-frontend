@@ -16,10 +16,10 @@ export class MyPlanComponent implements OnInit {
     totalAvailable: number = 0;
     totalObtained: number = 0;
 
-    constructor(private processesService: ProcessesService, private userService: UserService) {}
+    constructor(private processosService: ProcessesService, private userService: UserService) {}
 
     ngOnInit(): void {
-      this.processesService.getNumberProcessesObtained().subscribe((res: NumberProcessObtained) => {
+      this.processosService.getNumberProcessesObtained().subscribe((res: NumberProcessObtained) => {
         this.totalObtained = res.usedProcesses;
         this.totalAvailable = res.limitProcesses;
       });

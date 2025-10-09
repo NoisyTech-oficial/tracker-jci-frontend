@@ -17,9 +17,7 @@ export class MenuComponent implements OnInit {
   userData!: UserData;
 
   menuItems = [
-    // { label: 'Dashboard', icon: 'dashboard', link: '/dashboard', permission: 'DASHBOARD' },
-    { label: 'Meus Processos', icon: 'insights', link: '/meus-processos', permission: 'MEUS_PROCESSOS' },
-    { label: 'Obter Processos', icon: 'find_in_page', link: '/obter-processos', permission: 'OBTER_PROCESSOS' },
+    { label: 'Obter Leads', icon: 'find_in_page', link: '/obter-leads', permission: 'OBTER_LEADS' },
     { label: 'Funcionários', icon: 'groups', link: '/funcionarios', permission: 'FUNCIONARIOS' },
   ];
   

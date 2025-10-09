@@ -1,0 +1,119 @@
+<div class="loading-container" *ngIf="isLoading">
+  <div class="loading-card">
+    <p class="subtitle">Aguarde! <br> Estamos obtendo informações...</p>
+  </div>
+</div>
+
+<ng-container *ngIf="!isLoading">
+  <table class="custom-table" *ngIf="paginatedProcesses.length; else emptyState">
+    <thead>
+      <tr>
+        <th (click)="sortBy('numero_processo')">
+          <div class="flex">
+            <span class="titulo">Número do processo</span>
+            <mat-icon class="sortable-icon" [class.active]="sortColumn === 'numero_processo'">
+              {{ sortColumn === 'numero_processo' ? (sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward') : 'unfold_more' }}
+            </mat-icon>
+          </div>
+        </th>
+
+        <th (click)="sortBy('nome')">
+          <div class="flex">
+            <span class="titulo">Nome</span>
+            <mat-icon class="sortable-icon" [class.active]="sortColumn === 'nome'">
+              {{ sortColumn === 'nome' ? (sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward') : 'unfold_more' }}
+            </mat-icon>
+          </div>
+        </th>
+
+        <th (click)="sortBy('cpf')">
+          <div class="flex">
+            <span class="titulo">CPF</span>
+            <mat-icon class="sortable-icon" [class.active]="sortColumn === 'cpf'">
+              {{ sortColumn === 'cpf' ? (sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward') : 'unfold_more' }}
+            </mat-icon>
+          </div>
+        </th>
+
+        <th (click)="sortBy('telefone_1')">
+          <div class="flex">
+            <span class="titulo">Telefone 1</span>
+            <mat-icon class="sortable-icon" [class.active]="sortColumn === 'telefone_1'">
+              {{ sortColumn === 'telefone_1' ? (sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward') : 'unfold_more' }}
+            </mat-icon>
+          </div>
+        </th>
+
+        <th (click)="sortBy('email')">
+          <div class="flex">
+            <span class="titulo">E-mail</span>
+            <mat-icon class="sortable-icon" [class.active]="sortColumn === 'email'">
+              {{ sortColumn === 'email' ? (sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward') : 'unfold_more' }}
+            </mat-icon>
+          </div>
+        </th>
+
+        <th (click)="sortBy('banco')">
+          <div class="flex">
+            <span class="titulo">Banco</span>
+            <mat-icon class="sortable-icon" [class.active]="sortColumn === 'banco'">
+              {{ sortColumn === 'banco' ? (sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward') : 'unfold_more' }}
+            </mat-icon>
+          </div>
+        </th>
+
+        <th (click)="sortBy('status_id')">
+          <div class="flex">
+            <span class="titulo">Status</span>
+            <mat-icon class="sortable-icon" [class.active]="sortColumn === 'status_id'">
+              {{ sortColumn === 'status_id' ? (sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward') : 'unfold_more' }}
+            </mat-icon>
+          </div>
+        </th>
+
+        <th (click)="sortBy('pertence_a')">
+          <div class="flex">
+            <span class="titulo">Pertence a</span>
+            <mat-icon class="sortable-icon" [class.active]="sortColumn === 'pertence_a'">
+              {{ sortColumn === 'pertence_a' ? (sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward') : 'unfold_more' }}
+            </mat-icon>
+          </div>
+        </th>
+
+        <th>
+          <span class="titulo">Ações</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let leads of paginatedProcesses; let i = index">
+        <td> {{ leads.numero_processo || '-' }} </td>
+        <td> {{ leads.nome || '-' }} </td>
+        <td> {{ formatDocument(leads.cpf) || '-' }} </td>
+        <td> {{ formatPhone(leads.telefone_1) || '-' }} </td>
+        <td> {{ leads.email || '-' }} </td>
+        <td> {{ leads.banco || '-' }} </td>
+        <td> {{ leads.status_id !== null && leads.status_id !== undefined ? leads.status_id : '-' }} </td>
+        <td> {{ leads.pertence_a !== null && leads.pertence_a !== undefined ? leads.pertence_a : '-' }} </td>
+        <td> <a class="see-more" (click)="verDetalhes(leads.id)">Ver mais</a> </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #emptyState>
+    <div class="empty-state">Nenhum lead disponível.</div>
+  </ng-template>
+
+  <!-- Paginação Customizada -->
+  <div class="pagination" *ngIf="totalPages > 1">
+    <button (click)="changePage(1)" [disabled]="currentPage === 1">Primeiro</button>
+
+    <button *ngFor="let page of totalPagesArray"
+            [class.active]="page === currentPage"
+            (click)="changePage(page)">
+      {{ page }}
+    </button>
+
+    <button (click)="changePage(totalPages)" [disabled]="currentPage === totalPages">Último</button>
+  </div>
+</ng-container>
