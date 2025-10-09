@@ -1,6 +1,14 @@
 .custom-table {
   width: 100%;
   border-collapse: collapse;
+
+  .tbodyEmpty {
+    tr {
+      td {
+        text-align: center;
+      }
+    }
+  }
 }
 
 .loading-container {
@@ -36,28 +44,82 @@
 }
 
 .custom-table td {
-  font-size: 11px;
+  font-size: 12px;
+  width: 100%;
+
   .see-more {
     cursor: pointer;
+    text-align: center;
+    display: flex;
   }
 
   .see-more:hover {
     color: #455988;
     text-decoration: underline;
   }
-}
 
-.custom-table th {
-  font-size: 12px;
-  white-space: nowrap;
-  .flex {
-    display: flex;
+  ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+    display: none !important;
+  }
+
+  ::ng-deep .mat-mdc-select-min-line {
+    font-size: 12px !important;
+  }
+
+  ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background-color: transparent !important;
+  }
+
+  ::ng-deep .mat-mdc-form-field {
+    --mdc-text-field-container-height: 12px !important;
+    font-size: 10px !important;
+  }
+
+  ::ng-deep .mat-mdc-form-field-infix {
+    padding: 2px 0 !important;
+    min-height: 8px !important;
+  }
+
+  ::ng-deep .mat-mdc-form-field-subscript-wrapper .mat-mdc-form-field-bottom-align {
+    display: none !important;
+  }
+
+  ::ng-deep .mat-mdc-input-element {
+    height: 8px !important;
+    line-height: 0.4 !important;
+  }
+
+  ::ng-deep .mdc-notched-outline__notch {
+    min-height: 8px !important;
+  }
+
+  ::ng-deep .mat-mdc-form-field .mdc-floating-label {
+    font-size: 10px !important;
+  }
+
+  ::ng-deep .mat-mdc-option .mdc-list-item__primary-text {
+    font-size: 11px !important;
+  }
+
+  .disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .disabled .mat-mdc-select {
+    border-color: #ccc !important;
+    color: #999 !important;
   }
 }
 
-.custom-table .titulo {
-  font-size: 12px;
-  font-weight: 700 !important;
+.custom-table th {
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+
+  .flex {
+    display: flex;
+  }
 }
 
 .pagination {
@@ -127,6 +189,11 @@ th.sorted.desc::after {
   margin-top: 24px;
   text-align: center;
   color: #777;
+}
+
+.status-wrapper {
+  width: 65% !important;
+  display: flex !important;
 }
 
 @keyframes pulse {

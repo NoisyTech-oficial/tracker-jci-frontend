@@ -87,15 +87,26 @@
     </thead>
     <tbody>
       <tr *ngFor="let leads of paginatedProcesses; let i = index">
-        <td> {{ leads.numero_processo || '-' }} </td>
-        <td> {{ leads.nome || '-' }} </td>
-        <td> {{ formatDocument(leads.cpf) || '-' }} </td>
-        <td> {{ formatPhone(leads.telefone_1) || '-' }} </td>
-        <td> {{ leads.email || '-' }} </td>
-        <td> {{ leads.banco || '-' }} </td>
-        <td> {{ leads.status_id !== null && leads.status_id !== undefined ? leads.status_id : '-' }} </td>
-        <td> {{ leads.pertence_a !== null && leads.pertence_a !== undefined ? leads.pertence_a : '-' }} </td>
-        <td> <a class="see-more" (click)="verDetalhes(leads.id)">Ver mais</a> </td>
+        <td class="row"> {{ leads.numero_processo || '-' }} </td>
+        <td class="row"> {{ formatName(leads.nome) || '-' }} </td>
+        <td class="row"> {{ formatDocument(leads.cpf) || '-' }} </td>
+        <td class="row"> {{ formatPhone(leads.telefone_1) || '-' }} </td>
+        <td class="row"> {{ leads.email || '-' }} </td>
+        <td class="row"> {{ leads.banco || '-' }} </td>
+        <td class="row status-cell">
+          <div class="status-wrapper">
+            <mat-form-field appearance="fill">
+              <mat-select [(ngModel)]="selectedStatus[leads.id]">
+                <mat-option *ngFor="let permission of permissions" [value]="permission"
+                  (click)="postNewStatus(permission, leads.numero_processo, leads.id)">
+                  {{ permission }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </td>
+        <td class="row"> {{ leads.pertence_a !== null && leads.pertence_a !== undefined ? leads.pertence_a : '-' }} </td>
+        <td class="row"> <a class="see-more" (click)="verDetalhes(leads.id)">Ver mais</a> </td>
       </tr>
     </tbody>
   </table>

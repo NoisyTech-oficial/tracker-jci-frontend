@@ -6,7 +6,8 @@
       <app-tabela-leads
         [leadsDados]="leads"
         [isLoading]="isLoading"
-        (verDetalhesClicked)="verDetalhes($event)">
+        (verDetalhesClicked)="verDetalhes($event)"
+        (statusChanged)="onStatusChanged($event)">
       </app-tabela-leads>
     </div>
   </div>

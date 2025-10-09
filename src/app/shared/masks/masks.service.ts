@@ -86,6 +86,17 @@ export class MasksService {
     return cleanValue; // Retorna sem alterações se não corresponder ao padrão esperado
   }
 
+  formatName(value: string | undefined | null): string | undefined {
+    if (!value) return undefined;
+
+    return value
+      .toLowerCase()
+      .split(/\s+/)
+      .filter(Boolean)
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  }
+
   getElapsedTimeMask(data: string | Date): string {
     let dataProcesso: Date;
   

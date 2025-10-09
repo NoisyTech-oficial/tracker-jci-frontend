@@ -12,15 +12,20 @@ export class TabelaLeadsComponent {
 
   pageSize = 15;
   currentPage = 1;
-
-  blockSize = 10;
-  currentBlock = 1;
   
   paginatedProcesses: ObterLeads[] = [];
+
+  readonly permissions = ['Cliente Encontrado', 'Cliente Desconhecido', 'Processo Desativado'];
+  selectedStatus: Record<number, string> = {};
 
   @Input() set leadsDados(data: ObterLeads[]) {
     this.leads = data;
     this.updatePaginatedProcesses();
+    this.leads.forEach(lead => {
+      if (lead && typeof lead.id === 'number' && !this.selectedStatus[lead.id]) {
+        this.selectedStatus[lead.id] = this.permissions[0];
+      }
+    });
   }
 
   @Input() isLoading: boolean = false;
@@ -29,7 +34,7 @@ export class TabelaLeadsComponent {
   sortDirection: 'asc' | 'desc' = 'asc';
 
   @Output() verDetalhesClicked = new EventEmitter<number>();
-  @Output() sortByColumn = new EventEmitter<string>();
+  @Output() statusChanged = new EventEmitter<{ status: string; processNumber: string | null | undefined }>();
 
   leads: ObterLeads[] = [];
 
@@ -60,25 +65,8 @@ export class TabelaLeadsComponent {
 
   changePage(page: number): void {
     if (page < 1 || page > this.totalPages) return;
-    
+
     this.currentPage = page;
-    this.updatePaginatedProcesses();
-  
-    const newBlock = Math.floor((page - 1) / this.blockSize) + 1;
-    if (newBlock !== this.currentBlock) {
-      this.currentBlock = newBlock;
-    }
-  }
-
-  goToFirstPage() {
-    this.currentPage = 1;
-    this.currentBlock = 1;
-    this.updatePaginatedProcesses();
-  }
-
-  goToLastPage() {
-    this.currentPage = this.totalPages;
-    this.currentBlock = Math.ceil(this.totalPages / this.blockSize);
     this.updatePaginatedProcesses();
   }
   
@@ -86,10 +74,6 @@ export class TabelaLeadsComponent {
     const start = (this.currentPage - 1) * this.pageSize;
     const end = start + this.pageSize;
     this.paginatedProcesses = this.leads.slice(start, end);
-  }
-
-  onSort(column: string) {
-    this.sortByColumn.emit(column);
   }
 
   verDetalhes(id: number) {
@@ -101,8 +85,20 @@ export class TabelaLeadsComponent {
     return format ? format : undefined
   }
 
+  formatName(value: string | null | undefined): string | undefined {
+    const formatted = this.masksService.formatName(value);
+    return formatted && formatted.trim() ? formatted : undefined;
+  }
+
   formatPhone(value: string | null | undefined): string | undefined {
     return this.masksService.formatPhone(value);
+  }
+
+  postNewStatus(permission: string, processNumber: string | null | undefined, leadId: number): void {
+    if (leadId) {
+      this.selectedStatus[leadId] = permission;
+    }
+    this.statusChanged.emit({ status: permission, processNumber });
   }
 
   getElapsedTimeMask(date: string | Date): string {
@@ -116,19 +112,11 @@ export class TabelaLeadsComponent {
   get totalPages(): number {
     return Math.ceil(this.leads.length / this.pageSize);
   }
-
-  get currentBlockStart(): number {
-    return Math.floor((this.currentPage - 1) / 9) * 9 + 1;
-  }
-
-  get currentBlockEnd(): number {
-    return Math.min(this.currentBlockStart + 9, this.totalPages);
-  }
   
   get totalPagesArray(): number[] {
     const blockSize = 10; // tamanho do bloco total (10 páginas)
     const halfBlock = Math.floor(blockSize / 2); // metade do bloco (5)
-  
+
     let start = this.currentPage - halfBlock;
     let end = this.currentPage + halfBlock - 1;
   
