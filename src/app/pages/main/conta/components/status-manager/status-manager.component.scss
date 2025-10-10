@@ -64,57 +64,14 @@
 
     .actions {
       display: inline-flex;
-      gap: 6px;
-      .mat-icon {
-        font-size: 19px;
+      mat-icon {
+        font-size: 18px;
         cursor: pointer;
       }
-    }
-
-    .edit-form {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-
-      mat-form-field {
-        width: 100%;
-      }
-
-      .color-picker {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-
-        label {
-          font-size: 13px;
-          color: #475467;
-        }
-
-        .color-input {
-          display: inline-flex;
-          align-items: center;
-          gap: 10px;
-
-          input[type='color'] {
-            width: 42px;
-            height: 32px;
-            border: none;
-            background: transparent;
-            cursor: pointer;
-          }
-
-          .color-value {
-            font-size: 13px;
-            color: #475467;
-          }
-        }
-      }
-
-      .edit-actions {
-        display: flex;
-        justify-content: flex-end;
-        gap: 8px;
-      }
+      .edite { color: #2d8cf0; }
+      .edite:hover { color: #0056b3; }
+      .delete { color: #ff4d4d; }
+      .delete:hover { color: #cc0000; }
     }
   }
 

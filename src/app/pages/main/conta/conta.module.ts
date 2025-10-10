@@ -14,12 +14,20 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 import { ConfiguracoesComponent } from './components/configuracoes/configuracoes.component';
 import { StatusManagerComponent } from './components/status-manager/status-manager.component';
 import { StatusDialogComponent } from './components/status-manager/status-dialog/status-dialog.component';
+import { StatusConfirmDialogComponent } from './components/status-manager/status-confirm-dialog/status-confirm-dialog.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar'; // se for usar a barra de progresso futuramente
 
 @NgModule({
-  declarations: [ContaComponent, PerfilComponent, ConfiguracoesComponent, StatusManagerComponent, StatusDialogComponent],
+  declarations: [
+    ContaComponent,
+    PerfilComponent,
+    ConfiguracoesComponent,
+    StatusManagerComponent,
+    StatusDialogComponent,
+    StatusConfirmDialogComponent
+  ],
   imports: [
     CommonModule,
     SettingsRoutingModule,

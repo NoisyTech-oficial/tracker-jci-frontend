@@ -1,7 +1,13 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { CreateStatusDto } from 'src/app/shared/interfaces/status.interface';
+import { CreateStatusDto, StatusItem } from 'src/app/shared/interfaces/status.interface';
+
+export interface StatusDialogData {
+  title?: string;
+  submitLabel?: string;
+  status?: StatusItem;
+}
 
 @Component({
   selector: 'app-status-dialog',
@@ -10,19 +16,26 @@ import { CreateStatusDto } from 'src/app/shared/interfaces/status.interface';
 })
 export class StatusDialogComponent {
   form: FormGroup;
+  title: string;
+  submitLabel: string;
+  private readonly defaultColor = '#5f71d2';
 
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<StatusDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Partial<CreateStatusDto> | null
+    @Inject(MAT_DIALOG_DATA) public data: StatusDialogData | null
   ) {
+    const status = data?.status;
+    this.title = data?.title || (status ? 'Editar status' : 'Novo status');
+    this.submitLabel = data?.submitLabel || (status ? 'Salvar' : 'Criar');
+
     this.form = this.fb.group({
       nome: [
-        data?.nome || '',
+        status?.nome || '',
         [Validators.required, Validators.maxLength(80), Validators.pattern(/.*\S.*/)]
       ],
-      descricao: [data?.descricao || '', [Validators.maxLength(160)]],
-      codigo_cor: [data?.codigo_cor || '#5f71d2']
+      descricao: [status?.descricao || '', [Validators.maxLength(160)]],
+      codigo_cor: [status?.codigo_cor || this.defaultColor]
     });
   }
 
