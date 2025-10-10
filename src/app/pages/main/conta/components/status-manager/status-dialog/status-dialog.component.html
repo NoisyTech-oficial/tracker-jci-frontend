@@ -1,0 +1,32 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <h2 mat-dialog-title>Novo status</h2>
+
+  <mat-dialog-content class="dialog-content">
+    <mat-form-field appearance="fill">
+      <mat-label>Nome</mat-label>
+      <input matInput formControlName="nome" placeholder="Ex: Contato realizado" />
+      <mat-error *ngIf="nomeControl?.hasError('required')">Informe um nome</mat-error>
+      <mat-error *ngIf="nomeControl?.hasError('maxlength')">Máximo de 80 caracteres</mat-error>
+      <mat-error *ngIf="nomeControl?.hasError('pattern')">Informe um nome válido</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Descrição</mat-label>
+      <textarea matInput rows="3" formControlName="descricao"></textarea>
+      <mat-error *ngIf="descricaoControl?.hasError('maxlength')">Máximo de 160 caracteres</mat-error>
+    </mat-form-field>
+
+    <div class="color-picker">
+      <label for="color-input">Cor</label>
+      <div class="picker">
+        <input type="color" id="color-input" formControlName="codigo_cor" />
+        <span class="color-value">{{ form.get('codigo_cor')?.value }}</span>
+      </div>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button type="button" (click)="onCancel()">Cancelar</button>
+    <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">Criar</button>
+  </mat-dialog-actions>
+</form>

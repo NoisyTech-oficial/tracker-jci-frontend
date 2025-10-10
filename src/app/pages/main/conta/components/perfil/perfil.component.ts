@@ -7,11 +7,11 @@ import { DadosPerfilUsuario } from 'src/app/shared/interfaces/user-data.interfac
 import { MasksService } from 'src/app/shared/masks/masks.service';
 
 @Component({
-  selector: 'app-my-account',
-  templateUrl: './my-account.component.html',
-  styleUrls: ['./my-account.component.scss']
+  selector: 'app-perfil',
+  templateUrl: './perfil.component.html',
+  styleUrls: ['./perfil.component.scss']
 })
-export class MyAccountComponent implements OnInit {
+export class PerfilComponent implements OnInit {
   @ViewChild('inputImagem') inputImagem!: ElementRef<HTMLInputElement>;
 
   header: Header = {

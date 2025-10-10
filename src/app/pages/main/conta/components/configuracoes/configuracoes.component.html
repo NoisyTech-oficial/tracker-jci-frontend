@@ -1,0 +1,26 @@
+<div class="container">
+  <app-header [info]="header"></app-header>
+
+  <div class="tabs">
+    <button class="tab" [class.active]="activeTab === 'status'" (click)="selectTab('status')">
+      Status
+    </button>
+    <button class="tab" [class.active]="activeTab === 'advogado'" (click)="selectTab('advogado')">
+      Advogado
+    </button>
+  </div>
+
+  <div class="tab-content" *ngIf="activeTab === 'status'">
+    <app-status-manager></app-status-manager>
+  </div>
+
+  <div class="tab-content" *ngIf="activeTab === 'advogado'">
+    <!-- <div class="card">
+      <h3>Dados do Advogado Responsável</h3>
+      <p><strong>Nome:</strong> {{ userData?.advogado?.nome || '-' }}</p>
+      <p><strong>OAB:</strong> {{ userData?.advogado?.oab || '-' }}</p>
+      <p><strong>Email:</strong> {{ userData?.advogado?.email || userData?.email || '-' }}</p>
+      <p><strong>Telefone:</strong> {{ userData?.advogado?.telefone || '-' }}</p>
+    </div> -->
+  </div>
+</div>

@@ -1,0 +1,81 @@
+<div class="status-manager">
+  <div class="manager-header">
+    <button mat-flat-button color="primary" (click)="openCreateDialog()">
+      Novo status
+    </button>
+  </div>
+
+  <div class="feedback" *ngIf="error">{{ error }}</div>
+
+  <div class="status-list" *ngIf="!isLoading && hasStatuses; else fallbackTemplate">
+    <div class="status-card" *ngFor="let status of statuses"
+      [style.background]="editingId === (status.id)
+        ? editForms[(status.id)]?.get('codigo_cor')?.value || colorFor(status)
+        : colorFor(status)">
+      <div class="status-header">
+        <ng-container *ngIf="editingId !== (status.id); else editTemplate">
+          <div class="status-info">
+            <span class="status-name">{{ status.nome }}</span>
+            <span class="status-description">{{ status.descricao || 'Sem descrição' }}</span>
+          </div>
+          <div class="actions">
+            <!-- <button mat-icon-button aria-label="Editar status"> -->
+              <mat-icon (click)="startEdit(status.id)">edit</mat-icon>
+            <!-- </button> -->
+            <!-- <button mat-icon-button color="warn" aria-label="Excluir status"> -->
+              <mat-icon (click)="deleteStatus(status.id)">delete</mat-icon>
+            <!-- </button> -->
+          </div>
+        </ng-container>
+      </div>
+
+      <ng-template #editTemplate>
+        <form class="edit-form" [formGroup]="editForms[(status.id)]" (ngSubmit)="updateStatus(status.id)">
+          <mat-form-field appearance="fill">
+            <mat-label>Nome do status</mat-label>
+            <input matInput formControlName="nome" />
+            <mat-error *ngIf="editForms[(status.id)]?.get('nome')?.hasError('required')">
+              Informe um nome
+            </mat-error>
+            <mat-error *ngIf="editForms[(status.id)]?.get('nome')?.hasError('maxlength')">
+              Máximo de 80 caracteres
+            </mat-error>
+            <mat-error *ngIf="editForms[(status.id)]?.get('nome')?.hasError('pattern')">
+              Informe um nome válido
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Descrição</mat-label>
+            <textarea matInput rows="2" formControlName="descricao"></textarea>
+            <mat-error *ngIf="editForms[(status.id)]?.get('descricao')?.hasError('maxlength')">
+              Máximo de 160 caracteres
+            </mat-error>
+          </mat-form-field>
+
+          <div class="color-picker">
+            <label [for]="'status-color-' + status.id">Cor</label>
+            <div class="color-input">
+              <input type="color" [id]="'status-color-' + status.id" formControlName="codigo_cor" />
+              <span class="color-value">{{ editForms[(status.id)]?.get('codigo_cor')?.value }}</span>
+            </div>
+          </div>
+
+          <div class="edit-actions">
+            <button mat-stroked-button type="button" (click)="cancelEdit()">Cancelar</button>
+            <button mat-flat-button color="primary" type="submit"
+              [disabled]="editForms[(status.id)]?.invalid">Salvar</button>
+          </div>
+        </form>
+      </ng-template>
+    </div>
+  </div>
+
+  <ng-template #fallbackTemplate>
+    <div class="loading" *ngIf="isLoading">Carregando status...</div>
+    <div class="empty" *ngIf="!isLoading">
+      <p>Nenhum status cadastrado no momento.</p>
+      <p class="hint">Clique no botão "Novo status" para adicionar o primeiro.</p>
+    </div>
+  </ng-template>
+</div>

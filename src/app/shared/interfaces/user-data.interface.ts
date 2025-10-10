@@ -11,6 +11,8 @@ export interface UserData {
   usuario_ativo: boolean;
   email: string;
   foto: string | null;
+  advogado?: UsuarioAdvogado | null;
+  plan?: string | null;
 }
 
 export interface DadosPerfilUsuario {
@@ -18,4 +20,11 @@ export interface DadosPerfilUsuario {
   documento: string;
   email: string;
   foto: string | null;
+}
+
+export interface UsuarioAdvogado {
+  nome?: string | null;
+  oab?: string | null;
+  email?: string | null;
+  telefone?: string | null;
 }

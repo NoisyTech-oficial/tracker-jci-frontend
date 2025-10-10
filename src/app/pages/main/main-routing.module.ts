@@ -12,7 +12,7 @@ const routes: Routes = [
       { path: 'inicio', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
       { path: 'funcionarios', loadChildren: () => import('./employees/employees.module').then(m => m.EmployeesModule) },
       { path: 'obter-leads', loadChildren: () => import('./leads/leads.module').then(m => m.LeadsModule) },
-      { path: 'conta', loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule) },
+      { path: 'conta', loadChildren: () => import('./conta/conta.module').then(m => m.ContaModule) },
     ]
   }
 ];
