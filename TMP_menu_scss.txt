@@ -7,9 +7,7 @@
   top: 0;
   width: 11.5vw;
   height: 100vh;
-  background: linear-gradient(180deg, #004E2A, #1A9D53, #009C56);
-  background-size: 200% 200%;
-  animation: moveGradient 8s ease infinite;
+  background: linear-gradient(135deg, $secondary-color, $text-dark); /* Gradiente Azul */
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
   padding: 20px;
   transition: width 0.3s ease-in-out;
@@ -30,13 +28,6 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
-}
-
-/* Logo branca para Sidebar JCI */
-.sidebar-logo {
-  width: 90px;
-  margin: 24px auto 40px auto;
-  filter: brightness(0) invert(1);
 }
 
 /* Logo sempre visível, mas menor quando fechado */
@@ -147,7 +138,7 @@ nav ul li a {
   color: white;
   padding: 10px;
   border-radius: 8px;
-  transition: all 0.2s ease-in-out;
+  transition: background 0.3s;
 }
 
 nav ul {
@@ -173,7 +164,7 @@ nav ul li a {
   color: white;
   padding: 10px;
   border-radius: 8px;
-  transition: all 0.2s ease-in-out;
+  transition: background 0.3s;
 }
 
 /* Quando o sidebar estiver fechado, muda para coluna */
@@ -188,16 +179,14 @@ nav ul li a {
 
 /* Efeito de hover */
 nav ul li a:hover {
-  background: rgba(255, 255, 255, 0.08);
-  transform: scale(1.05);
+  background: rgba(95, 113, 210, 0.3);
 }
 
 /* Ícones maiores e centralizados */
 nav ul li a mat-icon {
   font-size: 21px;
-  color: rgba(255, 255, 255, 0.85);
+  color: white;
   margin: 0;
-  transition: all 0.2s ease-in-out;
 }
 
 /* Ícones e texto quando fechado */
@@ -243,19 +232,11 @@ mat-tooltip {
 }
 
 .active-link {
-  border-left: 3px solid #2ECC71;
-  background: rgba(255, 255, 255, 0.06);
+  background-color: rgba(95, 113, 210, 0.3);
   font-weight: bold;
 }
 
 .open {
-  background: rgba(255, 255, 255, 0.06);
+  background-color: rgba(95, 113, 210, 0.3);
   border-radius: 8px;
-}
-
-/* Animação premium: gradiente vivo */
-@keyframes moveGradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
 }

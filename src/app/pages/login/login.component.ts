@@ -17,6 +17,7 @@ export class LoginComponent implements AfterViewInit {
   hidePassword: boolean = true;
   loginForm!: FormGroup;
   isloading: boolean = false;
+  loginError: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -36,6 +37,9 @@ export class LoginComponent implements AfterViewInit {
         { mask: '00.000.000/0000-00', maxLength: 14 }
       ]
     });
+
+    // Foco automático no primeiro campo
+    documentoField.focus();
   }
 
   startForm() {
@@ -52,6 +56,7 @@ export class LoginComponent implements AfterViewInit {
     }
 
     this.isloading = true;
+    this.loginError = false;
 
     this.authService.login(this.loginForm.value).subscribe({
       next: () => {
@@ -61,6 +66,9 @@ export class LoginComponent implements AfterViewInit {
         this.notificationService.showMessage('Algo deu errado, tente novamente.', 'error');
         this.loginForm.controls['senha'].setValue('');
         this.isloading = false;
+        this.loginError = true;
+        // Alterna rapidamente para permitir repetição da animação de vibração
+        setTimeout(() => { this.loginError = false; }, 350);
       }
     });
   }

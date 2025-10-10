@@ -16,9 +16,72 @@
 html, body { height: 100%; }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-color: var(--cor-fundo-pagina);
-  color: var(--cor-texto-titulo);
+  font-family: 'Inter', 'Poppins', sans-serif;
+  background-color: #F9FAFB;
+  color: #111827;
+}
+
+h1, h2, h3 {
+  color: #1E293B;
+  font-weight: 600;
+}
+
+p, span {
+  color: #6B7280;
+}
+
+/* Botões e Filtros (JCI) */
+.filter-button.active {
+  background: #2ECC71;
+  color: #FFFFFF;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(46,204,113,0.4);
+}
+
+.filter-button {
+  background: #E5E8EC;
+  color: #374151;
+  transition: all 0.2s ease-in-out;
+}
+
+.filter-button:hover {
+  background: #D1D5DB;
+}
+
+.apply-button {
+  background: #2ECC71;
+  color: #FFFFFF;
+  transition: all 0.3s ease;
+}
+
+.apply-button:hover {
+  background: #27AE60;
+  transform: scale(1.02);
+}
+
+/* Cards de Métricas (JCI) */
+.metric-card {
+  background: #FFFFFF;
+  border-top: 3px solid #2ECC71;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  transition: all 0.2s ease;
+}
+
+.metric-card:hover {
+  transform: scale(1.01);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+.metric-card h3 {
+  color: #6B7280;
+  font-weight: 500;
+}
+
+.metric-card span {
+  color: #111827;
+  font-weight: 700;
+  font-size: 1.5rem;
 }
 
 /* 🔥 Remove o fundo padrão do Material */
