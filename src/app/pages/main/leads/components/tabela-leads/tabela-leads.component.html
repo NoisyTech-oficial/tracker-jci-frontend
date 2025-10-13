@@ -1,130 +1,184 @@
-<div class="loading-container" *ngIf="isLoading">
-  <div class="loading-card">
-    <p class="subtitle">Aguarde! <br> Estamos obtendo informações...</p>
-  </div>
-</div>
-
-<ng-container *ngIf="!isLoading">
-  <table class="custom-table" *ngIf="paginatedProcesses.length; else emptyState">
-    <thead>
-      <tr>
-        <th (click)="sortBy('numero_processo')">
-          <div class="flex">
-            <span class="titulo">Número do processo</span>
-            <mat-icon class="sortable-icon" [class.active]="sortColumn === 'numero_processo'">
-              {{ sortColumn === 'numero_processo' ? (sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward') : 'unfold_more' }}
-            </mat-icon>
-          </div>
-        </th>
-
-        <th (click)="sortBy('nome')">
-          <div class="flex">
-            <span class="titulo">Nome</span>
-            <mat-icon class="sortable-icon" [class.active]="sortColumn === 'nome'">
-              {{ sortColumn === 'nome' ? (sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward') : 'unfold_more' }}
-            </mat-icon>
-          </div>
-        </th>
-
-        <th (click)="sortBy('cpf')">
-          <div class="flex">
-            <span class="titulo">CPF</span>
-            <mat-icon class="sortable-icon" [class.active]="sortColumn === 'cpf'">
-              {{ sortColumn === 'cpf' ? (sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward') : 'unfold_more' }}
-            </mat-icon>
-          </div>
-        </th>
-
-        <th (click)="sortBy('telefone_1')">
-          <div class="flex">
-            <span class="titulo">Telefone 1</span>
-            <mat-icon class="sortable-icon" [class.active]="sortColumn === 'telefone_1'">
-              {{ sortColumn === 'telefone_1' ? (sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward') : 'unfold_more' }}
-            </mat-icon>
-          </div>
-        </th>
-
-        <th (click)="sortBy('email')">
-          <div class="flex">
-            <span class="titulo">E-mail</span>
-            <mat-icon class="sortable-icon" [class.active]="sortColumn === 'email'">
-              {{ sortColumn === 'email' ? (sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward') : 'unfold_more' }}
-            </mat-icon>
-          </div>
-        </th>
-
-        <th (click)="sortBy('banco')">
-          <div class="flex">
-            <span class="titulo">Banco</span>
-            <mat-icon class="sortable-icon" [class.active]="sortColumn === 'banco'">
-              {{ sortColumn === 'banco' ? (sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward') : 'unfold_more' }}
-            </mat-icon>
-          </div>
-        </th>
-
-        <th (click)="sortBy('status_id')">
-          <div class="flex">
-            <span class="titulo">Status</span>
-            <mat-icon class="sortable-icon" [class.active]="sortColumn === 'status_id'">
-              {{ sortColumn === 'status_id' ? (sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward') : 'unfold_more' }}
-            </mat-icon>
-          </div>
-        </th>
-
-        <th (click)="sortBy('pertence_a')">
-          <div class="flex">
-            <span class="titulo">Pertence a</span>
-            <mat-icon class="sortable-icon" [class.active]="sortColumn === 'pertence_a'">
-              {{ sortColumn === 'pertence_a' ? (sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward') : 'unfold_more' }}
-            </mat-icon>
-          </div>
-        </th>
-
-        <th>
-          <span class="titulo">Ações</span>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let leads of paginatedProcesses; let i = index">
-        <td class="row"> {{ leads.numero_processo || '-' }} </td>
-        <td class="row"> {{ formatName(leads.nome) || '-' }} </td>
-        <td class="row"> {{ formatDocument(leads.cpf) || '-' }} </td>
-        <td class="row"> {{ formatPhone(leads.telefone_1) || '-' }} </td>
-        <td class="row"> {{ leads.email || '-' }} </td>
-        <td class="row"> {{ leads.banco || '-' }} </td>
-        <td class="row status-cell">
-          <div class="status-wrapper">
-            <mat-form-field appearance="fill">
-              <mat-select [(ngModel)]="selectedStatus[leads.id]">
-                <mat-option *ngFor="let permission of permissions" [value]="permission"
-                  (click)="postNewStatus(permission, leads.numero_processo, leads.id)">
-                  {{ permission }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-        </td>
-        <td class="row"> {{ leads.pertence_a !== null && leads.pertence_a !== undefined ? leads.pertence_a : '-' }} </td>
-        <td class="row"> <a class="see-more" (click)="verDetalhes(leads.id)">Ver mais</a> </td>
-      </tr>
-    </tbody>
-  </table>
-
-  <ng-template #emptyState>
-    <div class="empty-state">Nenhum lead disponível.</div>
-  </ng-template>
-
-  <!-- Paginação Customizada -->
-  <div class="pagination" *ngIf="totalPages > 1">
-    <button (click)="changePage(1)" [disabled]="currentPage === 1">Primeiro</button>
-
-    <button *ngFor="let page of totalPagesArray"
-            [class.active]="page === currentPage"
-            (click)="changePage(page)">
-      {{ page }}
-    </button>
-
-    <button (click)="changePage(totalPages)" [disabled]="currentPage === totalPages">Último</button>
+<ng-container *ngIf="isLoading; else tableContent">
+  <div class="table-card table-card--loading">
+    <div class="skeleton-row" *ngFor="let _ of [1,2,3,4,5,6]">
+      <div class="skeleton skeleton--wide"></div>
+    </div>
   </div>
 </ng-container>
+
+<ng-template #tableContent>
+  <div class="table-card">
+    <div class="table-meta" *ngIf="leads.length">
+      <span class="result-range">{{ resultRangeLabel }}</span>
+      <div class="meta-actions">
+        <div class="density-switch" role="group" aria-label="Densidade da tabela">
+          <button
+            type="button"
+            [class.active]="density === 'default'"
+            (click)="onDensityChange('default')">
+            Padrão
+          </button>
+          <button
+            type="button"
+            [class.active]="density === 'compact'"
+            (click)="onDensityChange('compact')">
+            Compacto
+          </button>
+        </div>
+
+        <div class="page-size">
+          <label for="page-size">Itens por página</label>
+          <select id="page-size" [value]="pageSize" (change)="onPageSizeChange($any($event.target).value)">
+            <option *ngFor="let size of pageSizeOptions" [value]="size">{{ size }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-wrapper" [class.compact]="density === 'compact'" *ngIf="leads.length; else emptyState">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col" [attr.aria-sort]="sortColumn === 'nome' ? sortDirection : 'none'" (click)="sortBy('nome')">
+              Nome
+              <mat-icon *ngIf="sortColumn === 'nome'">
+                {{ sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward' }}
+              </mat-icon>
+            </th>
+            <th scope="col" [attr.aria-sort]="sortColumn === 'numero_processo' ? sortDirection : 'none'" (click)="sortBy('numero_processo')">
+              Número do processo
+              <mat-icon *ngIf="sortColumn === 'numero_processo'">
+                {{ sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward' }}
+              </mat-icon>
+            </th>
+            <th scope="col" class="numeric" [attr.aria-sort]="sortColumn === 'cpf' ? sortDirection : 'none'" (click)="sortBy('cpf')">
+              CPF/CNPJ
+              <mat-icon *ngIf="sortColumn === 'cpf'">
+                {{ sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward' }}
+              </mat-icon>
+            </th>
+            <th scope="col" class="numeric" [attr.aria-sort]="sortColumn === 'telefone_1' ? sortDirection : 'none'" (click)="sortBy('telefone_1')">
+              Telefone
+              <mat-icon *ngIf="sortColumn === 'telefone_1'">
+                {{ sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward' }}
+              </mat-icon>
+            </th>
+            <th scope="col" [attr.aria-sort]="sortColumn === 'email' ? sortDirection : 'none'" (click)="sortBy('email')">
+              E-mail
+              <mat-icon *ngIf="sortColumn === 'email'">
+                {{ sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward' }}
+              </mat-icon>
+            </th>
+            <th scope="col" [attr.aria-sort]="sortColumn === 'banco' ? sortDirection : 'none'" (click)="sortBy('banco')">
+              Banco
+              <mat-icon *ngIf="sortColumn === 'banco'">
+                {{ sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward' }}
+              </mat-icon>
+            </th>
+            <th scope="col">
+              Status
+            </th>
+            <th scope="col">
+              Pertence a
+            </th>
+            <th scope="col" class="actions-head">
+              Ações
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let lead of paginatedProcesses">
+            <td>
+              <span class="ellipsis" [title]="formatName(lead.nome) || '-'">{{ formatName(lead.nome) || '-' }}</span>
+            </td>
+            <td>
+              <span class="ellipsis" [title]="lead.numero_processo || '-'">{{ lead.numero_processo || '-' }}</span>
+            </td>
+            <td class="numeric">
+              <span class="ellipsis" [title]="formatDocument(lead.cpf) || '-'">{{ formatDocument(lead.cpf) || '-' }}</span>
+            </td>
+            <td class="numeric">
+              <a
+                class="ellipsis link"
+                *ngIf="formatPhone(lead.telefone_1); else noPhone"
+                [href]="telHref(lead.telefone_1)"
+                [title]="formatPhone(lead.telefone_1)">
+                {{ formatPhone(lead.telefone_1) }}
+              </a>
+              <ng-template #noPhone> - </ng-template>
+            </td>
+            <td>
+              <a
+                class="ellipsis link"
+                *ngIf="lead.email; else noEmail"
+                [href]="mailHref(lead.email)"
+                [title]="lead.email">
+                {{ lead.email }}
+              </a>
+              <ng-template #noEmail> - </ng-template>
+            </td>
+            <td>
+              <span class="ellipsis" [title]="lead.banco || '-'">{{ lead.banco || '-' }}</span>
+            </td>
+            <td class="status-cell">
+              <button
+                type="button"
+                class="chip"
+                [ngClass]="getStatusMeta(lead).chipClass"
+                [matMenuTriggerFor]="statusMenu"
+                [attr.aria-label]="'Status ' + getStatusLabel(lead)">
+                <span>{{ getStatusLabel(lead) }}</span>
+              </button>
+              <mat-menu #statusMenu="matMenu">
+                <button mat-menu-item *ngFor="let option of statusOptions" (click)="updateStatus(option, lead)">
+                  {{ option }}
+                </button>
+              </mat-menu>
+            </td>
+            <td>
+              <span class="ellipsis" [title]="resolveOwner(lead.pertence_a)">{{ resolveOwner(lead.pertence_a) }}</span>
+            </td>
+            <td class="actions-cell">
+              <button
+                mat-icon-button
+                [matMenuTriggerFor]="rowMenu"
+                [attr.aria-label]="'Mais ações para o processo ' + (lead.numero_processo || lead.nome)">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #rowMenu="matMenu">
+                <button mat-menu-item (click)="openRowAction('open', lead)">Abrir</button>
+                <button mat-menu-item (click)="openRowAction('details', lead)">Detalhes</button>
+                <button mat-menu-item (click)="openRowAction('download', lead)">Baixar PDF</button>
+                <button mat-menu-item (click)="openRowAction('archive', lead)">Arquivar</button>
+              </mat-menu>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ng-template #emptyState>
+      <div class="empty-state">
+        <mat-icon>inbox</mat-icon>
+        <h3>Nenhum processo disponível</h3>
+        <p>Assim que novos processos forem encontrados eles aparecerão aqui.</p>
+      </div>
+    </ng-template>
+
+    <div class="alert alert--error" *ngIf="!isLoading && !allLeads.length">
+      Nenhum processo disponível no momento.
+    </div>
+
+    <div class="pagination" *ngIf="leads.length && totalPages > 1">
+      <button type="button" (click)="prevPage()" [disabled]="currentPage === 1">Anterior</button>
+      <button
+        type="button"
+        *ngFor="let page of totalPagesArray"
+        [class.active]="page === currentPage"
+        (click)="changePage(page)">
+        {{ page }}
+      </button>
+      <button type="button" (click)="nextPage()" [disabled]="currentPage === totalPages">Próximo</button>
+    </div>
+  </div>
+</ng-template>

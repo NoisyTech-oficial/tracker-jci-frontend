@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatMenuModule } from '@angular/material/menu';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -27,6 +28,7 @@ import { DetalhesLeadsComponent } from './components/detalhes-leads/detalhes-lea
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    MatMenuModule,
     ReactiveFormsModule,
     FormsModule,
     NgxMaskDirective,
