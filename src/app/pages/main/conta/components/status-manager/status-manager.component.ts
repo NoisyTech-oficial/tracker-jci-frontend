@@ -16,7 +16,7 @@ export class StatusManagerComponent implements OnInit {
   isLoading = false;
   error: string | null = null;
 
-  private readonly defaultColor = '#5f71d2';
+  private readonly defaultColor = '#2ECC71';
 
   constructor(
     private statusService: StatusService,

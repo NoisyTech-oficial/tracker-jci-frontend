@@ -32,11 +32,16 @@
           TOTAIS HOJE
           <button class="info" (click)="toggleTodayInfo()" aria-label="Mais informações">i</button>
         </span>
-        <span class="kpi-value">{{ todayTotal }}</span>
-  
+        <ng-container *ngIf="!isTodayLoading(); else todayLoading">
+          <span class="kpi-value">{{ todayTotal }}</span>
+        </ng-container>
+        <ng-template #todayLoading>
+          <span class="kpi-value">--</span>
+        </ng-template>
+
         <div class="kpi-tooltip" *ngIf="showTodayInfo">
           <p>Este número é atualizado ao longo do dia.</p>
-          <p class="muted">Última atualização: {{ lastUpdate }}</p>
+          <p class="muted">Última atualização: {{ lastUpdate || '--' }}</p>
           <button class="close" (click)="toggleTodayInfo()">OK</button>
         </div>
       </div>

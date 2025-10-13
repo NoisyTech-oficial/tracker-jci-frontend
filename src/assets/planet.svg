@@ -42,17 +42,17 @@
 <feGaussianBlur stdDeviation="34.2" result="effect1_foregroundBlur_1_248"/>
 </filter>
 <linearGradient id="paint0_linear_1_248" x1="1204.49" y1="215.832" x2="426.946" y2="669.474" gradientUnits="userSpaceOnUse">
-<stop stop-color="#0015FF"/>
-<stop offset="0.825" stop-color="#BE9FFF"/>
-<stop offset="1" stop-color="#5F72DA"/>
+<stop stop-color="#0E3A22"/>
+<stop offset="0.825" stop-color="#2ECC71"/>
+<stop offset="1" stop-color="#58D68D"/>
 </linearGradient>
 <linearGradient id="paint1_linear_1_248" x1="719.132" y1="498.074" x2="719.132" y2="162.058" gradientUnits="userSpaceOnUse">
-<stop stop-color="#0D0D0D"/>
-<stop offset="1" stop-color="#131835"/>
+<stop stop-color="#0B1D13"/>
+<stop offset="1" stop-color="#0E3A22"/>
 </linearGradient>
 <linearGradient id="paint2_linear_1_248" x1="551.01" y1="213.51" x2="597.864" y2="54.5682" gradientUnits="userSpaceOnUse">
-<stop stop-color="#5F72DA"/>
-<stop offset="1" stop-color="#253DBF"/>
+<stop stop-color="#2ECC71"/>
+<stop offset="1" stop-color="#1F7146"/>
 </linearGradient>
 </defs>
 </svg>

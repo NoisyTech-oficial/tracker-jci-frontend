@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { map, shareReplay, tap } from 'rxjs/operators';
+import { map, shareReplay, tap, startWith } from 'rxjs/operators';
 import { environment } from '../../../environments/environment.dev';
 
 export type Preset = 'hoje' | 7 | 15 | 30;
@@ -27,16 +27,17 @@ export class DashboardService {
   private TTL_MS = 5 * 60 * 1000; // 5 minutos
   private cache = new Map<string, CacheEntry>();
 
+  // === ENDPOINTS ATUALIZADOS (confirmado funcionando) ===
   private presetEndpoint(preset: Preset): string {
     switch (preset) {
       case 'hoje':
-        return `${this.base}/dashboard-processos/dashboard/hoje`;
+        return `${this.base}/dashboard/hoje`;
       case 7:
-        return `${this.base}/dashboard-processos/dashboard/7-dias`;
+        return `${this.base}/dashboard/7-dias`;
       case 15:
-        return `${this.base}/dashboard-processos/dashboard/15-dias`;
+        return `${this.base}/dashboard/15-dias`;
       case 30:
-        return `${this.base}/dashboard-processos/dashboard/30-dias`;
+        return `${this.base}/dashboard/30-dias`;
     }
   }
 
@@ -45,23 +46,32 @@ export class DashboardService {
       data_inicio: fromISO,
       data_fim: toISO,
     }).toString();
-    return `${this.base}/dashboard-processos/dashboard/customizado?${q}`;
+    return `${this.base}/dashboard/customizado?${q}`;
   }
 
   private keyForPreset(p: Preset) { return `preset:${p}`; }
   private keyForCustom(from: string, to: string) { return `custom:${from}|${to}`; }
 
+  // === CACHE INTELIGENTE ===
   private fetchWithCache(key: string, url: string): Observable<DashboardData> {
     const now = Date.now();
     const hit = this.cache.get(key);
 
     // Cache válido
-    if (hit && hit.expiresAt > now) return of(hit.data);
-
-    // Cache stale: devolve cache e revalida em background
-    if (hit && hit.expiresAt <= now) {
-      this.revalidate(key, url);
+    if (hit && hit.expiresAt > now) {
       return of(hit.data);
+    }
+
+    // Cache stale: devolve cache AGORA e atualiza em background
+    if (hit && hit.expiresAt <= now) {
+      const inflight$ = this.http.get<DashboardData>(url).pipe(
+        tap(data => this.cache.set(key, { data, expiresAt: Date.now() + this.TTL_MS })),
+        shareReplay(1),
+        startWith(hit.data)
+      );
+
+      this.cache.set(key, { ...(hit as CacheEntry), inflight$ });
+      return inflight$;
     }
 
     // Sem cache: busca e grava
@@ -86,8 +96,16 @@ export class DashboardService {
 
     this.cache.set(key, { ...(entry as CacheEntry), inflight$ });
     inflight$.subscribe({
-      next: () => this.cache.set(key, { data: (this.cache.get(key) as CacheEntry).data, expiresAt: now + this.TTL_MS }),
-      error: () => this.cache.set(key, { ...(this.cache.get(key) as CacheEntry), inflight$: undefined })
+      next: () =>
+        this.cache.set(key, {
+          data: (this.cache.get(key) as CacheEntry).data,
+          expiresAt: now + this.TTL_MS,
+        }),
+      error: () =>
+        this.cache.set(key, {
+          ...(this.cache.get(key) as CacheEntry),
+          inflight$: undefined,
+        }),
     });
   }
 
@@ -99,5 +117,7 @@ export class DashboardService {
     return this.fetchWithCache(this.keyForCustom(fromISO, toISO), this.customEndpoint(fromISO, toISO));
   }
 
-  invalidateAll() { this.cache.clear(); }
+  invalidateAll() {
+    this.cache.clear();
+  }
 }

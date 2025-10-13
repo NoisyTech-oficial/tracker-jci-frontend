@@ -71,7 +71,7 @@ body, html {
 }
 
 .input-group input:focus {
-  box-shadow: 0 0 10px rgba(69, 89, 136, 0.6);
+  box-shadow: 0 0 10px rgba(31, 113, 70, 0.6);
   outline: none; /* Garante que não tenha borda padrão */
 }
 
@@ -89,7 +89,7 @@ body, html {
   background: rgba(255, 255, 255, 0.15);
   color: white;
   font-size: 16px;
-  box-shadow: 0 0 10px rgba(69, 89, 136, 0.6);
+  box-shadow: 0 0 10px rgba(31, 113, 70, 0.6);
   outline: none;
 }
 
@@ -148,7 +148,7 @@ body, html {
   padding: 12px;
   border: none;
   border-radius: 8px;
-  background-color: #5F71D2;
+  background-color: #2ECC71;
   color: white;
   font-size: 16px;
   cursor: pointer;
@@ -165,7 +165,7 @@ body, html {
 }
 
 .login-button:hover {
-  background-color: #3a4d76; /* Um tom mais escuro ao passar o mouse */
+  background-color: #1A9D53; /* Um tom mais escuro ao passar o mouse */
   transform: scale(1.05);
 }
 

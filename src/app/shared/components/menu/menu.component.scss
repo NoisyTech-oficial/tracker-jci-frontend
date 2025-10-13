@@ -90,7 +90,7 @@
 /* Ícones fixos no rodapé */
 .menu-bottom {
   padding: 10px 0 15px 0;
-  border-top: 1px solid #5F71DA;
+  border-top: 1px solid rgba(46, 204, 113, 0.4);
 
   .has-dropdown {
     position: relative;
@@ -112,7 +112,7 @@
           display: flex;
           align-items: center;
           font-size: 13px;
-          color: white;
+          color: rgba(255, 255, 255, 0.95);
           padding: 7px 5px 5px 5px;
           text-decoration: none;
   
@@ -123,6 +123,10 @@
           mat-icon {
             font-size: 18px;
             // margin-right: 6px;
+          }
+
+          span {
+            color: inherit;
           }
   
           &:hover {
@@ -144,7 +148,7 @@ nav ul li a {
   display: flex;
   align-items: center;
   text-decoration: none;
-  color: white;
+  color: rgba(255, 255, 255, 0.95);
   padding: 10px;
   border-radius: 8px;
   transition: all 0.2s ease-in-out;
@@ -170,7 +174,7 @@ nav ul li a {
   display: flex;
   align-items: center;
   text-decoration: none;
-  color: white;
+  color: rgba(255, 255, 255, 0.95);
   padding: 10px;
   border-radius: 8px;
   transition: all 0.2s ease-in-out;
@@ -212,6 +216,7 @@ nav ul li a mat-icon {
   overflow: hidden;
   transition: opacity 0.2s ease-in-out;
   margin-left: 10px;
+  color: rgba(255, 255, 255, 0.92);
 }
 
 /* Esconde os textos quando o menu está fechado */

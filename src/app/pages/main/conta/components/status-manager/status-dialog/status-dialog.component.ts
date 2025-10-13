@@ -18,7 +18,7 @@ export class StatusDialogComponent {
   form: FormGroup;
   title: string;
   submitLabel: string;
-  private readonly defaultColor = '#5f71d2';
+  private readonly defaultColor = '#2ECC71';
 
   constructor(
     private fb: FormBuilder,

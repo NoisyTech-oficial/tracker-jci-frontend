@@ -32,7 +32,7 @@
 }
 
 .custom-table thead {
-  background: #455988;
+  background: #1F7146;
   color: white;
 }
 
@@ -54,7 +54,7 @@
   }
 
   .see-more:hover {
-    color: #455988;
+    color: #1F7146;
     text-decoration: underline;
   }
 
@@ -136,7 +136,7 @@
     cursor: pointer;
 
     &.active {
-      background-color: #5F71D2;
+      background-color: #2ECC71;
       color: white;
       font-weight: bold;
     }
