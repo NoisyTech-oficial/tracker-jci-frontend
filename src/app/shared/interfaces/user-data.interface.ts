@@ -11,6 +11,7 @@ export interface UserData {
   usuario_ativo: boolean;
   email: string;
   foto: string | null;
+  image?: string | null;
   advogado?: UsuarioAdvogado | null;
   plan?: string | null;
 }

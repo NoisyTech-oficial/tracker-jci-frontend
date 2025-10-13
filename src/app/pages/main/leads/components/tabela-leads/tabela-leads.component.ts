@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ObterLeads } from 'src/app/shared/interfaces/processes-data.interface';
 import { MasksService } from 'src/app/shared/masks/masks.service';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-tabela-leads',
@@ -17,9 +18,14 @@ export class TabelaLeadsComponent {
 
   readonly permissions = ['Cliente Encontrado', 'Cliente Desconhecido', 'Processo Desativado'];
   selectedStatus: Record<number, string> = {};
+  imageLoadError: Record<number, boolean> = {};
 
   @Input() set leadsDados(data: ObterLeads[]) {
-    this.leads = data;
+    this.imageLoadError = {};
+    this.leads = (data || []).map(lead => ({
+      ...lead,
+      owner: lead.owner ? { ...lead.owner, image: this.resolveOwnerImage(lead.owner.image) } : null
+    }));
     this.updatePaginatedProcesses();
     this.leads.forEach(lead => {
       if (lead && typeof lead.id === 'number' && !this.selectedStatus[lead.id]) {
@@ -80,6 +86,10 @@ export class TabelaLeadsComponent {
     this.verDetalhesClicked.emit(id);
   }
 
+  onImageError(leadId: number): void {
+    this.imageLoadError[leadId] = true;
+  }
+
   formatDocument(value: string | null | undefined): string | undefined {
     const format = this.masksService.formatDocument(value);
     return format ? format : undefined
@@ -137,12 +147,39 @@ export class TabelaLeadsComponent {
   }
 
   private extractSortableValue(item: ObterLeads, column: keyof ObterLeads) {
-    const value = item[column];
-
     if (column === 'createdAt') {
-      return value ? new Date(value).getTime() : 0;
+      const dateValue = item.createdAt;
+      return dateValue ? new Date(dateValue).getTime() : 0;
+    }
+    if (column === 'pertence_a') {
+      return item.pertence_a ?? 0;
+    }
+    if (column === 'owner') {
+      return item.owner?.nome ?? '';
     }
 
+    const value = item[column];
     return value ?? '';
+  }
+
+  private resolveOwnerImage(imagePath: string | null | undefined): string | null {
+    if (!imagePath) {
+      return null;
+    }
+
+    const trimmed = imagePath.trim();
+    if (!trimmed) {
+      return null;
+    }
+
+    if (/^(data:|https?:\/\/)/i.test(trimmed)) {
+      return trimmed;
+    }
+
+    try {
+      return new URL(trimmed, environment.apiUrl).toString();
+    } catch {
+      return null;
+    }
   }
 }

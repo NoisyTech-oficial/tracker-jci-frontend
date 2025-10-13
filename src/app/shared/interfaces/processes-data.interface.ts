@@ -8,8 +8,9 @@ export interface ObterLeads {
   email: string | null;
   banco: string;
   status_id: number;
-  pertence_a: number;
+  pertence_a: number | null;
   createdAt: string;
+  owner: LeadOwner | null;
 }
 
 export interface DetalhesLead {
@@ -71,4 +72,10 @@ export interface Process {
 export interface CEP {
   city: string | null;
   state: string | null;
+}
+
+export interface LeadOwner {
+  id: number;
+  nome: string;
+  image: string | null;
 }

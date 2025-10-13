@@ -73,7 +73,7 @@
 
         <th (click)="sortBy('pertence_a')">
           <div class="flex">
-            <span class="titulo">Pertence a</span>
+            <span class="titulo">Responsável</span>
             <mat-icon class="sortable-icon" [class.active]="sortColumn === 'pertence_a'">
               {{ sortColumn === 'pertence_a' ? (sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward') : 'unfold_more' }}
             </mat-icon>
@@ -105,7 +105,24 @@
             </mat-form-field>
           </div>
         </td>
-        <td class="row"> {{ leads.pertence_a !== null && leads.pertence_a !== undefined ? leads.pertence_a : '-' }} </td>
+        <td class="row owner-cell">
+          <div class="owner-info">
+            <ng-container *ngIf="leads.owner?.image && !imageLoadError[leads.id]; else defaultOwnerIcon">
+              <img
+                class="owner-avatar"
+                [src]="leads.owner?.image"
+                [alt]="leads.owner?.nome || 'Responsável'"
+                (error)="onImageError(leads.id)"
+              />
+            </ng-container>
+            <span class="owner-name">
+              {{ leads.owner?.nome || (leads.pertence_a !== null && leads.pertence_a !== undefined ? ('ID ' + leads.pertence_a) : 'Não informado') }}
+            </span>
+            <ng-template #defaultOwnerIcon>
+              <mat-icon class="owner-default-icon" aria-hidden="true">account_circle</mat-icon>
+            </ng-template>
+          </div>
+        </td>
         <td class="row"> <a class="see-more" (click)="verDetalhes(leads.id)">Ver mais</a> </td>
       </tr>
     </tbody>

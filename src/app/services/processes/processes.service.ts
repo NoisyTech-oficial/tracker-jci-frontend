@@ -12,14 +12,18 @@ export class ProcessesService {
 
   private baseUrl = environment.apiUrl;
 
+  private buildApiUrl(path: string): string {
+    return new URL(path, this.baseUrl).toString();
+  }
+
   constructor(private http: HttpClient) { }
 
   getLeads(): Observable<ObterLeads[]> {
-    return this.http.get<ObterLeads[]>(`${this.baseUrl}/leads`);
+    return this.http.get<ObterLeads[]>(this.buildApiUrl('/api/leads'));
   }
 
   getDetalhesLeads(id: string): Observable<DetalhesLead> {
-    return this.http.get<DetalhesLead>(`${this.baseUrl}/leads/${id}`);
+    return this.http.get<DetalhesLead>(this.buildApiUrl(`/api/leads/${id}`));
   }
 
   getDocumentos(id: string) {
