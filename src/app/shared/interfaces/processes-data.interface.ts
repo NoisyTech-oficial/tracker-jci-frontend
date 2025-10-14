@@ -31,13 +31,19 @@ export interface DetalhesLead {
 
 export interface ProcessoMovimentac {
   data: string
-  titulo: string
+  titulo?: string
   descricao: string
 }
 
 export interface ProcessoDocumento {
   nome: string
   descricao: string
+}
+
+export interface ProcessDocumentStatus {
+  status: string | null
+  url?: string | null
+  storagePath?: string | null
 }
 
 export interface Process {
@@ -78,4 +84,16 @@ export interface LeadOwner {
   id: number;
   nome: string;
   image: string | null;
+}
+
+export interface LeadSearchPayload {
+  filtros?: {
+    data_inicio?: string | null;
+    data_fim?: string | null;
+    valor_acao_min?: number | null;
+    valor_acao_max?: number | null;
+    pertence_a?: number | null;
+    status_id?: number | null;
+  };
+  termoPesquisa?: string | null;
 }

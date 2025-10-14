@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DetalhesLead, ObterLeads } from 'src/app/shared/interfaces/processes-data.interface';
+import { DetalhesLead, LeadSearchPayload, ObterLeads, ProcessDocumentStatus } from 'src/app/shared/interfaces/processes-data.interface';
 import { environment } from '../../../environments/environment.prod';
 import { NumberProcessObtained, ProcessObtained, putStatusOrNotesProcess } from 'src/app/shared/interfaces/processes-obtained-data.interface';
 
@@ -26,8 +26,24 @@ export class ProcessesService {
     return this.http.get<DetalhesLead>(this.buildApiUrl(`/api/leads/${id}`));
   }
 
+  searchLeads(payload: LeadSearchPayload): Observable<ObterLeads[]> {
+    return this.http.post<ObterLeads[]>(this.buildApiUrl('/api/leads/filtrar'), payload);
+  }
+
+  getLeadProcess(id: string): Observable<DetalhesLead> {
+    return this.http.get<DetalhesLead>(this.buildApiUrl(`/api/leads/${id}/processo`));
+  }
+
   getDocumentos(id: string) {
     return this.http.get<DetalhesLead>(`${this.baseUrl}/documentos-processo/solicitar/${id}`);
+  }
+
+  getProcessDocumentsStatus(id: string): Observable<ProcessDocumentStatus | null> {
+    return this.http.get<ProcessDocumentStatus | null>(this.buildApiUrl(`/api/documentos-processo/status/${id}`));
+  }
+
+  requestProcessDocuments(id: string): Observable<any> {
+    return this.http.post<any>(this.buildApiUrl(`/api/documentos-processo/solicitar/${id}`), {});
   }
 
   getProcessesObtained(): Observable<ProcessObtained[]> {

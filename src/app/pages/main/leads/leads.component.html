@@ -2,10 +2,46 @@
   <app-header [info]="header"></app-header>
 
   <div class="body">
+    <ng-template #filtersTemplate>
+      <form class="filters-form" [formGroup]="filtersForm" (ngSubmit)="applyFilters()">
+        <mat-form-field appearance="outline">
+          <mat-label>Data inicial</mat-label>
+          <input matInput [matDatepicker]="startPicker" formControlName="data_inicio" placeholder="dd/mm/aaaa">
+          <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+          <mat-datepicker #startPicker></mat-datepicker>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>Data final</mat-label>
+          <input matInput [matDatepicker]="endPicker" formControlName="data_fim" placeholder="dd/mm/aaaa">
+          <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+          <mat-datepicker #endPicker></mat-datepicker>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="filters-form__search">
+          <mat-label>Buscar lead</mat-label>
+          <input matInput formControlName="termoPesquisa" placeholder="Nome, CPF, número do processo...">
+          <button *ngIf="filtersForm.get('termoPesquisa')?.value" mat-icon-button matSuffix type="button" (click)="filtersForm.get('termoPesquisa')?.setValue('')">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+  
+        <div class="filters-form__actions">
+          <button mat-raised-button color="primary" type="submit">Aplicar filtros</button>
+          <button mat-button type="button" (click)="clearFilters()">Limpar</button>
+        </div>
+      </form>
+    </ng-template>
+
+    <div class="alert alert--error" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
+
     <div class="table-container">
       <app-tabela-leads
         [leadsDados]="leads"
         [isLoading]="isLoading"
+        [filtersTemplate]="filtersTemplate"
         (verDetalhesClicked)="verDetalhes($event)"
         (statusChanged)="onStatusChanged($event)">
       </app-tabela-leads>

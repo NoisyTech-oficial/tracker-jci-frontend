@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
 import { ObterLeads } from 'src/app/shared/interfaces/processes-data.interface';
 import { MasksService } from 'src/app/shared/masks/masks.service';
 import { environment } from 'src/environments/environment.prod';
@@ -70,6 +70,7 @@ export class TabelaLeadsComponent {
   }
 
   @Input() isLoading: boolean = false;
+  @Input() filtersTemplate?: TemplateRef<unknown>;
 
   @Output() verDetalhesClicked = new EventEmitter<number>();
   @Output() statusChanged = new EventEmitter<{ status: string; processNumber: string | null | undefined }>();

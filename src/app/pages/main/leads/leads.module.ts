@@ -15,6 +15,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TabelaLeadsComponent } from './components/tabela-leads/tabela-leads.component';
 import { DetalhesLeadsComponent } from './components/detalhes-leads/detalhes-leads.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 
 @NgModule({
   declarations: [LeadsComponent, TabelaLeadsComponent, DetalhesLeadsComponent],
@@ -29,13 +31,15 @@ import { DetalhesLeadsComponent } from './components/detalhes-leads/detalhes-lea
     MatInputModule,
     MatSelectModule,
     MatMenuModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     ReactiveFormsModule,
     FormsModule,
     NgxMaskDirective,
     NgxMaskPipe,
     SharedModule
   ],
-  providers: [provideNgxMask()],
+  providers: [provideNgxMask(), { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }],
   exports: []
 })
 export class LeadsModule { }

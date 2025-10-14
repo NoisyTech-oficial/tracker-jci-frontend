@@ -12,7 +12,7 @@
   </div>
 
   <ng-container *ngIf="!isLoading">
-    <ng-container *ngIf="detalhes || fieldsLead.length; else emptyState">
+    <ng-container *ngIf="fieldsLead.length || processDetails; else emptyState">
       <div class="row">
         <div class="tabs">
           <button
@@ -24,73 +24,144 @@
           </button>
           <button
             class="tab"
-            [class.active]="activeTab === 'movimentacoes'"
-            (click)="selectTab('movimentacoes')"
+            [class.active]="activeTab === 'processo'"
+            (click)="selectTab('processo')"
           >
-            Movimentações
-          </button>
-          <button
-            class="tab"
-            [class.active]="activeTab === 'documentos'"
-            (click)="selectTab('documentos')"
-          >
-            Documentos
+            Processo
           </button>
         </div>
       </div>
 
       <div class="row" *ngIf="activeTab === 'detalhes' && fieldsLead.length">
         <label class="title-section">Informações do Lead</label>
-        <div class="grid-container">
-          <div class="grid-item" *ngFor="let field of fieldsLead">
-            <label class="title">{{ field.label }}</label>
-            <label class="value">{{ field.value || '-' }}</label>
-          </div>
-          <div *ngIf="fieldsLead.length % 3 === 1" class="grid-item placeholder"></div>
-          <div *ngIf="fieldsLead.length % 3 === 2" class="grid-item placeholder"></div>
-        </div>
+        <table class="details-table">
+          <tbody>
+            <tr *ngFor="let field of fieldsLead">
+              <th>{{ field.label }}</th>
+              <td>{{ field.value || '-' }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
-      <div class="row" *ngIf="activeTab === 'detalhes' && fieldsProcess.length">
-        <label class="title-section">Informações do Processo</label>
-        <div class="grid-container">
-          <div class="grid-item" *ngFor="let field of fieldsProcess">
-            <label class="title">{{ field.label }}</label>
-            <label class="value">{{ field.value || '-' }}</label>
-          </div>
-          <div *ngIf="fieldsProcess.length % 3 === 1" class="grid-item placeholder"></div>
-          <div *ngIf="fieldsProcess.length % 3 === 2" class="grid-item placeholder"></div>
-        </div>
-      </div>
-
-      <div class="row" *ngIf="activeTab === 'movimentacoes'">
+      <div class="row" *ngIf="activeTab === 'processo'">
         <div class="tab-content">
-          <div class="movements-list" *ngIf="movimentacoes.length; else emptyMovements">
-            <div class="movement-item" *ngFor="let movimento of movimentacoes">
-              <div class="movement-date">{{ formatMovementDate(movimento.data) }}</div>
-              <div class="movement-content">
-                <div class="movement-title">{{ movimento.titulo || '-' }}</div>
-                <div class="movement-description">{{ movimento.descricao || '-' }}</div>
-              </div>
-            </div>
+          <div class="process-loading" *ngIf="processLoading">
+            Carregando informações do processo...
           </div>
-          <ng-template #emptyMovements>
-            <div class="empty-tab">Nenhuma movimentação disponível.</div>
-          </ng-template>
-        </div>
-      </div>
 
-      <div class="row" *ngIf="activeTab === 'documentos'">
-        <div class="tab-content">
-          <div class="documents-list" *ngIf="documentos.length; else emptyDocuments">
-            <div class="document-item" *ngFor="let documento of documentos">
-              <div class="document-title">{{ documento.nome || '-' }}</div>
-              <div class="document-description">{{ documento.descricao || '-' }}</div>
-            </div>
+          <div class="process-error" *ngIf="processError">
+            {{ processError }}
           </div>
-          <ng-template #emptyDocuments>
-            <div class="empty-tab">Nenhum documento disponível.</div>
-          </ng-template>
+
+          <ng-container *ngIf="!processLoading && !processError">
+            <div *ngIf="processDetails; else emptyProcess">
+              <section class="process-section documents-section">
+                <div class="documents-header">
+                  <h3 class="section-title">Documentos do Processo</h3>
+                  <ng-container *ngIf="documentButtonState as docButton">
+                    <ng-container *ngIf="docButton.visible">
+                      <button
+                        *ngIf="docButton.action === 'request'"
+                        type="button"
+                        class="documents-button"
+                        [ngClass]="docButton.styleClass"
+                        (click)="requestDocuments()"
+                        [disabled]="docButton.disabled">
+                        {{ docButton.label }}
+                      </button>
+
+                      <button
+                        *ngIf="docButton.action === 'disabled'"
+                        type="button"
+                        class="documents-button"
+                        [ngClass]="docButton.styleClass"
+                        disabled>
+                        {{ docButton.label }}
+                      </button>
+
+                      <button
+                        *ngIf="docButton.action === 'open'"
+                        type="button"
+                        class="documents-button"
+                        [ngClass]="docButton.styleClass"
+                        (click)="openDocument(docButton.url)">
+                        {{ docButton.label }}
+                      </button>
+                    </ng-container>
+                  </ng-container>
+                </div>
+              </section>
+
+              <section class="process-section">
+                <h2 class="section-title">Capa do Processo</h2>
+                <div class="process-cover">
+                  <div class="cover-item">
+                    <span class="label">Classe:</span>
+                    <span class="value">{{ processDetails.processo_classe || '-' }}</span>
+                  </div>
+                  <div class="cover-item">
+                    <span class="label">Assunto:</span>
+                    <span class="value">{{ processDetails.processo_assunto || '-' }}</span>
+                  </div>
+                  <div class="cover-item">
+                    <span class="label">Distribuição:</span>
+                    <span class="value">{{ formatDate(processDetails.processo_distribuicao) || '-' }}</span>
+                  </div>
+                  <div class="cover-item">
+                    <span class="label">Foro:</span>
+                    <span class="value">{{ processDetails.processo_foro || '-' }}</span>
+                  </div>
+                  <div class="cover-item">
+                    <span class="label">Vara:</span>
+                    <span class="value">{{ processDetails.processo_vara || '-' }}</span>
+                  </div>
+                  <div class="cover-item">
+                    <span class="label">Juiz:</span>
+                    <span class="value">{{ processDetails.processo_juiz || '-' }}</span>
+                  </div>
+                  <div class="cover-item">
+                    <span class="label">Valor da Ação:</span>
+                    <span class="value">{{ formatCurrency(processDetails.processo_valor_acao) || '-' }}</span>
+                  </div>
+                </div>
+              </section>
+
+              <section class="process-section">
+                <h3 class="section-title">Partes do Processo</h3>
+                <div class="process-parties">
+                  <div class="party-item">
+                    <span class="label">Requerente:</span>
+                    <span class="value">{{ processDetails.processo_requerente || '-' }}</span>
+                  </div>
+                  <div class="party-item">
+                    <span class="label">Advogado do Requerente:</span>
+                    <span class="value">{{ processDetails.processo_advogado_requerente || '-' }}</span>
+                  </div>
+                  <div class="party-item">
+                    <span class="label">Banco:</span>
+                    <span class="value">{{ processDetails.banco || '-' }}</span>
+                  </div>
+                </div>
+              </section>
+
+              <section class="process-section">
+                <h3 class="section-title">Movimentações</h3>
+                <div class="process-movements" *ngIf="movimentacoes.length; else emptyMovements">
+                  <div class="movement-row" *ngFor="let movimento of movimentacoes">
+                    <span class="movement-date">{{ formatMovementDate(movimento.data) }}</span>
+                    <span class="movement-description">{{ movimento.descricao || movimento.titulo || '-' }}</span>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <ng-template #emptyProcess>
+              <div class="empty-tab">Nenhum dado de processo disponível.</div>
+            </ng-template>
+            <ng-template #emptyMovements>
+              <div class="empty-tab">Nenhuma movimentação disponível.</div>
+            </ng-template>
+          </ng-container>
         </div>
       </div>
     </ng-container>

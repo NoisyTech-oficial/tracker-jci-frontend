@@ -8,6 +8,10 @@
 
 <ng-template #tableContent>
   <div class="table-card">
+    <div class="table-filters" *ngIf="filtersTemplate">
+      <ng-container [ngTemplateOutlet]="filtersTemplate"></ng-container>
+    </div>
+
     <div class="table-meta" *ngIf="leads.length">
       <span class="result-range">{{ resultRangeLabel }}</span>
 

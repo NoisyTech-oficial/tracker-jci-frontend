@@ -24,6 +24,12 @@ $bg-muted: #FAFBFC;
   }
 }
 
+.table-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 .table-meta {
   display: flex;
   flex-wrap: wrap;
