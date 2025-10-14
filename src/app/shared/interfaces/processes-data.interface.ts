@@ -1,3 +1,9 @@
+export interface LeadOwner {
+  id: number;
+  nome: string | null;
+  image: string | null;
+}
+
 export interface ObterLeads {
   id: number;
   nome: string;
@@ -10,6 +16,7 @@ export interface ObterLeads {
   status_id: number;
   pertence_a: number;
   createdAt: string;
+  owner?: LeadOwner | null;
 }
 
 export interface DetalhesLead {
@@ -30,7 +37,7 @@ export interface DetalhesLead {
 
 export interface ProcessoMovimentac {
   data: string
-  titulo: string
+  titulo?: string
   descricao: string
 }
 
@@ -71,4 +78,29 @@ export interface Process {
 export interface CEP {
   city: string | null;
   state: string | null;
+}
+
+export interface LeadProcessDetails {
+  nome: string | null;
+  cpf?: string | null;
+  banco: string | null;
+  numero_processo?: string | null;
+  telefone_1?: string | null;
+  telefone_2?: string | null;
+  email?: string | null;
+  status_id?: number | null;
+  pertence_a?: number | null;
+  createdAt?: string | null;
+  owner?: LeadOwner | null;
+  processo_assunto: string | null;
+  processo_classe: string | null;
+  processo_foro: string | null;
+  processo_vara: string | null;
+  processo_juiz: string | null;
+  processo_distribuicao: string | null;
+  processo_valor_acao: string | null;
+  processo_requerente: string | null;
+  processo_requerido?: string | null;
+  processo_advogado_requerente: string | null;
+  processo_movimentacoes?: ProcessoMovimentac[];
 }

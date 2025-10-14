@@ -358,10 +358,16 @@ export class TabelaLeadsComponent {
   }
 
   private extractSortableValue(item: ObterLeads, column: keyof ObterLeads) {
-    const value = item[column];
     if (column === 'createdAt') {
-      return value ? new Date(value).getTime() : 0;
+      const dateValue = item.createdAt;
+      return dateValue ? new Date(dateValue).getTime() : 0;
     }
+    if (column === 'owner') {
+      const ownerName = item.owner?.nome ?? null;
+      return ownerName ?? '';
+    }
+
+    const value = item[column];
     return value ?? '';
   }
 

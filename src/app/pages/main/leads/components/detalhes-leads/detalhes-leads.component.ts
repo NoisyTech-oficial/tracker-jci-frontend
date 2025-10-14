@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { LeadDetailsService } from 'src/app/services/lead-details/lead-details.service';
 import { ProcessesService } from 'src/app/services/processes/processes.service';
 import { Header } from 'src/app/shared/interfaces/header.interface';
-import { DetalhesLead, ObterLeads, ProcessoDocumento, ProcessoMovimentac } from 'src/app/shared/interfaces/processes-data.interface';
+import { DetalhesLead, LeadProcessDetails, ObterLeads, ProcessoDocumento, ProcessoMovimentac } from 'src/app/shared/interfaces/processes-data.interface';
 import { MasksService } from 'src/app/shared/masks/masks.service';
 
 @Component({
@@ -12,16 +12,21 @@ import { MasksService } from 'src/app/shared/masks/masks.service';
   templateUrl: './detalhes-leads.component.html',
   styleUrls: ['./detalhes-leads.component.scss']
 })
-export class DetalhesLeadsComponent implements OnInit {
+export class DetalhesLeadsComponent implements OnInit, OnDestroy {
   header: Header = { title: 'Detalhes do Processo', subtitle: '' };
   fieldsLead: { label: string; value: string | null }[] = [];
-  fieldsProcess: { label: string; value: string | null }[] = [];
-  movimentacoes: ProcessoMovimentac[] = [];
   documentos: ProcessoDocumento[] = [];
   detalhes: DetalhesLead | null = null;
   leadResumo: ObterLeads | null = null;
-  activeTab: 'detalhes' | 'movimentacoes' | 'documentos' = 'detalhes';
+  leadProcessDetails: LeadProcessDetails | null = null;
+  processMovements: ProcessoMovimentac[] = [];
+  activeTab: 'detalhes' | 'processo' | 'documentos' = 'detalhes';
   isLoading = true;
+  isProcessDetailsLoading = false;
+  isLeadInfoLoading = false;
+  private leadId: string | null = null;
+  private hasLoadedProcessDetails = false;
+  private mergedLeadData: Partial<ObterLeads> & { owner?: ObterLeads['owner'] | null } = {};
 
   constructor(
     private route: ActivatedRoute,
@@ -37,9 +42,14 @@ export class DetalhesLeadsComponent implements OnInit {
       return;
     }
 
+    this.leadId = id;
     this.leadResumo = this.leadDetailsService.getLead();
-    if (this.leadResumo) {
-      this.fieldsLead = this.mapLeadFields(this.leadResumo);
+
+    if (!this.leadResumo) {
+      this.isLeadInfoLoading = true;
+      this.carregarDetalhesProcesso(id);
+    } else {
+      this.mergeLeadData(this.leadResumo);
     }
 
     this.leadsService.getDetalhesLeads(id)
@@ -48,12 +58,10 @@ export class DetalhesLeadsComponent implements OnInit {
       }))
       .subscribe((res) => {
         this.detalhes = res;
-        this.fieldsProcess = this.mapProcessFields(res);
-        this.movimentacoes = res?.processo_movimentacoes || [];
         this.documentos = res?.processo_documentos || [];
         this.leadDetailsService.clear();
       });
-  }
+}
 
   formatCurrency(value: string | null): string | null {
     if (!value) return null;
@@ -62,7 +70,7 @@ export class DetalhesLeadsComponent implements OnInit {
     return this.masksService.formatCurrency(parsed) ?? value;
   }
 
-  formatDate(value: string | null): string | null {
+  formatDate(value: string | null | undefined): string | null {
     if (!value) return null;
     return this.masksService.getFormatDateToLabel(value);
   }
@@ -77,44 +85,120 @@ export class DetalhesLeadsComponent implements OnInit {
     return this.masksService.formatPhone(value) ?? value;
   }
 
-  private mapProcessFields(res: DetalhesLead): { label: string; value: string | null }[] {
-    return [
-      { label: 'Assunto', value: res.processo_assunto || null },
-      { label: 'Classe', value: res.processo_classe || null },
-      { label: 'Foro', value: res.processo_foro || null },
-      { label: 'Vara', value: res.processo_vara || null },
-      { label: 'Juiz', value: res.processo_juiz || null },
-      { label: 'Distribuição', value: this.formatDate(res.processo_distribuicao) },
-      { label: 'Valor da Ação', value: this.formatCurrency(res.processo_valor_acao) },
-      { label: 'Requerente', value: res.processo_requerente || null },
-      { label: 'Advogado do Requerente', value: res.processo_advogado_requerente || null }
-    ];
+  formatMovementDate(date: string | null | undefined): string {
+    return this.formatDate(date ?? null) || '-';
   }
 
-  private mapLeadFields(lead: ObterLeads): { label: string; value: string | null }[] {
-    return [
-      { label: 'Nome', value: lead.nome || null },
-      { label: 'CPF', value: this.formatDocument(lead.cpf) },
-      { label: 'Número do Processo', value: lead.numero_processo || null },
-      { label: 'Telefone 1', value: this.formatPhone(lead.telefone_1) },
-      { label: 'Telefone 2', value: this.formatPhone(lead.telefone_2) },
-      { label: 'E-mail', value: lead.email || null },
-      { label: 'Banco', value: lead.banco || null },
-      { label: 'Status', value: lead.status_id !== undefined && lead.status_id !== null ? String(lead.status_id) : null },
-      { label: 'Pertence a', value: lead.pertence_a !== undefined && lead.pertence_a !== null ? String(lead.pertence_a) : null },
-      { label: 'Criado em', value: this.formatDate(lead.createdAt) }
-    ];
+  ngOnDestroy(): void {
+    this.hasLoadedProcessDetails = false;
+    this.leadProcessDetails = null;
   }
 
-  formatMovementDate(date: string): string {
-    return this.formatDate(date) || '-';
-  }
-
-  selectTab(tab: 'detalhes' | 'movimentacoes' | 'documentos'): void {
+  selectTab(tab: 'detalhes' | 'processo' | 'documentos'): void {
     this.activeTab = tab;
+    if (tab === 'processo' && this.leadId && !this.hasLoadedProcessDetails && !this.isProcessDetailsLoading) {
+      this.carregarDetalhesProcesso(this.leadId);
+    }
   }
 
   voltar(): void {
     this.router.navigate(['/obter-processos'], { relativeTo: this.route });
+  }
+
+  solicitarDocumentos(): void {
+    // Implementação futura
+  }
+
+  private carregarDetalhesProcesso(id: string): void {
+    this.isProcessDetailsLoading = true;
+    this.leadsService.getLeadProcessDetails(id)
+      .pipe(finalize(() => {
+        this.isProcessDetailsLoading = false;
+      }))
+      .subscribe({
+        next: (detalhesProcesso) => {
+          this.leadProcessDetails = detalhesProcesso;
+          this.processMovements = detalhesProcesso?.processo_movimentacoes || [];
+          this.mergeLeadData(detalhesProcesso);
+          this.hasLoadedProcessDetails = true;
+          this.isLeadInfoLoading = false;
+        },
+        error: () => {
+          this.leadProcessDetails = null;
+          this.processMovements = [];
+          this.populateLeadFields();
+          this.hasLoadedProcessDetails = false;
+          this.isLeadInfoLoading = false;
+        }
+      });
+  }
+
+  private mergeLeadData(source: Partial<LeadProcessDetails> | Partial<ObterLeads> | null | undefined): void {
+    if (!source) {
+      this.populateLeadFields();
+      return;
+    }
+
+    const map: Record<string, any> = {
+      nome: (source as any).nome,
+      cpf: (source as any).cpf,
+      numero_processo: (source as any).numero_processo,
+      telefone_1: (source as any).telefone_1,
+      telefone_2: (source as any).telefone_2,
+      email: (source as any).email,
+      banco: (source as any).banco,
+      status_id: (source as any).status_id,
+      pertence_a: (source as any).pertence_a,
+      createdAt: (source as any).createdAt
+    };
+
+    let changed = false;
+
+    Object.entries(map).forEach(([key, value]) => {
+      if (value !== undefined && value !== null && value !== '') {
+        if ((this.mergedLeadData as any)[key] !== value) {
+          (this.mergedLeadData as any)[key] = value;
+          changed = true;
+        }
+      }
+    });
+
+    if ('owner' in (source as any)) {
+      this.mergedLeadData.owner = (source as any).owner ?? null;
+      changed = true;
+    }
+
+    if (changed || !this.fieldsLead.length) {
+      this.populateLeadFields();
+    }
+  }
+
+  private populateLeadFields(): void {
+    const data = this.mergedLeadData;
+
+    const telefone1 = data.telefone_1 ?? null;
+    const telefone2 = data.telefone_2 ?? null;
+    const status = data.status_id ?? null;
+    const pertenceA = data.pertence_a ?? null;
+    const createdAt = data.createdAt ?? null;
+    const ownerName = data.owner?.nome ?? null;
+    const responsibleValue = ownerName ?? (pertenceA !== null && pertenceA !== undefined ? `ID ${pertenceA}` : null);
+
+    const fields = [
+      { label: 'Nome', value: data.nome ?? null },
+      { label: 'CPF', value: this.formatDocument((data.cpf ?? null) as string | null) },
+      { label: 'Número do Processo', value: data.numero_processo ?? null },
+      { label: 'Telefone 1', value: telefone1 ? this.formatPhone(telefone1) : null },
+      { label: 'Telefone 2', value: telefone2 ? this.formatPhone(telefone2) : null },
+      { label: 'E-mail', value: data.email ?? null },
+      { label: 'Banco', value: data.banco ?? null },
+      { label: 'Responsável', value: responsibleValue },
+      { label: 'Status', value: status !== null && status !== undefined ? String(status) : null },
+      { label: 'Pertence a', value: pertenceA !== null && pertenceA !== undefined ? String(pertenceA) : null },
+      { label: 'Criado em', value: this.formatDate(createdAt ?? null) }
+    ];
+
+    const hasData = fields.some(field => field.value !== null && field.value !== undefined && field.value !== '');
+    this.fieldsLead = hasData ? fields : [];
   }
 }

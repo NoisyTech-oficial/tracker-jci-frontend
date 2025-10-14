@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DetalhesLead, ObterLeads } from 'src/app/shared/interfaces/processes-data.interface';
+import { DetalhesLead, LeadProcessDetails, ObterLeads } from 'src/app/shared/interfaces/processes-data.interface';
 import { environment } from '../../../environments/environment.prod';
 import { NumberProcessObtained, ProcessObtained, putStatusOrNotesProcess } from 'src/app/shared/interfaces/processes-obtained-data.interface';
 
@@ -20,6 +20,10 @@ export class ProcessesService {
 
   getDetalhesLeads(id: string): Observable<DetalhesLead> {
     return this.http.get<DetalhesLead>(`${this.baseUrl}/leads/${id}`);
+  }
+
+  getLeadProcessDetails(id: string): Observable<LeadProcessDetails> {
+    return this.http.get<LeadProcessDetails>(`${this.baseUrl}/leads/${id}/processo`);
   }
 
   getDocumentos(id: string) {

@@ -31,6 +31,32 @@ const processesServiceMock = {
     processo_advogado_requerente: 'Advogado',
     processo_movimentacoes: [],
     processo_documentos: []
+  }),
+  getLeadProcessDetails: () => of({
+    nome: 'Teste',
+    cpf: '12345678900',
+    numero_processo: '0000000-00.0000.0.00.0000',
+    telefone_1: '11999999999',
+    telefone_2: '11888888888',
+    email: 'teste@example.com',
+    banco: 'Banco',
+    status_id: 1,
+    pertence_a: 2,
+    createdAt: '2024-01-01T00:00:00.000Z',
+    owner: { id: 1, nome: 'Responsável', image: null },
+    processo_assunto: 'Assunto',
+    processo_classe: 'Classe',
+    processo_foro: 'Foro',
+    processo_vara: 'Vara',
+    processo_juiz: 'Juiz',
+    processo_distribuicao: '2024-01-01T00:00:00.000Z',
+    processo_valor_acao: '1000',
+    processo_requerente: 'Requerente',
+    processo_requerido: 'Requerido',
+    processo_advogado_requerente: 'Advogado',
+    processo_movimentacoes: [
+      { data: '2024-01-02', descricao: 'Movimentação teste' }
+    ]
   })
 };
 
@@ -66,6 +92,9 @@ describe('DetalhesLeadsComponent', () => {
 
     fixture = TestBed.createComponent(DetalhesLeadsComponent);
     component = fixture.componentInstance;
+    fixture.detectChanges();
+
+    component.selectTab('processo');
     fixture.detectChanges();
   });
 
