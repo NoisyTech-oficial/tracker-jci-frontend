@@ -15,6 +15,7 @@ import { EditEmployeeModalComponent } from './components/edit-employee-modal/edi
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { DeleteEmployeeModalComponent } from './components/delete-employee-modal/delete-employee-modal.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [EmployeesComponent, NewEmployeeModalComponent, EditEmployeeModalComponent, DeleteEmployeeModalComponent],
@@ -24,6 +25,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    MatSlideToggleModule,
     EmployeesRoutingModule,
     MatIconModule,
     MatDialogModule,

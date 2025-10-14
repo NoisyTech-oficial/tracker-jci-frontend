@@ -5,6 +5,9 @@
     <button class="tab" [class.active]="activeTab === 'status'" (click)="selectTab('status')">
       Status
     </button>
+    <button class="tab" [class.active]="activeTab === 'leads'" (click)="selectTab('leads')">
+      Leads
+    </button>
     <button class="tab" [class.active]="activeTab === 'advogado'" (click)="selectTab('advogado')">
       Advogado
     </button>
@@ -22,5 +25,40 @@
       <p><strong>Email:</strong> {{ userData?.advogado?.email || userData?.email || '-' }}</p>
       <p><strong>Telefone:</strong> {{ userData?.advogado?.telefone || '-' }}</p>
     </div> -->
+  </div>
+
+  <div class="tab-content" *ngIf="activeTab === 'leads'">
+    <div class="card lead-config-card">
+      <div class="card-header">
+        <div>
+          <h3>Distribuição de Leads</h3>
+          <p class="card-subtitle">Escolha como os novos leads serão atribuídos para sua equipe.</p>
+        </div>
+        <span class="badge" *ngIf="leadAssignmentType === defaultLeadAssignment">Padrão aplicado</span>
+      </div>
+
+      <div class="lead-options">
+        <label
+          class="lead-option"
+          *ngFor="let option of leadAssignmentOptions"
+          [class.selected]="leadAssignmentType === option.value"
+        >
+          <input
+            type="radio"
+            name="leadAssignment"
+            [value]="option.value"
+            [checked]="leadAssignmentType === option.value"
+            (change)="setLeadAssignmentType(option.value)"
+          />
+
+          <div class="option-info">
+            <span class="option-title">{{ option.label }}</span>
+            <span class="option-description">{{ option.description }}</span>
+          </div>
+
+          <span class="option-default" *ngIf="option.value === defaultLeadAssignment">Padrão</span>
+        </label>
+      </div>
+    </div>
   </div>
 </div>

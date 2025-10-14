@@ -81,7 +81,8 @@ export class EmployeesComponent implements OnInit {
         this.employeesData.push({
           nome: null,
           documento: result.documento,
-          permissao_visualizacao: result.permissao_visualizacao
+          permissao_visualizacao: result.permissao_visualizacao,
+          permissao_recebimento_leads: result.permissao_recebimento_leads ?? true
         });
 
         this.filteredEmployees = [...this.employeesData];
@@ -109,6 +110,7 @@ export class EmployeesComponent implements OnInit {
         this.employeesData.map(item => {
           if (item.documento === result.documento) {
             item.permissao_visualizacao = result.permissao_visualizacao;
+            item.permissao_recebimento_leads = result.permissao_recebimento_leads ?? item.permissao_recebimento_leads;
           }
         });
         this.filteredEmployees = [...this.employeesData];

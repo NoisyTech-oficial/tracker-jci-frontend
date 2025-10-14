@@ -80,4 +80,121 @@
         }
       }
     }
+
+    .lead-config-card {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+
+      .card-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 16px;
+
+        .card-subtitle {
+          margin: 4px 0 0;
+          font-size: 14px;
+          color: #6b7799;
+        }
+
+        .badge {
+          padding: 6px 12px;
+          border-radius: 999px;
+          background: rgba(69, 89, 136, 0.12);
+          color: #455988;
+          font-weight: 600;
+          font-size: 12px;
+          text-transform: uppercase;
+          letter-spacing: 0.6px;
+          white-space: nowrap;
+        }
+      }
+
+      .lead-options {
+        display: grid;
+        gap: 12px;
+      }
+
+      .lead-option {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 16px 18px;
+        border: 1px solid #d6dff6;
+        border-radius: 10px;
+        background: #f7f9ff;
+        cursor: pointer;
+        transition: border 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+
+        &:hover {
+          border-color: #b7c6f0;
+          box-shadow: 0 8px 20px rgba(17, 27, 71, 0.08);
+        }
+
+        &.selected {
+          border-color: #455988;
+          background: #eef2ff;
+          box-shadow: 0 10px 24px rgba(17, 27, 71, 0.12);
+        }
+
+        input {
+          appearance: none;
+          width: 18px;
+          height: 18px;
+          border: 2px solid #9aa8d4;
+          border-radius: 50%;
+          display: grid;
+          place-content: center;
+          transition: border-color 0.2s ease, background 0.2s ease;
+
+          &:after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #455988;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: transform 0.2s ease, opacity 0.2s ease;
+          }
+
+          &:checked {
+            border-color: #455988;
+            background: rgba(69, 89, 136, 0.12);
+
+            &:after {
+              opacity: 1;
+              transform: scale(1);
+            }
+          }
+        }
+
+        .option-info {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+          flex: 1;
+
+          .option-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #364a78;
+          }
+
+          .option-description {
+            font-size: 13px;
+            color: #6b7799;
+          }
+        }
+
+        .option-default {
+          font-size: 12px;
+          font-weight: 600;
+          color: #2a74e1;
+          align-self: flex-start;
+        }
+      }
+    }
 }

@@ -17,6 +17,16 @@
       </mat-form-field>
     </div>
 
+    <div class="lead-toggle-card">
+      <div class="lead-toggle-text">
+        <h3>Recebimento de Leads</h3>
+        <p>Desative para impedir que este colaborador entre na distribuição automática de novos leads.</p>
+      </div>
+      <mat-slide-toggle formControlName="permissao_recebimento_leads" color="primary">
+        {{ employeeForm.get('permissao_recebimento_leads')?.value ? 'Ativo' : 'Inativo' }}
+      </mat-slide-toggle>
+    </div>
+
     <mat-dialog-actions align="end">
       <button mat-raised-button color="primary" [disabled]="employeeForm.invalid || isloading">{{ isloading ? 'Aguarde...' : 'Editar' }}</button>
     </mat-dialog-actions>

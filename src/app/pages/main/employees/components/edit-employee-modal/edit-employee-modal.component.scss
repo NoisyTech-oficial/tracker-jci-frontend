@@ -45,4 +45,43 @@
       color: #ffffff;
     }
   }
+
+  .lead-toggle-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 20px;
+    border: 1px solid #d6dff6;
+    border-radius: 10px;
+    background: #f7f9ff;
+    margin-bottom: 16px;
+
+    .lead-toggle-text {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+
+      h3 {
+        margin: 0;
+        font-size: 16px;
+        color: #455988;
+        font-weight: 600;
+      }
+
+      p {
+        margin: 0;
+        color: #6b7799;
+        font-size: 14px;
+      }
+    }
+
+    ::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+      background-color: rgba(69, 89, 136, 0.35);
+    }
+
+    ::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+      background-color: #455988;
+    }
+  }
 }

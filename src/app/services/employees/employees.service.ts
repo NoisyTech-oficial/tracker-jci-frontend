@@ -26,7 +26,7 @@ export class EmployeesService {
 
   putEmployeeView(data: PutEmployeeViewData): Observable<any> {
     data.permissao_visualizacao = this.rulesPermission(data.permissao_visualizacao);
-    return this.http.put<any>(`${this.baseUrl}/funcionarios/permissoes-visualizacao`, data);
+    return this.http.put<any>(`${this.baseUrl}/funcionarios/permissoes`, data);
   }
 
   deleteEmployee(documento: string): Observable<any> {

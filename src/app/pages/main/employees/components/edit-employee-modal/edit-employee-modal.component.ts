@@ -37,8 +37,10 @@ export class EditEmployeeModalComponent implements OnInit {
   }
 
   startForm(): void {
+    const recebeLeads = this.data?.permissao_recebimento_leads ?? true;
     this.employeeForm = this.fb.group({
-      permissao_visualizacao: [this.getSelectedPermissions(), Validators.required]
+      permissao_visualizacao: [this.getSelectedPermissions(), Validators.required],
+      permissao_recebimento_leads: [recebeLeads]
     });
   }
 
@@ -48,7 +50,12 @@ export class EditEmployeeModalComponent implements OnInit {
 
   editEmployee() {
     this.isloading = true;
-    const data = this.getChangeViewingData(this.documentoEmployee, (this.employeeForm.value).permissao_visualizacao);
+    const formValue = this.employeeForm.value;
+    const data = this.getChangeViewingData(
+      this.documentoEmployee,
+      formValue.permissao_visualizacao,
+      formValue.permissao_recebimento_leads
+    );
 
     this.employeesService.putEmployeeView(data)
     .subscribe({
@@ -57,7 +64,8 @@ export class EditEmployeeModalComponent implements OnInit {
         this.dialogRef.close(
           {
             documento: this.documentoEmployee,
-            permissao_visualizacao: this.employeesService.rulesPermission((this.employeeForm.value).permissao_visualizacao),
+            permissao_visualizacao: this.employeesService.rulesPermission(formValue.permissao_visualizacao),
+            permissao_recebimento_leads: formValue.permissao_recebimento_leads
           }
         );
       },
@@ -68,10 +76,11 @@ export class EditEmployeeModalComponent implements OnInit {
     });
   }
 
-  getChangeViewingData(documento: string, viewing: string[]): PutEmployeeViewData {
+  getChangeViewingData(documento: string, viewing: string[], recebeLeads: boolean): PutEmployeeViewData {
     return {
       permissao_visualizacao: viewing,
-      documento: documento
+      documento: documento,
+      permissao_recebimento_leads: recebeLeads
     };
   }
 
