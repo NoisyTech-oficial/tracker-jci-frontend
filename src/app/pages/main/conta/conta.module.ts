@@ -18,6 +18,7 @@ import { StatusConfirmDialogComponent } from './components/status-manager/status
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar'; // se for usar a barra de progresso futuramente
+import { ConfirmAvatarDialogComponent } from './components/perfil/confirm-avatar-dialog/confirm-avatar-dialog.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar'; // se for
     ConfiguracoesComponent,
     StatusManagerComponent,
     StatusDialogComponent,
-    StatusConfirmDialogComponent
+    StatusConfirmDialogComponent,
+    ConfirmAvatarDialogComponent
   ],
   imports: [
     CommonModule,

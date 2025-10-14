@@ -101,7 +101,7 @@ export class DetalhesLeadsComponent implements OnInit {
       { label: 'E-mail', value: lead.email || null },
       { label: 'Banco', value: lead.banco || null },
       { label: 'Status', value: lead.status_id !== undefined && lead.status_id !== null ? String(lead.status_id) : null },
-      { label: 'Pertence a', value: lead.pertence_a !== undefined && lead.pertence_a !== null ? String(lead.pertence_a) : null },
+      { label: 'Responsável', value: lead.owner?.nome || (lead.pertence_a !== undefined && lead.pertence_a !== null ? String(lead.pertence_a) : null) },
       { label: 'Criado em', value: this.formatDate(lead.createdAt) }
     ];
   }

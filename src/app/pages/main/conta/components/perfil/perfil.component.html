@@ -11,7 +11,7 @@
         />
       
         <!-- Ícone de câmera sobre a foto -->
-        <button mat-icon-button class="camera-btn" (click)="selecionarImagem()">
+        <button mat-icon-button class="camera-btn" (click)="selecionarImagem()" [disabled]="isUploading">
           <mat-icon>photo_camera</mat-icon>
         </button>
       
@@ -24,7 +24,9 @@
           hidden
         />
       </div>
-  
+
+      <mat-progress-bar *ngIf="isUploading" mode="indeterminate"></mat-progress-bar>
+
       <form [formGroup]="profileForm" (ngSubmit)="salvar()">
         <mat-form-field appearance="outline">
           <mat-label>Nome</mat-label>
@@ -41,7 +43,7 @@
           <input matInput [value]="userData?.documento" disabled />
         </mat-form-field>
   
-        <button mat-flat-button color="primary" type="submit" [disabled]="profileForm.invalid">
+        <button mat-flat-button color="primary" type="submit" [disabled]="profileForm.invalid || isUploading">
           Salvar Alterações
         </button>
       </form>

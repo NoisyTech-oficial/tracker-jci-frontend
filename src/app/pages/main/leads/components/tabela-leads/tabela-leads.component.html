@@ -10,18 +10,13 @@
   <div class="table-card">
     <div class="table-meta" *ngIf="leads.length">
       <span class="result-range">{{ resultRangeLabel }}</span>
+
       <div class="meta-actions">
         <div class="density-switch" role="group" aria-label="Densidade da tabela">
-          <button
-            type="button"
-            [class.active]="density === 'default'"
-            (click)="onDensityChange('default')">
+          <button type="button" [class.active]="density === 'default'" (click)="onDensityChange('default')">
             Padrão
           </button>
-          <button
-            type="button"
-            [class.active]="density === 'compact'"
-            (click)="onDensityChange('compact')">
+          <button type="button" [class.active]="density === 'compact'" (click)="onDensityChange('compact')">
             Compacto
           </button>
         </div>
@@ -35,41 +30,41 @@
       </div>
     </div>
 
-    <div class="table-wrapper" [class.compact]="density === 'compact'" *ngIf="leads.length; else emptyState">
+    <div class="table-wrapper" [class.compact]="density === 'compact'" *ngIf="paginatedProcesses.length; else emptyState">
       <table>
         <thead>
           <tr>
-            <th scope="col" [attr.aria-sort]="sortColumn === 'nome' ? sortDirection : 'none'" (click)="sortBy('nome')">
+            <th scope="col" (click)="sortBy('nome')">
               Nome
               <mat-icon *ngIf="sortColumn === 'nome'">
                 {{ sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward' }}
               </mat-icon>
             </th>
-            <th scope="col" [attr.aria-sort]="sortColumn === 'numero_processo' ? sortDirection : 'none'" (click)="sortBy('numero_processo')">
+            <th scope="col" (click)="sortBy('numero_processo')">
               Número do processo
               <mat-icon *ngIf="sortColumn === 'numero_processo'">
                 {{ sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward' }}
               </mat-icon>
             </th>
-            <th scope="col" class="numeric" [attr.aria-sort]="sortColumn === 'cpf' ? sortDirection : 'none'" (click)="sortBy('cpf')">
+            <th scope="col" class="numeric" (click)="sortBy('cpf')">
               CPF/CNPJ
               <mat-icon *ngIf="sortColumn === 'cpf'">
                 {{ sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward' }}
               </mat-icon>
             </th>
-            <th scope="col" class="numeric" [attr.aria-sort]="sortColumn === 'telefone_1' ? sortDirection : 'none'" (click)="sortBy('telefone_1')">
+            <th scope="col" class="numeric" (click)="sortBy('telefone_1')">
               Telefone
               <mat-icon *ngIf="sortColumn === 'telefone_1'">
                 {{ sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward' }}
               </mat-icon>
             </th>
-            <th scope="col" [attr.aria-sort]="sortColumn === 'email' ? sortDirection : 'none'" (click)="sortBy('email')">
+            <th scope="col" (click)="sortBy('email')">
               E-mail
               <mat-icon *ngIf="sortColumn === 'email'">
                 {{ sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward' }}
               </mat-icon>
             </th>
-            <th scope="col" [attr.aria-sort]="sortColumn === 'banco' ? sortDirection : 'none'" (click)="sortBy('banco')">
+            <th scope="col" (click)="sortBy('banco')">
               Banco
               <mat-icon *ngIf="sortColumn === 'banco'">
                 {{ sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward' }}
@@ -78,8 +73,11 @@
             <th scope="col">
               Status
             </th>
-            <th scope="col">
+            <th scope="col" (click)="sortBy('owner')">
               Pertence a
+              <mat-icon *ngIf="sortColumn === 'owner'">
+                {{ sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward' }}
+              </mat-icon>
             </th>
             <th scope="col" class="actions-head">
               Ações
@@ -87,19 +85,19 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let lead of paginatedProcesses">
+          <tr *ngFor="let lead of paginatedProcesses" (click)="verDetalhes(lead.id)">
             <td>
-              <span class="ellipsis" [title]="formatName(lead.nome) || '-'">{{ formatName(lead.nome) || '-' }}</span>
+              <span class="ellipsis name" [title]="formatName(lead.nome) || '-'">{{ formatName(lead.nome) || '-' }}</span>
             </td>
             <td>
-              <span class="ellipsis" [title]="lead.numero_processo || '-'">{{ lead.numero_processo || '-' }}</span>
+              <span class="ellipsis mono process" [title]="lead.numero_processo || '-'">{{ lead.numero_processo || '-' }}</span>
             </td>
             <td class="numeric">
-              <span class="ellipsis" [title]="formatDocument(lead.cpf) || '-'">{{ formatDocument(lead.cpf) || '-' }}</span>
+              <span class="ellipsis doc" [title]="formatDocument(lead.cpf) || '-'">{{ formatDocument(lead.cpf) || '-' }}</span>
             </td>
             <td class="numeric">
               <a
-                class="ellipsis link"
+                class="ellipsis link phone"
                 *ngIf="formatPhone(lead.telefone_1); else noPhone"
                 [href]="telHref(lead.telefone_1)"
                 [title]="formatPhone(lead.telefone_1)">
@@ -108,17 +106,13 @@
               <ng-template #noPhone> - </ng-template>
             </td>
             <td>
-              <a
-                class="ellipsis link"
-                *ngIf="lead.email; else noEmail"
-                [href]="mailHref(lead.email)"
-                [title]="lead.email">
+              <a class="ellipsis link email" *ngIf="lead.email; else noEmail" [href]="mailHref(lead.email)" [title]="lead.email">
                 {{ lead.email }}
               </a>
               <ng-template #noEmail> - </ng-template>
             </td>
             <td>
-              <span class="ellipsis" [title]="lead.banco || '-'">{{ lead.banco || '-' }}</span>
+              <span class="ellipsis bank" [title]="lead.banco || '-'">{{ lead.banco || '-' }}</span>
             </td>
             <td class="status-cell">
               <button
@@ -127,29 +121,39 @@
                 [ngClass]="getStatusMeta(lead).chipClass"
                 [matMenuTriggerFor]="statusMenu"
                 [attr.aria-label]="'Status ' + getStatusLabel(lead)">
-                <span>{{ getStatusLabel(lead) }}</span>
+                {{ getStatusLabel(lead) }}
               </button>
               <mat-menu #statusMenu="matMenu">
-                <button mat-menu-item *ngFor="let option of statusOptions" (click)="updateStatus(option, lead)">
-                  {{ option }}
+                <button mat-menu-item *ngFor="let permission of permissions" (click)="updateStatus(permission, lead)">
+                  {{ permission }}
                 </button>
               </mat-menu>
             </td>
-            <td>
-              <span class="ellipsis" [title]="resolveOwner(lead.pertence_a)">{{ resolveOwner(lead.pertence_a) }}</span>
+            <td class="owner-cell">
+              <div class="owner-info">
+                <ng-container *ngIf="lead.owner?.image && !imageLoadError[lead.id]; else defaultOwnerIcon">
+                  <img
+                    class="owner-avatar"
+                    [src]="lead.owner?.image"
+                    [alt]="lead.owner?.nome || 'Responsável'"
+                    (error)="onImageError(lead.id)" />
+                </ng-container>
+                <span class="owner-name">
+                  {{ lead.owner?.nome || resolveOwner(lead.pertence_a) }}
+                </span>
+                <ng-template #defaultOwnerIcon>
+                  <mat-icon class="owner-default-icon" aria-hidden="true">account_circle</mat-icon>
+                </ng-template>
+              </div>
             </td>
-            <td class="actions-cell">
-              <button
-                mat-icon-button
-                [matMenuTriggerFor]="rowMenu"
-                [attr.aria-label]="'Mais ações para o processo ' + (lead.numero_processo || lead.nome)">
+            <td class="actions-cell" (click)="$event.stopPropagation()">
+              <button mat-icon-button [matMenuTriggerFor]="rowMenu" [attr.aria-label]="'Mais ações para o processo ' + (lead.numero_processo || lead.nome)">
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #rowMenu="matMenu">
-                <button mat-menu-item (click)="openRowAction('open', lead)">Abrir</button>
-                <button mat-menu-item (click)="openRowAction('details', lead)">Detalhes</button>
-                <button mat-menu-item (click)="openRowAction('download', lead)">Baixar PDF</button>
-                <button mat-menu-item (click)="openRowAction('archive', lead)">Arquivar</button>
+                <button mat-menu-item (click)="verDetalhes(lead.id)">Abrir</button>
+                <button mat-menu-item (click)="verDetalhes(lead.id)">Detalhes</button>
+                <button mat-menu-item (click)="updateStatus('Processo Desativado', lead)">Arquivar</button>
               </mat-menu>
             </td>
           </tr>

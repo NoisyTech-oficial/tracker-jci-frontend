@@ -13,6 +13,7 @@ import { DocumentValidator } from 'src/app/shared/validators/document-length';
 })
 export class LoginComponent implements AfterViewInit {
   @ViewChild('documentInput') documentoInput!: ElementRef;
+  @ViewChild('loginCard') loginCard!: ElementRef<HTMLDivElement>;
 
   hidePassword: boolean = true;
   loginForm!: FormGroup;
@@ -60,6 +61,7 @@ export class LoginComponent implements AfterViewInit {
 
     this.authService.login(this.loginForm.value).subscribe({
       next: () => {
+        this.onLoginSuccess();
         this.router.navigate(['']);
       },
       error: () => {
@@ -75,6 +77,17 @@ export class LoginComponent implements AfterViewInit {
 
   togglePasswordVisibility() {
     this.hidePassword = !this.hidePassword;
+  }
+
+  onLoginSuccess() {
+    const card = this.loginCard?.nativeElement;
+    if (!card) return;
+
+    card.classList.remove('success');
+    // allow re-trigger
+    void card.offsetWidth;
+    card.classList.add('success');
+    setTimeout(() => card.classList.remove('success'), 1500);
   }
 
 }

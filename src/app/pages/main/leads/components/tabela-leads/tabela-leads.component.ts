@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ObterLeads } from 'src/app/shared/interfaces/processes-data.interface';
 import { MasksService } from 'src/app/shared/masks/masks.service';
+import { environment } from 'src/environments/environment.prod';
 
 type SortDirection = 'asc' | 'desc';
 type DensityMode = 'default' | 'compact';
-type PeriodFilter = 'all' | '7d' | '30d';
 
 interface StatusMeta {
   label: string;
@@ -29,19 +29,12 @@ export class TabelaLeadsComponent {
   leads: ObterLeads[] = [];
   paginatedProcesses: ObterLeads[] = [];
 
-  searchTerm = '';
-  selectedBanks = new Set<string>();
-  selectedStatuses = new Set<string>();
-  selectedPeriod: PeriodFilter = 'all';
-
-  availableBanks: string[] = [];
-  availableStatuses: string[] = [];
+  readonly permissions = ['Cliente Encontrado', 'Cliente Desconhecido', 'Processo Desativado'];
+  selectedStatus: Record<number, string> = {};
+  imageLoadError: Record<number, boolean> = {};
 
   sortColumn: keyof ObterLeads | '' = '';
   sortDirection: SortDirection = 'asc';
-
-  readonly statusOptions = ['Cliente Encontrado', 'Cliente Desconhecido', 'Processo Desativado'];
-  selectedStatus: Record<number, string> = {};
 
   readonly statusIdLabelMap: Record<number, string> = {
     1: 'Encontrado',
@@ -63,14 +56,20 @@ export class TabelaLeadsComponent {
     erro: { label: 'Problema', chipClass: 'chip--err' }
   };
 
-  @Input() isLoading = false;
-
   @Input() set leadsDados(data: ObterLeads[]) {
-    this.allLeads = Array.isArray(data) ? [...data] : [];
+    this.imageLoadError = {};
+    this.allLeads = (data || []).map(lead => ({
+      ...lead,
+      owner: lead.owner ? { ...lead.owner, image: this.resolveOwnerImage(lead.owner.image) } : null
+    }));
+
     this.initialiseStatuses();
-    this.buildFilterData();
-    this.applyFiltersAndSort();
+    this.applySorting();
+    this.currentPage = 1;
+    this.updatePaginatedProcesses();
   }
+
+  @Input() isLoading: boolean = false;
 
   @Output() verDetalhesClicked = new EventEmitter<number>();
   @Output() statusChanged = new EventEmitter<{ status: string; processNumber: string | null | undefined }>();
@@ -83,12 +82,13 @@ export class TabelaLeadsComponent {
       this.sortDirection = 'asc';
     }
 
-    this.applyFiltersAndSort();
+    this.applySorting();
+    this.currentPage = 1;
+    this.updatePaginatedProcesses();
   }
 
   changePage(page: number): void {
     if (page < 1 || page > this.totalPages) return;
-
     this.currentPage = page;
     this.updatePaginatedProcesses();
   }
@@ -99,47 +99,6 @@ export class TabelaLeadsComponent {
 
   prevPage(): void {
     this.changePage(this.currentPage - 1);
-  }
-
-  onSearchChange(value: string): void {
-    this.searchTerm = value;
-    this.currentPage = 1;
-    this.applyFiltersAndSort();
-  }
-
-  toggleBanco(banco: string): void {
-    if (this.selectedBanks.has(banco)) {
-      this.selectedBanks.delete(banco);
-    } else {
-      this.selectedBanks.add(banco);
-    }
-    this.currentPage = 1;
-    this.applyFiltersAndSort();
-  }
-
-  toggleStatusFilter(status: string): void {
-    if (this.selectedStatuses.has(status)) {
-      this.selectedStatuses.delete(status);
-    } else {
-      this.selectedStatuses.add(status);
-    }
-    this.currentPage = 1;
-    this.applyFiltersAndSort();
-  }
-
-  setPeriodFilter(period: PeriodFilter): void {
-    this.selectedPeriod = period;
-    this.currentPage = 1;
-    this.applyFiltersAndSort();
-  }
-
-  clearFilters(): void {
-    this.searchTerm = '';
-    this.selectedBanks.clear();
-    this.selectedStatuses.clear();
-    this.selectedPeriod = 'all';
-    this.currentPage = 1;
-    this.applyFiltersAndSort();
   }
 
   onDensityChange(mode: DensityMode): void {
@@ -158,21 +117,8 @@ export class TabelaLeadsComponent {
     this.verDetalhesClicked.emit(id);
   }
 
-  openRowAction(action: 'open' | 'details' | 'download' | 'archive', lead: ObterLeads): void {
-    if (action === 'open' || action === 'details') {
-      this.verDetalhes(lead.id);
-      return;
-    }
-
-    if (action === 'download') {
-      // placeholder: integrate download logic
-      console.info('Baixar PDF ainda não implementado', lead);
-    }
-
-    if (action === 'archive') {
-      // placeholder: integrate archive logic
-      console.info('Arquivar ainda não implementado', lead);
-    }
+  onImageError(leadId: number): void {
+    this.imageLoadError[leadId] = true;
   }
 
   updateStatus(option: string, lead: ObterLeads): void {
@@ -180,17 +126,14 @@ export class TabelaLeadsComponent {
       this.selectedStatus[lead.id] = option;
     }
     this.statusChanged.emit({ status: option, processNumber: lead?.numero_processo });
-    this.buildFilterData();
-    this.applyFiltersAndSort();
+    this.applySorting();
+    this.updatePaginatedProcesses();
   }
 
   getStatusMeta(lead: ObterLeads): StatusMeta {
     const raw = this.resolveStatusValue(lead);
     const key = raw.toLowerCase();
-    return this.statusChipMap[key] ?? {
-      label: raw,
-      chipClass: 'chip--neu'
-    };
+    return this.statusChipMap[key] ?? { label: raw, chipClass: 'chip--neu' };
   }
 
   getStatusLabel(lead: ObterLeads): string {
@@ -198,8 +141,8 @@ export class TabelaLeadsComponent {
   }
 
   formatDocument(value: string | null | undefined): string | undefined {
-    const format = this.masksService.formatDocument(value);
-    return format ? format : undefined;
+    const formatted = this.masksService.formatDocument(value);
+    return formatted || undefined;
   }
 
   formatName(value: string | null | undefined): string | undefined {
@@ -232,15 +175,8 @@ export class TabelaLeadsComponent {
     return String(value);
   }
 
-  get resultRangeLabel(): string {
-    if (!this.leads.length) return 'Nenhum processo';
-    const start = (this.currentPage - 1) * this.pageSize + 1;
-    const end = Math.min(this.currentPage * this.pageSize, this.leads.length);
-    return `Exibindo ${start}–${end} de ${this.leads.length} processos`;
-  }
-
   get totalPages(): number {
-    return this.leads.length ? Math.ceil(this.leads.length / this.pageSize) : 1;
+    return Math.ceil(this.leads.length / this.pageSize) || 1;
   }
 
   get totalPagesArray(): number[] {
@@ -250,13 +186,23 @@ export class TabelaLeadsComponent {
     const half = Math.floor(blockSize / 2);
     let start = Math.max(1, this.currentPage - half);
     let end = Math.min(pages, start + blockSize - 1);
+
     if (end - start + 1 < blockSize) {
       start = Math.max(1, end - blockSize + 1);
     }
+
     for (let page = start; page <= end; page++) {
       range.push(page);
     }
+
     return range;
+  }
+
+  get resultRangeLabel(): string {
+    if (!this.leads.length) return 'Nenhum processo';
+    const start = (this.currentPage - 1) * this.pageSize + 1;
+    const end = Math.min(this.currentPage * this.pageSize, this.leads.length);
+    return `Exibindo ${start}–${end} de ${this.leads.length} processos`;
   }
 
   private initialiseStatuses(): void {
@@ -267,81 +213,12 @@ export class TabelaLeadsComponent {
     });
   }
 
-  private buildFilterData(): void {
-    const bankSet = new Set<string>();
-    const statusSet = new Set<string>();
-
-    this.allLeads.forEach(lead => {
-      if (lead?.banco) bankSet.add(lead.banco);
-      statusSet.add(this.getStatusLabel(lead));
-    });
-
-    this.selectedBanks.forEach(b => {
-      if (!bankSet.has(b)) this.selectedBanks.delete(b);
-    });
-
-    this.selectedStatuses.forEach(s => {
-      if (!statusSet.has(s)) this.selectedStatuses.delete(s);
-    });
-
-    this.availableBanks = Array.from(bankSet).sort((a, b) => a.localeCompare(b));
-    this.availableStatuses = Array.from(statusSet).sort((a, b) => a.localeCompare(b));
-  }
-
-  private applyFiltersAndSort(): void {
-    const filtered = this.allLeads.filter(lead =>
-      this.matchesSearch(lead) &&
-      this.matchesBank(lead) &&
-      this.matchesStatusFilter(lead) &&
-      this.matchesPeriod(lead)
-    );
-
+  private applySorting(): void {
+    const data = [...this.allLeads];
     if (this.sortColumn) {
-      filtered.sort((a, b) => this.compareValues(a, b, this.sortColumn as keyof ObterLeads));
+      data.sort((a, b) => this.compareValues(a, b, this.sortColumn as keyof ObterLeads));
     }
-
-    this.leads = filtered;
-    this.currentPage = Math.min(this.currentPage, this.totalPages);
-    if (this.currentPage < 1) this.currentPage = 1;
-    this.updatePaginatedProcesses();
-  }
-
-  private matchesSearch(lead: ObterLeads): boolean {
-    if (!this.searchTerm.trim()) return true;
-    const term = this.searchTerm.trim().toLowerCase();
-    const fields = [
-      lead.numero_processo,
-      lead.nome,
-      lead.cpf,
-      this.formatDocument(lead.cpf),
-      this.resolveOwner(lead.pertence_a)
-    ];
-    return fields.some(field => (field ?? '').toString().toLowerCase().includes(term));
-  }
-
-  private matchesBank(lead: ObterLeads): boolean {
-    if (!this.selectedBanks.size) return true;
-    return lead?.banco ? this.selectedBanks.has(lead.banco) : false;
-  }
-
-  private matchesStatusFilter(lead: ObterLeads): boolean {
-    if (!this.selectedStatuses.size) return true;
-    return this.selectedStatuses.has(this.getStatusLabel(lead));
-  }
-
-  private matchesPeriod(lead: ObterLeads): boolean {
-    if (this.selectedPeriod === 'all') return true;
-    if (!lead?.createdAt) return false;
-    const created = new Date(lead.createdAt);
-    if (Number.isNaN(created.getTime())) return false;
-
-    const now = new Date();
-    const diffMs = now.getTime() - created.getTime();
-    const diffDays = diffMs / (1000 * 60 * 60 * 24);
-
-    if (this.selectedPeriod === '7d') return diffDays <= 7;
-    if (this.selectedPeriod === '30d') return diffDays <= 30;
-    return true;
+    this.leads = data;
   }
 
   private compareValues(a: ObterLeads, b: ObterLeads, column: keyof ObterLeads): number {
@@ -358,11 +235,17 @@ export class TabelaLeadsComponent {
   }
 
   private extractSortableValue(item: ObterLeads, column: keyof ObterLeads) {
-    const value = item[column];
     if (column === 'createdAt') {
-      return value ? new Date(value).getTime() : 0;
+      const dateValue = item.createdAt;
+      return dateValue ? new Date(dateValue).getTime() : 0;
     }
-    return value ?? '';
+    if (column === 'pertence_a') {
+      return item.pertence_a ?? 0;
+    }
+    if (column === 'owner') {
+      return item.owner?.nome ?? '';
+    }
+    return item[column] ?? '';
   }
 
   private updatePaginatedProcesses(): void {
@@ -391,6 +274,21 @@ export class TabelaLeadsComponent {
       return String(explicit);
     }
 
-    return this.statusOptions[0];
+    return this.permissions[0];
+  }
+
+  private resolveOwnerImage(imagePath: string | null | undefined): string | null {
+    if (!imagePath) return null;
+
+    const trimmed = imagePath.trim();
+    if (!trimmed) return null;
+
+    if (/^(data:|https?:\/\/)/i.test(trimmed)) return trimmed;
+
+    try {
+      return new URL(trimmed, environment.apiUrl).toString();
+    } catch {
+      return null;
+    }
   }
 }

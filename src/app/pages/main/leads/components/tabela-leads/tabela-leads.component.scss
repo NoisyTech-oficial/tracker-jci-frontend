@@ -120,11 +120,6 @@ $bg-muted: #FAFBFC;
       cursor: pointer;
       white-space: nowrap;
 
-      &:first-child {
-        width: 48px;
-        cursor: default;
-      }
-
       &.numeric {
         text-align: right;
       }
@@ -140,13 +135,14 @@ $bg-muted: #FAFBFC;
   tbody tr {
     background: #fff;
     transition: box-shadow 0.18s ease, background 0.18s ease;
+    cursor: pointer;
 
     &:nth-child(even) {
       background: $bg-muted;
     }
 
     &:hover {
-      background: color.scale($bg-muted, $lightness: -2%);
+      background: #F5F7FA;
     }
 
     &:focus-within {
@@ -154,6 +150,10 @@ $bg-muted: #FAFBFC;
       position: relative;
       z-index: 1;
     }
+  }
+
+  tbody tr + tr td {
+    border-top: 1px solid $border-color;
   }
 
   td {
@@ -206,7 +206,7 @@ $bg-muted: #FAFBFC;
 .chip {
   display: inline-flex;
   align-items: center;
-  gap: 0;
+  gap: 6px;
   border-radius: 999px;
   padding: 4px 12px;
   border: none;
@@ -240,6 +240,44 @@ $bg-muted: #FAFBFC;
 .chip--neu {
   background: #ECEFF3;
   color: #374151;
+}
+
+.status-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.owner-cell {
+  min-width: 200px;
+}
+
+.owner-info {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.owner-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  object-fit: cover;
+  box-shadow: 0 0 0 2px #fff;
+}
+
+.owner-default-icon {
+  font-size: 28px;
+  color: rgba($brand, 0.45);
+}
+
+.owner-name {
+  font-weight: 600;
+  color: $text-primary;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .empty-state {
@@ -329,16 +367,70 @@ $bg-muted: #FAFBFC;
   100% { background-position: 0 0; }
 }
 
-@media (max-width: 960px) {
-  .table-card {
-    padding: 16px;
+.truncate {
+  display: inline-block;      /* ou block */
+  max-width: 200px;           /* Defina a largura que corresponde a 30 caracteres */
+  white-space: nowrap;        /* Impede quebra de linha */
+  overflow: hidden;           /* Oculta o excesso */
+  text-overflow: ellipsis;    /* Adiciona os "..." */
+}
+
+.empty-state {
+  margin-top: 24px;
+  text-align: center;
+  color: #777;
+}
+
+.status-wrapper {
+  width: 65% !important;
+  display: flex !important;
+}
+
+.owner-cell {
+  .owner-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
-  .table-wrapper {
-    overflow-x: auto;
-
-    table {
-      min-width: 920px;
-    }
+  .owner-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
   }
+
+  .owner-default-icon {
+    font-size: 32px;
+    color: #9e9e9e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+  }
+
+  .owner-name {
+    font-weight: 500;
+  }
+}
+
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+.name { max-width: 260px; }
+.process { max-width: 320px; }
+.doc { max-width: 150px; }
+.phone { max-width: 200px; }
+.email { max-width: 220px; }
+.bank { max-width: 180px; }
+.status-cell { width: 120px; }
+.owner-cell { width: 160px; }
+.actions-cell,
+.actions-head { width: 56px; }
+
+.mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
 }

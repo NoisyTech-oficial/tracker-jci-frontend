@@ -27,8 +27,15 @@ export class UserService {
     return this.http.put<any>(`${this.baseUrl}/usuario/perfil`, user);
   }
 
+  uploadAvatar(image: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('image', image);
+    return this.http.post<any>(`${this.baseUrl}/usuario/avatar`, formData);
+  }
+
   setUser(user: UserData): void {
-    this.userData = user;
+    const foto = user.foto ?? user.image ?? null;
+    this.userData = { ...user, foto };
   }
 
   getUserData(): UserData {
